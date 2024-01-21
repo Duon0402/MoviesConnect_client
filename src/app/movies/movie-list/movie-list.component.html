@@ -1,0 +1,16 @@
+<div
+  *ngFor="let movie of movies"
+  class="blog-post"
+>
+  <h2>{{ movie.title }}</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+  <ngb-pagination
+    [collectionSize]="totalItems"
+    [(page)]="pageNumber"
+    [pageSize]="pageSize"
+    (pageChange)="pageChanged($event)"
+    aria-label="Default pagination"
+  ></ngb-pagination>
+</div>

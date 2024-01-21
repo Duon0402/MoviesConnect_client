@@ -8,9 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './_modules/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MovieListComponent } from './movies/movie-list/movie-list.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent],
+  declarations: [AppComponent, NavComponent, MovieListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
