@@ -1,0 +1,15 @@
+<div>
+  <label [for]="inputId" class="form-label"> {{ label }}</label>
+  <input
+    class="form-control"
+    [class.is-invalid]="control.touched && control.invalid && control.dirty"
+    [formControl]="control"
+    type="text"
+    [id]="inputId"
+  />
+  <ng-container *ngIf="control.touched && control.invalid && control.dirty">
+    <div *ngFor="let error of control.errors | keyvalue" class="invalid-feedback">
+      {{ errorMessages[error.key] }}
+    </div>
+  </ng-container>
+</div>

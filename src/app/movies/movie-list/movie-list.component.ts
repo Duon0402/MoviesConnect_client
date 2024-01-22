@@ -26,7 +26,6 @@ export class MovieListComponent implements OnInit{
   getListMovies() {
     this._service.getListMovies(this.pageNumber, this.pageSize).subscribe(
       (resp: any) => {
-        console.log(resp);
         this.totalItems = resp.totalItems;
         this.movies = resp.pagedItems;
       },

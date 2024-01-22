@@ -5,6 +5,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
 import { NgbPagination, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -14,10 +15,16 @@ import { NgbPagination, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
       positionClass: 'toast-bottom-right',
     }),
     NgxSpinnerModule.forRoot({
-      type: 'ball-scale-multiple'
-    })
+      type: 'ball-scale-multiple',
+    }),
   ],
-  exports: [ToastrModule, BrowserAnimationsModule, NgxSpinnerModule, NgbPaginationModule],
+  exports: [
+    ToastrModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+    NgbPaginationModule,
+    ReactiveFormsModule,
+  ],
   providers: [ProxiesService],
 })
 export class SharedModule {}

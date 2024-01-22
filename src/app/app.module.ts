@@ -9,9 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './_modules/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, MovieListComponent],
+  declarations: [AppComponent, NavComponent, MovieListComponent, TextInputComponent, RegisterComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
