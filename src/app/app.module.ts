@@ -12,9 +12,18 @@ import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, MovieListComponent, TextInputComponent, RegisterComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    MovieListComponent,
+    TextInputComponent,
+    DateInputComponent,
+    RegisterComponent,
+    HomeComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

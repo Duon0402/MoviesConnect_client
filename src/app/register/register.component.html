@@ -1,12 +1,40 @@
-<form action="" class="mb-3">
+<form [formGroup]="registerForm" class="mb-3" (ngSubmit)="register()">
   <app-text-input
     [control]="registerForm.controls.username"
+    type="text"
     inputId="username"
     label="Username"
   ></app-text-input>
+
   <app-text-input
     [control]="registerForm.controls.password"
+    type="password"
     inputId="password"
     label="Password"
   ></app-text-input>
+
+  <app-text-input
+    [control]="registerForm.controls.fullName"
+    type="text"
+    inputId="fullName"
+    label="Full Name"
+  ></app-text-input>
+
+  <app-text-input
+    [control]="registerForm.controls.gender"
+    type="text"
+    inputId="gender"
+    label="Gender"
+  ></app-text-input>
+
+  <app-text-input
+    [control]="registerForm.controls.dateOfBirth"
+    type="Date"
+    inputId="dateOfBirth"
+    label="Date of Birth"
+  ></app-text-input>
+
+  <div class="mt-3">
+    <button type="submit" class="btn btn-primary">Register</button>
+  </div>
 </form>

@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
@@ -20,24 +21,28 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
-  registerForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
   registerData!: RegisterDto;
 
   constructor(
     private _service: ProxiesService,
     private toastr: ToastrService,
-    private fb: FormBuilder,
     private router: Router
   ) {}
-
   ngOnInit(): void {
 
   }
 
+  registerForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    fullName: new FormControl('', [Validators.required]),
+    gender: new FormControl('', [Validators.required]),
+    dateOfBirth: new FormControl('', [Validators.required]),
+  });
+
+
   register() {
+    this.registerData = this.registerForm.value as any;
     this._service.register(this.registerData).subscribe(
       (response) => {
         this.toastr.success('Register successful');
