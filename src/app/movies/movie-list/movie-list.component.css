@@ -1,0 +1,10 @@
+.pagination-container {
+  position: relative;
+}
+
+.d-flex.justify-content-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+}

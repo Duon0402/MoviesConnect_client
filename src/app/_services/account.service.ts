@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccountOutputDto, ProxiesService } from '../../shared/service-proxies/proxies.service';
 import { ReplaySubject, map } from 'rxjs';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<AccountOutputDto | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private _service: ProxiesService, private toastr: ToastrService) { }
+  constructor(private _service: ProxiesService, private toastr: ToastrService, private router: Router) { }
 
   login(model: any) {
     return this._service.login(model).subscribe(
@@ -33,5 +34,6 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+    this.router.navigateByUrl('');
   }
 }

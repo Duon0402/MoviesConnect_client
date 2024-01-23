@@ -14,9 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
-    NgxSpinnerModule.forRoot({
-      type: 'ball-scale-multiple',
-    }),
   ],
   exports: [
     ToastrModule,

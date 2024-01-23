@@ -13,7 +13,7 @@ import { finalize, map } from 'rxjs';
 })
 export class MovieListComponent implements OnInit{
   pageNumber: number = 1;
-  pageSize: number = 2;
+  pageSize: number = 5;
   totalItems!: number;
   movies: Movie[] = [];
 
