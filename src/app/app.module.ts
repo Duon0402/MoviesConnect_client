@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -18,6 +17,7 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { UserWatchListComponent } from './users/user-watch-list/user-watch-list.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     MovieDetailComponent,
     DateInputComponent,
     UserProfileComponent,
+    UserWatchListComponent
   ],
   imports: [
     BrowserModule,
