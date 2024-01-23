@@ -1,36 +1,51 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
-      <a class="navbar-brand" routerLink="/" routerLinkActive="active">Movies Connect</a>
-      <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown" *ngIf="(accountService.currentUser$ | async) as user">
-        <button
-          type="button"
-          class="btn btn-primary me-2"
-          id="dropdownManual"
-          ngbDropdownAnchor
-          (focus)="myDrop.open()"
-        >
-        <a class="text-light m-lg-2">Welcome {{user.username | titlecase}}</a>
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownManual">
-          <button ngbDropdownItem (click)="logout()">Logout</button>
-        </div>
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active"
+      >Movies Connect</a
+    >
+    <div
+      class="d-inline-block"
+      ngbDropdown
+      #myDrop="ngbDropdown"
+      *ngIf="accountService.currentUser$ | async as user"
+    >
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        id="dropdownManual"
+        ngbDropdownAnchor
+        (focus)="myDrop.open()"
+      >
+        <a class="text-light m-lg-2">Welcome {{ user.username | titlecase }}</a>
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownManual">
+        <button ngbDropdownItem routerLink="/user">My Profile</button>
+        <button ngbDropdownItem (click)="logout()">Logout</button>
       </div>
+    </div>
 
-      <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="d-flex mt-2 mt-md-0" (ngSubmit)="login()"
-          autocomplete="off">
-          <input
-              name="username"
-              [(ngModel)]="loginData.username"
-              class="form-control me-sm-2"
-              type="text"
-              placeholder="Username">
-          <input
-              name="password"
-              [(ngModel)]="loginData.password"
-              class="form-control me-sm-2"
-              type="password"
-              placeholder="Password">
-          <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-      </form>
+    <form
+      *ngIf="(accountService.currentUser$ | async) === null"
+      #loginForm="ngForm"
+      class="d-flex mt-2 mt-md-0"
+      (ngSubmit)="login()"
+      autocomplete="off"
+    >
+      <input
+        name="username"
+        [(ngModel)]="loginData.username"
+        class="form-control me-sm-2"
+        type="text"
+        placeholder="Username"
+      />
+      <input
+        name="password"
+        [(ngModel)]="loginData.password"
+        class="form-control me-sm-2"
+        type="password"
+        placeholder="Password"
+      />
+      <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
   </div>
 </nav>
