@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ProxiesService } from '../../../shared/service-proxies/proxies.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
-import { NgbPagination, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

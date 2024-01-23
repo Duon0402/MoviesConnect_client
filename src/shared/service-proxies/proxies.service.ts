@@ -140,6 +140,163 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
+    createCertification(body: CertificationDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Certification/CreateCertification";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateCertification(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateCertification(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processCreateCertification(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getListCertification(): Observable<Certification[]> {
+        let url_ = this.baseUrl + "/api/Certification/GetListCertification";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetListCertification(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetListCertification(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Certification[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Certification[]>;
+        }));
+    }
+
+    protected processGetListCertification(response: HttpResponseBase): Observable<Certification[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Certification[];
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param certificationId (optional) 
+     * @return Success
+     */
+    getCertificationById(certificationId: number | undefined): Observable<Certification> {
+        let url_ = this.baseUrl + "/api/Certification/GetCertificationById?";
+        if (certificationId === null)
+            throw new Error("The parameter 'certificationId' cannot be null.");
+        else if (certificationId !== undefined)
+            url_ += "certificationId=" + encodeURIComponent("" + certificationId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetCertificationById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetCertificationById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Certification>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Certification>;
+        }));
+    }
+
+    protected processGetCertificationById(response: HttpResponseBase): Observable<Certification> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Certification;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
     createMovie(body: MovieDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Movie/CreateMovie";
         url_ = url_.replace(/[?&]$/, "");
@@ -246,8 +403,8 @@ export class ProxiesService {
      * @param pageSize (optional) 
      * @return Success
      */
-    getListMovies(pageNumber: number | undefined, pageSize: number | undefined): Observable<Movie[]> {
-        let url_ = this.baseUrl + "/api/Movie/GetListMovies?";
+    getPagedListMovies(pageNumber: number | undefined, pageSize: number | undefined): Observable<Movie[]> {
+        let url_ = this.baseUrl + "/api/Movie/GetPagedListMovies?";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -267,11 +424,11 @@ export class ProxiesService {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetListMovies(response_);
+            return this.processGetPagedListMovies(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetListMovies(response_ as any);
+                    return this.processGetPagedListMovies(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<Movie[]>;
                 }
@@ -280,7 +437,7 @@ export class ProxiesService {
         }));
     }
 
-    protected processGetListMovies(response: HttpResponseBase): Observable<Movie[]> {
+    protected processGetPagedListMovies(response: HttpResponseBase): Observable<Movie[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -306,6 +463,17 @@ export interface AccountOutputDto {
     username?: string | undefined;
     roles?: string[] | undefined;
     token?: string | undefined;
+}
+
+export interface Certification {
+    id?: number;
+    type?: string | undefined;
+    description?: string | undefined;
+}
+
+export interface CertificationDto {
+    type?: string | undefined;
+    description?: string | undefined;
 }
 
 export interface LoginDto {

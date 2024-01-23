@@ -12,10 +12,5 @@ export class TextInputComponent {
   @Input() type = 'text';
   @Input() control = new FormControl();
 
-  errorMessages: Record<string, string> = {
-    required: 'The field is required',
-    isMatch: 'The password is not match',
-  }
-
   constructor() {}
 }

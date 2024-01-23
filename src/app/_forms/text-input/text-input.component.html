@@ -1,4 +1,4 @@
-<div>
+<div class="mb-3">
   <label [for]="inputId" class="form-label"> {{ label }}</label>
   <input
     class="form-control"
@@ -8,11 +8,19 @@
     [id]="inputId"
   />
   <ng-container *ngIf="control.touched && control.invalid">
-    <div
-      *ngFor="let error of control.errors | keyvalue"
-      class="invalid-feedback"
-    >
-      {{ errorMessages[error.key] }}
+    <div *ngIf="control.hasError('required')" class="invalid-feedback">
+      Please enter a {{ label }}
+    </div>
+    <div *ngIf="control.hasError('minlength')" class="invalid-feedback">
+      {{ label }} must be at least
+      {{ control.getError("minlength").requiredLength }} characters long
+    </div>
+    <div *ngIf="control.hasError('pattern')" class="invalid-feedback">
+      Password must contain at least one lowercase letter, one uppercase letter,
+      one digit, and one special character
+    </div>
+    <div *ngIf="control.hasError('isMatching')" class="invalid-feedback">
+      Passwords do not match
     </div>
   </ng-container>
 </div>

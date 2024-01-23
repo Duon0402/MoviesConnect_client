@@ -12,6 +12,8 @@ import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { MovieCreateComponent } from './movies/movie-create/movie-create.component';
+import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 @NgModule({
@@ -20,9 +22,11 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     NavComponent,
     MovieListComponent,
     TextInputComponent,
-    DateInputComponent,
     RegisterComponent,
     HomeComponent,
+    MovieCreateComponent,
+    MovieDetailComponent,
+    DateInputComponent,
   ],
   imports: [
     BrowserModule,

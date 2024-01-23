@@ -7,6 +7,29 @@
   ></app-text-input>
 
   <app-text-input
+    [control]="registerForm.controls.fullName"
+    type="text"
+    inputId="fullName"
+    label="Full Name"
+  ></app-text-input>
+
+  <div class="mb-3">
+    <label for="gender" class="form-label">Gender:</label>
+    <select formControlName="gender" id="gender" class="form-select">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <app-text-input
+    [control]="registerForm.controls.dateOfBirth"
+    type="Date"
+    inputId="dateOfBirth"
+    label="Date of Birth"
+  ></app-text-input>
+
+  <app-text-input
     [control]="registerForm.controls.password"
     type="password"
     inputId="password"
@@ -14,24 +37,10 @@
   ></app-text-input>
 
   <app-text-input
-    [control]="registerForm.controls.fullName"
-    type="text"
-    inputId="fullName"
-    label="Full Name"
-  ></app-text-input>
-
-  <app-text-input
-    [control]="registerForm.controls.gender"
-    type="text"
-    inputId="gender"
-    label="Gender"
-  ></app-text-input>
-
-  <app-text-input
-    [control]="registerForm.controls.dateOfBirth"
-    type="Date"
-    inputId="dateOfBirth"
-    label="Date of Birth"
+    [control]="registerForm.controls.confirmPassword"
+    type="password"
+    inputId="confirmPassword"
+    label="Confirm Password"
   ></app-text-input>
 
   <div class="mt-3">
