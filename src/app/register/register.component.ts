@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
     private _service: ProxiesService,
     private toastr: ToastrService,
     private router: Router,
-    private accountService: AccountService
   ) {}
   ngOnInit(): void {}
 
@@ -36,7 +35,9 @@ export class RegisterComponent implements OnInit {
     username: new FormControl('', [Validators.required]),
     fullName: new FormControl('', [Validators.required]),
     gender: new FormControl('Male'),
-    dateOfBirth: new FormControl('', [Validators.required]),
+    dateOfBirth: new FormControl('', [
+      Validators.required,
+    ]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
