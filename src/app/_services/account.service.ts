@@ -18,10 +18,10 @@ export class AccountService {
       (user: AccountOutputDto) => {
         this.toastr.success('Login Successful');
         this.setCurrentUser(user);
+        this.router.navigateByUrl('');
       },
-      (error) => {
+      () => {
         this.toastr.error('Login Failed');
-        console.error(error)
       }
     );
   }

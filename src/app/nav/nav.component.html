@@ -19,33 +19,32 @@
         <a class="text-light m-lg-2">Welcome {{ user.username | titlecase }}</a>
       </button>
       <div ngbDropdownMenu aria-labelledby="dropdownManual">
-        <button ngbDropdownItem routerLink="/user">Your Profile</button>
-        <button ngbDropdownItem (click)="logout()">Logout</button>
+        <button ngbDropdownItem type="button" routerLink="/user/profile">Your Profile</button>
+        <button ngbDropdownItem type="button" routerLink="/user/watch-list">Your Watchlist</button>
+        <button ngbDropdownItem class="" (click)="logout()">Logout</button>
       </div>
     </div>
 
-    <form
-      *ngIf="(accountService.currentUser$ | async) === null"
-      #loginForm="ngForm"
-      class="d-flex mt-2 mt-md-0"
-      (ngSubmit)="login()"
-      autocomplete="off"
-    >
-      <input
-        name="username"
-        [(ngModel)]="loginData.username"
-        class="form-control me-sm-2"
-        type="text"
-        placeholder="Username"
-      />
-      <input
-        name="password"
-        [(ngModel)]="loginData.password"
-        class="form-control me-sm-2"
-        type="password"
-        placeholder="Password"
-      />
-      <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-    </form>
+    <div *ngIf="(accountService.currentUser$ | async) === null" class="row">
+      <div class="col">
+        <button
+          class="btn btn-outline-light my-2 my-sm-0"
+          type="button"
+          routerLink="/login"
+        >
+          Login
+        </button>
+      </div>
+      <div class="col orText"><span class="text-light ">Or</span></div>
+      <div class="col">
+        <button
+          class="btn btn-outline-light my-2 my-sm-0"
+          type="button"
+          routerLink="/register"
+        >
+          Register
+        </button>
+      </div>
+    </div>
   </div>
 </nav>

@@ -9,7 +9,7 @@ import { SharedModule } from './_modules/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './accounts/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { MovieCreateComponent } from './movies/movie-create/movie-create.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
@@ -18,6 +18,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { UserWatchListComponent } from './users/user-watch-list/user-watch-list.component';
+import { LoginComponent } from './accounts/login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserWatchListComponent } from './users/user-watch-list/user-watch-list.
     MovieDetailComponent,
     DateInputComponent,
     UserProfileComponent,
-    UserWatchListComponent
+    UserWatchListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

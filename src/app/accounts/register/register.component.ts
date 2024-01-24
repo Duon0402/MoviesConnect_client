@@ -1,20 +1,18 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
   FormControl,
   FormGroup,
-  ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
 import {
+  AccountOutputDto,
   ProxiesService,
   RegisterDto,
-} from '../../shared/service-proxies/proxies.service';
+} from '../../../shared/service-proxies/proxies.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +25,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _service: ProxiesService,
     private toastr: ToastrService,
-    private router: Router,
+    private router: Router
   ) {}
   ngOnInit(): void {}
 
@@ -35,9 +33,7 @@ export class RegisterComponent implements OnInit {
     username: new FormControl('', [Validators.required]),
     fullName: new FormControl('', [Validators.required]),
     gender: new FormControl('Male'),
-    dateOfBirth: new FormControl('', [
-      Validators.required,
-    ]),
+    dateOfBirth: new FormControl('', [Validators.required]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
@@ -65,9 +61,10 @@ export class RegisterComponent implements OnInit {
     this._service.register(this.registerData).subscribe(
       () => {
         this.toastr.success('Register successful');
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/login');
       },
       (error) => {
+        this.toastr.error('Register failed');
         console.error(error);
       }
     );

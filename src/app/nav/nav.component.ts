@@ -9,20 +9,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './nav.component.css',
 })
 export class NavComponent {
-  loginData: LoginDto = {
-    username: '',
-    password: '',
-  };
-
   constructor(public accountService: AccountService) {}
-
-  login() {
-    this.accountService.login(this.loginData);
-  }
 
   logout() {
     this.accountService.logout();
-    this.loginData.username = '';
-    this.loginData.password = '';
   }
 }
