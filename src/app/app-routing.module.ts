@@ -4,6 +4,7 @@ import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserProfileComponent
+  },
+  {
+    path: 'date',
+    component: DateInputComponent
   }
 ];
 

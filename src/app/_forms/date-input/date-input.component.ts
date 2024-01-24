@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-date-input',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './date-input.component.css'
 })
 export class DateInputComponent {
+  @Input() inputId = '';
+  @Input() label = '';
+  @Input() type = 'text';
+  @Input() control = new FormControl();
 
+  // config datepicker
+  bsConfig: Partial<BsDatepickerConfig> = {
+    containerClass: 'theme-red',
+    dateInputFormat: 'DD/MM/YYYY'
+  }
+  maxDate: Date = new Date();;
 }

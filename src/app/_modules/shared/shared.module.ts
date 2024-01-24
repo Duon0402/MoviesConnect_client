@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
+    BsDatepickerModule.forRoot(),
   ],
   exports: [
     ToastrModule,
@@ -21,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgxSpinnerModule,
     NgbPaginationModule,
     ReactiveFormsModule,
+    BsDatepickerModule,
   ],
   providers: [ProxiesService],
 })

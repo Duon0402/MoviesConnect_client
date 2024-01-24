@@ -1,1 +1,18 @@
-<p>date-input works!</p>
+<div class="mb-3">
+  <label [for]="inputId" class="form-label"> {{ label }}</label>
+  <input
+    class="form-control"
+    [class.is-invalid]="control.touched && control.invalid"
+    [formControl]="control"
+    type="{{ type }}"
+    [id]="inputId"
+    bsDatepicker
+    [bsConfig]='bsConfig'
+    [maxDate]="maxDate"
+  />
+  <ng-container *ngIf="control.touched && control.invalid">
+    <div *ngIf="control.hasError('required')" class="invalid-feedback">
+      Please enter a {{ label }}
+    </div>
+  </ng-container>
+</div>
