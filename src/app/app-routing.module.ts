@@ -7,6 +7,7 @@ import { RegisterComponent } from './accounts/register/register.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { UserWatchListComponent } from './users/user-watch-list/user-watch-list.component';
+import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
       { path: 'watch-list', component: UserWatchListComponent },
     ],
   },
+  {
+    path: 'password',
+    component: ChangePasswordComponent
+  }
 ];
 
 @NgModule({

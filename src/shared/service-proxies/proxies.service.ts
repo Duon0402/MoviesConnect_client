@@ -137,6 +137,68 @@ export class ProxiesService {
     }
 
     /**
+     * @param username (optional) 
+     * @param oldPassword (optional) 
+     * @param newPassword (optional) 
+     * @return Success
+     */
+    changePassword(username: string | undefined, oldPassword: string | undefined, newPassword: string | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Account/ChangePassword?";
+        if (username === null)
+            throw new Error("The parameter 'username' cannot be null.");
+        else if (username !== undefined)
+            url_ += "username=" + encodeURIComponent("" + username) + "&";
+        if (oldPassword === null)
+            throw new Error("The parameter 'oldPassword' cannot be null.");
+        else if (oldPassword !== undefined)
+            url_ += "oldPassword=" + encodeURIComponent("" + oldPassword) + "&";
+        if (newPassword === null)
+            throw new Error("The parameter 'newPassword' cannot be null.");
+        else if (newPassword !== undefined)
+            url_ += "newPassword=" + encodeURIComponent("" + newPassword) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processChangePassword(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processChangePassword(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processChangePassword(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @param body (optional) 
      * @return Success
      */
@@ -457,23 +519,175 @@ export class ProxiesService {
         }
         return _observableOf(null as any);
     }
+
+    /**
+     * @return Success
+     */
+    getUserByUsername(username: string): Observable<AppUser> {
+        let url_ = this.baseUrl + "/api/User/GetUserByUsername/{username}";
+        if (username === undefined || username === null)
+            throw new Error("The parameter 'username' must be defined.");
+        url_ = url_.replace("{username}", encodeURIComponent("" + username));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUserByUsername(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUserByUsername(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AppUser>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AppUser>;
+        }));
+    }
+
+    protected processGetUserByUsername(response: HttpResponseBase): Observable<AppUser> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as AppUser;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getUserById(userId: number): Observable<AppUser> {
+        let url_ = this.baseUrl + "/api/User/GetUserById/{userId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUserById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUserById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AppUser>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AppUser>;
+        }));
+    }
+
+    protected processGetUserById(response: HttpResponseBase): Observable<AppUser> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as AppUser;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 export interface AccountOutputDto {
+    id?: number;
     username?: string | undefined;
     roles?: string[] | undefined;
     token?: string | undefined;
+}
+
+export interface AppRole {
+    id?: number;
+    name?: string | undefined;
+    normalizedName?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    userRoles?: AppUserRole[] | undefined;
+}
+
+export interface AppUser {
+    id?: number;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed?: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed?: boolean;
+    twoFactorEnabled?: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled?: boolean;
+    accessFailedCount?: number;
+    fullName?: string | undefined;
+    gender?: string | undefined;
+    dateOfBirth?: Date;
+    createAt?: Date;
+    userRoles?: AppUserRole[] | undefined;
+}
+
+export interface AppUserRole {
+    userId?: number;
+    roleId?: number;
+    user?: AppUser;
+    role?: AppRole;
 }
 
 export interface Certification {
     id?: number;
     type?: string | undefined;
     description?: string | undefined;
+    movies?: Movie[] | undefined;
 }
 
 export interface CertificationDto {
     type?: string | undefined;
     description?: string | undefined;
+}
+
+export interface Genre {
+    id?: number;
+    name?: string | undefined;
+    movieGenres?: MovieGenre[] | undefined;
 }
 
 export interface LoginDto {
@@ -484,10 +698,22 @@ export interface LoginDto {
 export interface Movie {
     id?: number;
     title?: string | undefined;
+    storyline?: string | undefined;
+    releaseDate?: Date;
+    certificationId?: number;
+    certification?: Certification;
+    movieGenres?: MovieGenre[] | undefined;
 }
 
 export interface MovieDto {
     title?: string | undefined;
+}
+
+export interface MovieGenre {
+    movieId?: number;
+    movie?: Movie;
+    genreId?: number;
+    genre?: Genre;
 }
 
 export interface RegisterDto {

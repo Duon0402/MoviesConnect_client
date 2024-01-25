@@ -19,6 +19,7 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { UserWatchListComponent } from './users/user-watch-list/user-watch-list.component';
 import { LoginComponent } from './accounts/login/login.component';
+import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LoginComponent } from './accounts/login/login.component';
     DateInputComponent,
     UserProfileComponent,
     UserWatchListComponent,
-    LoginComponent
+    LoginComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
