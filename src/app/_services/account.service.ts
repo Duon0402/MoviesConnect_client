@@ -38,33 +38,6 @@ export class AccountService {
     this.currentUserSource.next(user);
   }
 
-  getCurrentUsername(): string | undefined {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const user: AccountOutputDto = JSON.parse(storedUser);
-      return user.username;
-    }
-    return undefined;
-  }
-
-  getCurrentUserId(): number | undefined {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const user: AccountOutputDto = JSON.parse(storedUser);
-      return user.id;
-    }
-    return undefined;
-  }
-
-  getCurrentUserRoles(): string[] | undefined {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const user: AccountOutputDto = JSON.parse(storedUser);
-      return user.roles;
-    }
-    return undefined;
-  }
-
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);

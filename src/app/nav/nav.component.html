@@ -19,8 +19,8 @@
         <a class="text-light m-lg-2">Welcome {{ user.username | titlecase }}</a>
       </button>
       <div ngbDropdownMenu aria-labelledby="dropdownManual">
-        <button ngbDropdownItem type="button" routerLink="/user/profile">Your Profile</button>
-        <button ngbDropdownItem type="button" routerLink="/user/watch-list">Your Watchlist</button>
+        <button ngbDropdownItem type="button" routerLink="/member/profile">Your Profile</button>
+        <button ngbDropdownItem type="button" routerLink="/member/watch-list">Your Watchlist</button>
         <button ngbDropdownItem class="" (click)="logout()">Logout</button>
       </div>
     </div>

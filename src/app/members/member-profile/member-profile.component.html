@@ -1,0 +1,11 @@
+<div *ngIf="member">
+  <h2>Member Profile</h2>
+  <p><strong>Username:</strong> {{ member.username }}</p>
+  <p><strong>Full Name:</strong> {{ member.fullName }}</p>
+  <p><strong>Gender:</strong> {{ member.gender }}</p>
+  <p><strong>Date of Birth:</strong> {{ member.dateOfBirth | date:'dd/MM/yyyy' }}</p>
+</div>
+
+<div *ngIf="!member">
+  <p>Loading member profile...</p>
+</div>

@@ -15,9 +15,6 @@ export class LoginComponent {
 
   constructor(
     private accountService: AccountService,
-    private _service: ProxiesService,
-    private toastr: ToastrService,
-    private router: Router,
   ) { }
   ngOnInit(): void { }
 

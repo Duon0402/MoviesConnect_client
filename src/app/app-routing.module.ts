@@ -4,10 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './accounts/register/register.component';
-import { UserProfileComponent } from './users/user-profile/user-profile.component';
-import { DateInputComponent } from './_forms/date-input/date-input.component';
-import { UserWatchListComponent } from './users/user-watch-list/user-watch-list.component';
 import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
+import { MemberProfileComponent } from './members/member-profile/member-profile.component';
+import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 
 const routes: Routes = [
   {
@@ -32,10 +31,9 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'user',
+    path: 'member',
     children: [
-      { path: 'profile', component: UserProfileComponent },
-      { path: 'watch-list', component: UserWatchListComponent },
+      { path: 'profile', component: MemberProfileComponent },
     ],
   },
   {

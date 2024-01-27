@@ -15,11 +15,10 @@ import { MovieCreateComponent } from './movies/movie-create/movie-create.compone
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
-import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
-import { UserWatchListComponent } from './users/user-watch-list/user-watch-list.component';
 import { LoginComponent } from './accounts/login/login.component';
 import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
+import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 
 @NgModule({
   declarations: [
@@ -32,10 +31,9 @@ import { ChangePasswordComponent } from './accounts/change-password/change-passw
     MovieCreateComponent,
     MovieDetailComponent,
     DateInputComponent,
-    UserProfileComponent,
-    UserWatchListComponent,
     LoginComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    MemberProfileComponent
   ],
   imports: [
     BrowserModule,
