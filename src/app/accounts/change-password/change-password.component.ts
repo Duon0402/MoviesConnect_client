@@ -5,6 +5,13 @@ import { AccountService } from '../../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { map, take } from 'rxjs';
 import { Router } from '@angular/router';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-change-password',
@@ -12,8 +19,6 @@ import { Router } from '@angular/router';
   styleUrl: './change-password.component.css',
 })
 export class ChangePasswordComponent {
-  currentPassword!: string;
-  newPassword!: string;
   currentUser!: AccountOutputDto | null;
 
   constructor(
@@ -27,20 +32,46 @@ export class ChangePasswordComponent {
       .subscribe((currnetUser) => (this.currentUser = currnetUser));
   }
 
+  changePassForm = new FormGroup({
+    currentPassword: new FormControl('', [Validators.required]),
+    newPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*$/
+      ),
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      this.matchValues('newPassword'),
+    ]),
+  });
+
+  matchValues(matchTo: string): ValidatorFn {
+    return (control: AbstractControl) => {
+      const parentControl = control?.parent as FormGroup;
+      return control?.value === parentControl?.controls[matchTo].value
+        ? null
+        : { isMatching: true };
+    };
+  }
+
   changePassword() {
+    const changePassData = this.changePassForm.value as any;
     this._service
       .changePassword(
         this.currentUser?.username,
-        this.currentPassword,
-        this.newPassword
+        changePassData.currentPassword,
+        changePassData.newPassword
       )
       .subscribe(
         () => {
-          this.toastr.success('Password changed succesfully');
+          this.toastr.success('Password changed successful');
           this.accountService.logout();
           this.router.navigateByUrl('/login');
         },
         (error) => {
+          this.toastr.error('Register failed');
           console.error(error);
         }
       );

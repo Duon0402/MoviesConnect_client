@@ -19,6 +19,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { LoginComponent } from './accounts/login/login.component';
 import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
+import { MemberOverviewComponent } from './members/member-overview/member-overview.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MemberProfileComponent } from './members/member-profile/member-profile.
     DateInputComponent,
     LoginComponent,
     ChangePasswordComponent,
-    MemberProfileComponent
+    MemberProfileComponent,
+    MemberOverviewComponent
   ],
   imports: [
     BrowserModule,

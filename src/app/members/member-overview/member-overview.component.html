@@ -1,0 +1,33 @@
+<div
+  class="tab-pane fade show active profile-overview"
+  id="profile-overview"
+  *ngIf="member"
+>
+  <h5 class="card-title">About</h5>
+  <p class="small fst-italic">
+    Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus.
+    Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae
+    quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+  </p>
+
+  <h5 class="card-title">Profile Details</h5>
+
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Full Name</div>
+    <div class="col-lg-9 col-md-8">{{ member.fullName }}</div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Username</div>
+    <div class="col-lg-9 col-md-8">{{ member.username }}</div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Gender</div>
+    <div class="col-lg-9 col-md-8">{{ member.gender }}</div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Date Of Birth</div>
+    <div class="col-lg-9 col-md-8">
+      {{ member.dateOfBirth | date : "dd/MM/yyyy" }}
+    </div>
+  </div>
+</div>
