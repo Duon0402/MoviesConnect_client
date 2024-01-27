@@ -1,54 +1,5 @@
-<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/" routerLinkActive="active"
-      >Movies Connect</a
-    >
-    <div
-      class="d-inline-block"
-      ngbDropdown
-      #myDrop="ngbDropdown"
-      *ngIf="accountService.currentUser$ | async as user"
-    >
-      <button
-        type="button"
-        class="btn btn-primary me-2"
-        id="dropdownManual"
-        ngbDropdownAnchor
-        (focus)="myDrop.open()"
-      >
-        <a class="text-light m-lg-2">Welcome {{ user.username | titlecase }}</a>
-      </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownManual">
-        <button ngbDropdownItem type="button" routerLink="/member/profile">Your Profile</button>
-        <button ngbDropdownItem type="button" routerLink="/member/watch-list">Your Watchlist</button>
-        <button ngbDropdownItem class="" (click)="logout()">Logout</button>
-      </div>
-    </div>
-
-    <div *ngIf="(accountService.currentUser$ | async) === null" class="row">
-      <div class="col">
-        <button
-          class="btn btn-outline-light my-2 my-sm-0"
-          type="button"
-          routerLink="/login"
-        >
-          Login
-        </button>
-      </div>
-      <div class="col mt-2"><span class="text-light">Or</span></div>
-      <div class="col">
-        <button
-          class="btn btn-outline-light my-2 my-sm-0"
-          type="button"
-          routerLink="/register"
-        >
-          Register
-        </button>
-      </div>
-    </div>
-  </div>
-</nav> -->
 <header id="header" class="header fixed-top d-flex align-items-center">
+  <!-- logo -->
   <div class="d-flex align-items-center justify-content-between">
     <a routerLink="" class="logo d-flex align-items-center">
       <img src="assets/img/logo.png" alt="" />
@@ -56,6 +7,7 @@
     </a>
   </div>
 
+  <!-- search -->
   <div class="search-bar">
     <form
       class="search-form d-flex align-items-center"
@@ -72,6 +24,7 @@
     </form>
   </div>
 
+  <!-- user dropdown -->
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
       <li class="nav-item d-block d-lg-none">
@@ -90,11 +43,11 @@
         </li>
       </div>
       <li
-        class="nav-item dropdown pe-5"
+        class="nav-item dropdown pe-3"
         *ngIf="accountService.currentUser$ | async as user"
       >
         <a
-          class="nav-link nav-profile d-flex align-items-center pe-3"
+          class="nav-link nav-profile d-flex align-items-center pe-1"
           href="#"
           data-bs-toggle="dropdown"
         >
