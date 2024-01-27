@@ -31,8 +31,8 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "./src/favicon.ico",
+              "./src/assets"
             ],
             "styles": [
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
@@ -42,7 +42,17 @@
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./src/assets/vendor/apexcharts/apexcharts.min.js",
+              "./src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "./src/assets/vendor/chart.js/chart.umd.js",
+              "./src/assets/vendor/echarts/echarts.min.js",
+              "./src/assets/vendor/quill/quill.min.js",
+              "./src/assets/vendor/simple-datatables/simple-datatables.js",
+              "./src/assets/vendor/tinymce/tinymce.min.js",
+              "./src/assets/vendor/php-email-form/validate.js",
+              "./src/assets/js/main.js"
+            ]
           },
           "configurations": {
             "production": {
