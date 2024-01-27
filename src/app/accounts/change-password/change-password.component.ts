@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './change-password.component.css',
 })
 export class ChangePasswordComponent {
+  currentPassword!: string;
   newPassword!: string;
-  oldPassword!: string;
   currentUser!: AccountOutputDto | null;
 
   constructor(
@@ -29,7 +29,11 @@ export class ChangePasswordComponent {
 
   changePassword() {
     this._service
-      .changePassword(this.currentUser?.username, this.oldPassword, this.newPassword)
+      .changePassword(
+        this.currentUser?.username,
+        this.currentPassword,
+        this.newPassword
+      )
       .subscribe(
         () => {
           this.toastr.success('Password changed succesfully');
