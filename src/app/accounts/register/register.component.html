@@ -68,7 +68,7 @@
               label="Confirm Password"
             ></app-text-input>
             <div class="col-12">
-              <button class="btn btn-primary w-100" type="submit">
+              <button class="btn btn-primary w-100" type="submit" [disabled]="!registerForm.valid">
                 Create Account
               </button>
             </div>

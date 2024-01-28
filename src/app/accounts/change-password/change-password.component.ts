@@ -71,7 +71,7 @@ export class ChangePasswordComponent {
           this.router.navigateByUrl('/login');
         },
         (error) => {
-          this.toastr.error('Register failed');
+          this.toastr.error('Password changed failed');
           console.error(error);
         }
       );

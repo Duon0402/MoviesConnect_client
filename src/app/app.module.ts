@@ -20,6 +20,8 @@ import { LoginComponent } from './accounts/login/login.component';
 import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MemberOverviewComponent } from './members/member-overview/member-overview.component';
+import { MemberProfileEditComponent } from './members/member-profile-edit/member-profile-edit.component';
+import { MemberProfileSettingComponent } from './members/member-profile-setting/member-profile-setting.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { MemberOverviewComponent } from './members/member-overview/member-overvi
     LoginComponent,
     ChangePasswordComponent,
     MemberProfileComponent,
-    MemberOverviewComponent
+    MemberOverviewComponent,
+    MemberProfileEditComponent,
+    MemberProfileSettingComponent
   ],
   imports: [
     BrowserModule,
