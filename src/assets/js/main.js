@@ -1,3 +1,10 @@
+/**
+* Template Name: NiceAdmin
+* Updated: Jan 27 2024 with Bootstrap v5.3.2
+* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
 (function() {
   "use strict";
 
@@ -25,7 +32,7 @@
   }
 
   /**
-   * Easy on scroll event listener
+   * Easy on scroll event listener 
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)

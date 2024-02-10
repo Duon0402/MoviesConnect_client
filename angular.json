@@ -31,22 +31,29 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "./src/favicon.ico",
-              "./src/assets",
-              "./src/assets/img"
+              "src/favicon.ico",
+              "src/assets",
+              "src/assets/img"
             ],
             "styles": [
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "./src/styles.css",
-              "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "./src/assets/css/style.css"
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "src/assets/css/style.css"
             ],
             "scripts": [
-              "./src/assets/js/main.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "src/assets/vendor/apexcharts/apexcharts.min.js",
+              "src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/vendor/chart.js/chart.umd.js",
+              "src/assets/vendor/echarts/echarts.min.js",
+              "src/assets/vendor/quill/quill.min.js",
+              "src/assets/vendor/simple-datatables/simple-datatables.js",
+              "src/assets/vendor/tinymce/tinymce.min.js",
+              "src/assets/vendor/php-email-form/validate.js",
+              "src/assets/js/main.js"
             ]
           },
           "configurations": {
