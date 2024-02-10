@@ -1,41 +1,36 @@
-import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { MoviesParams } from './../../_models/movieParams';
+import { MovieService } from './../../_services/movie.service';
 import { Component, OnInit } from '@angular/core';
 import {
+  ListMoviesOutputDto,
   ProxiesService,
 } from '../../../shared/service-proxies/proxies.service';
-import { finalize, map } from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.css',
 })
-export class MovieListComponent{
-  // pageNumber: number = 1;
-  // pageSize: number = 5;
-  // totalItems!: number;
-  // movies: Movie[] = [];
+export class MovieListComponent implements OnInit {
+  moviesParams: MoviesParams = {};
+  movies: ListMoviesOutputDto[] = [];
 
-  // constructor(private _service: ProxiesService) {}
+  constructor(
+    private _service: ProxiesService,
+    private movieService: MovieService
+  ) {}
+  ngOnInit(): void {
+    this.loadMovies();
+  }
 
-  // ngOnInit(): void {
-  //   this.getListMovies();
-  // }
-
-  // getListMovies() {
-  //   this._service.getPagedListMovies(this.pageNumber, this.pageSize).subscribe(
-  //     (resp: any) => {
-  //       this.totalItems = resp.totalItems;
-  //       this.movies = resp.pagedItems;
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }
-
-  // pageChanged(event: any) {
-  //   this.pageNumber = event;
-  //   this.getListMovies();
-  // }
+  loadMovies() {
+    this.movieService.getListsMovies(this.moviesParams).subscribe(
+      (movies) => {
+        this.movies = movies;
+      },
+      (error) => {
+        console.error('Error loading movies:', error);
+      }
+    );
+  }
 }

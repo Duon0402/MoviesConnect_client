@@ -1016,29 +1016,24 @@ export class ProxiesService {
      * @param keyword (optional) 
      * @param orderBy (optional) 
      * @param sortOrder (optional) 
+     * @param pageSize (optional) 
      * @param status (optional) 
      * @param certificationId (optional) 
      * @param genreId (optional) 
      * @param purpose (optional) 
      * @return Success
      */
-    getListMovies(keyword: string | undefined, orderBy: string | undefined, sortOrder: string | undefined, status: string | undefined, certificationId: number[] | undefined, genreId: number[] | undefined, purpose: string | undefined): Observable<MovieOutputDto[]> {
+    getListMovies(keyword: string | null | undefined, orderBy: string | null | undefined, sortOrder: string | null | undefined, pageSize: number | null | undefined, status: string | null | undefined, certificationId: (number | undefined)[] | undefined, genreId: (number | undefined)[] | undefined, purpose: string | null | undefined): Observable<ListMoviesOutputDto[]> {
         let url_ = this.baseUrl + "/api/Movie/GetListMovies?";
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
+        if (keyword !== undefined && keyword !== null)
             url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (orderBy === null)
-            throw new Error("The parameter 'orderBy' cannot be null.");
-        else if (orderBy !== undefined)
+        if (orderBy !== undefined && orderBy !== null)
             url_ += "OrderBy=" + encodeURIComponent("" + orderBy) + "&";
-        if (sortOrder === null)
-            throw new Error("The parameter 'sortOrder' cannot be null.");
-        else if (sortOrder !== undefined)
+        if (sortOrder !== undefined && sortOrder !== null)
             url_ += "SortOrder=" + encodeURIComponent("" + sortOrder) + "&";
-        if (status === null)
-            throw new Error("The parameter 'status' cannot be null.");
-        else if (status !== undefined)
+        if (pageSize !== undefined && pageSize !== null)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (status !== undefined && status !== null)
             url_ += "Status=" + encodeURIComponent("" + status) + "&";
         if (certificationId === null)
             throw new Error("The parameter 'certificationId' cannot be null.");
@@ -1048,9 +1043,7 @@ export class ProxiesService {
             throw new Error("The parameter 'genreId' cannot be null.");
         else if (genreId !== undefined)
             genreId && genreId.forEach(item => { url_ += "GenreId=" + encodeURIComponent("" + item) + "&"; });
-        if (purpose === null)
-            throw new Error("The parameter 'purpose' cannot be null.");
-        else if (purpose !== undefined)
+        if (purpose !== undefined && purpose !== null)
             url_ += "Purpose=" + encodeURIComponent("" + purpose) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1069,14 +1062,14 @@ export class ProxiesService {
                 try {
                     return this.processGetListMovies(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<MovieOutputDto[]>;
+                    return _observableThrow(e) as any as Observable<ListMoviesOutputDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<MovieOutputDto[]>;
+                return _observableThrow(response_) as any as Observable<ListMoviesOutputDto[]>;
         }));
     }
 
-    protected processGetListMovies(response: HttpResponseBase): Observable<MovieOutputDto[]> {
+    protected processGetListMovies(response: HttpResponseBase): Observable<ListMoviesOutputDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1086,7 +1079,7 @@ export class ProxiesService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as MovieOutputDto[];
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ListMoviesOutputDto[];
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1340,6 +1333,11 @@ export interface GenreOutputDto {
 
 export interface GenreUpdateDto {
     name?: string | undefined;
+}
+
+export interface ListMoviesOutputDto {
+    id?: number;
+    title?: string | undefined;
 }
 
 export interface LoginDto {

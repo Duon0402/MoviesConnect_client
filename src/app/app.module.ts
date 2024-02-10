@@ -22,6 +22,9 @@ import { MemberProfileComponent } from './members/member-profile/member-profile.
 import { MemberOverviewComponent } from './members/member-overview/member-overview.component';
 import { MemberProfileEditComponent } from './members/member-profile-edit/member-profile-edit.component';
 import { MemberProfileSettingComponent } from './members/member-profile-setting/member-profile-setting.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { MemberProfileSettingComponent } from './members/member-profile-setting/
     MemberProfileComponent,
     MemberOverviewComponent,
     MemberProfileEditComponent,
-    MemberProfileSettingComponent
+    MemberProfileSettingComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+    MovieCardComponent
   ],
   imports: [
     BrowserModule,

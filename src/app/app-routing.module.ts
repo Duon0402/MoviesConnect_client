@@ -7,6 +7,9 @@ import { RegisterComponent } from './accounts/register/register.component';
 import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 
 const routes: Routes = [
   {
@@ -36,10 +39,17 @@ const routes: Routes = [
       { path: 'profile', component: MemberProfileComponent },
     ],
   },
+
   {
-    path: 'password',
-    component: ChangePasswordComponent
-  }
+    path: 'card',
+    component: MovieCardComponent
+  },
+
+
+  // errors
+  {path: 'not-found', component: NotFoundComponent},
+  {path: 'server-error', component: ServerErrorComponent},
+  {path: '**', component: NotFoundComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
