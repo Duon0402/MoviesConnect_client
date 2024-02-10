@@ -37,8 +37,8 @@
           class="nav-item pe-5"
           *ngIf="(accountService.currentUser$ | async) === null"
         >
-          <a class="nav-link" routerLink="/login">
-            <span>Login</span>
+          <a class="btn btn-light" routerLink="/login">
+            <span class="blue-300">Login</span>
           </a>
         </li>
       </div>

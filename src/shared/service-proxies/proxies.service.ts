@@ -30,7 +30,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    register(body: RegisterDto | undefined): Observable<AccountOutputDto> {
+    register(body?: RegisterDto | undefined): Observable<AccountOutputDto> {
         let url_ = this.baseUrl + "/api/Account/Register";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -85,7 +85,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    login(body: LoginDto | undefined): Observable<AccountOutputDto> {
+    login(body?: LoginDto | undefined): Observable<AccountOutputDto> {
         let url_ = this.baseUrl + "/api/Account/Login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -141,7 +141,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    changePassword(username: string | undefined, body: ChangePasswordDto | undefined): Observable<void> {
+    changePassword(username?: string | undefined, body?: ChangePasswordDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Account/ChangePassword?";
         if (username === null)
             throw new Error("The parameter 'username' cannot be null.");
@@ -197,7 +197,7 @@ export class ProxiesService {
      * @param certiId (optional) 
      * @return Success
      */
-    getCertificationById(certiId: number | undefined): Observable<void> {
+    getCertificationById(certiId?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Certification/GetCertificationById?";
         if (certiId === null)
             throw new Error("The parameter 'certiId' cannot be null.");
@@ -251,7 +251,7 @@ export class ProxiesService {
      * @param pageSize (optional) 
      * @return Success
      */
-    getPagedListCertifications(keyword: string | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<void> {
+    getPagedListCertifications(keyword?: string | undefined, pageNumber?: number | undefined, pageSize?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Certification/GetPagedListCertifications?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -311,7 +311,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    createGenre(body: GenreCreateDto | undefined): Observable<void> {
+    createGenre(body?: GenreCreateDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Genre/CreateGenre";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -364,7 +364,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    updateGenre(genreId: number | undefined, body: GenreUpdateDto | undefined): Observable<void> {
+    updateGenre(genreId?: number | undefined, body?: GenreUpdateDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Genre/UpdateGenre?";
         if (genreId === null)
             throw new Error("The parameter 'genreId' cannot be null.");
@@ -420,7 +420,7 @@ export class ProxiesService {
      * @param genreId (optional) 
      * @return Success
      */
-    deleteGenre(genreId: number | undefined): Observable<void> {
+    deleteGenre(genreId?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Genre/DeleteGenre?";
         if (genreId === null)
             throw new Error("The parameter 'genreId' cannot be null.");
@@ -472,7 +472,7 @@ export class ProxiesService {
      * @param genreId (optional) 
      * @return Success
      */
-    getGenreById(genreId: number | undefined): Observable<void> {
+    getGenreById(genreId?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Genre/GetGenreById?";
         if (genreId === null)
             throw new Error("The parameter 'genreId' cannot be null.");
@@ -526,7 +526,7 @@ export class ProxiesService {
      * @param pageSize (optional) 
      * @return Success
      */
-    getPagedListGenres(keyword: string | undefined, pageNumber: number | undefined, pageSize: number | undefined): Observable<void> {
+    getPagedListGenres(keyword?: string | undefined, pageNumber?: number | undefined, pageSize?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Genre/GetPagedListGenres?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -586,7 +586,7 @@ export class ProxiesService {
      * @param keyword (optional) 
      * @return Success
      */
-    getListGenres(keyword: string | undefined): Observable<GenreOutputDto[]> {
+    getListGenres(keyword?: string | undefined): Observable<GenreOutputDto[]> {
         let url_ = this.baseUrl + "/api/Genre/GetListGenres?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -641,7 +641,7 @@ export class ProxiesService {
      * @param genreId (optional) 
      * @return Success
      */
-    getListMoviesByGenreId(genreId: number | undefined): Observable<void> {
+    getListMoviesByGenreId(genreId?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Genre/GetListMoviesByGenreId?";
         if (genreId === null)
             throw new Error("The parameter 'genreId' cannot be null.");
@@ -693,7 +693,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    createMovie(body: MovieCreateDto | undefined): Observable<void> {
+    createMovie(body?: MovieCreateDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Movie/CreateMovie";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -745,7 +745,7 @@ export class ProxiesService {
      * @param movieId (optional) 
      * @return Success
      */
-    approveMovie(movieId: number | undefined): Observable<void> {
+    approveMovie(movieId?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Movie/ApproveMovie?";
         if (movieId === null)
             throw new Error("The parameter 'movieId' cannot be null.");
@@ -798,7 +798,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    updateMovie(movieId: number | undefined, body: MovieUpdateDto | undefined): Observable<void> {
+    updateMovie(movieId?: number | undefined, body?: MovieUpdateDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Movie/UpdateMovie?";
         if (movieId === null)
             throw new Error("The parameter 'movieId' cannot be null.");
@@ -854,7 +854,7 @@ export class ProxiesService {
      * @param movieId (optional) 
      * @return Success
      */
-    deleteMovie(movieId: number | undefined): Observable<void> {
+    deleteMovie(movieId?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Movie/DeleteMovie?";
         if (movieId === null)
             throw new Error("The parameter 'movieId' cannot be null.");
@@ -906,7 +906,7 @@ export class ProxiesService {
      * @param movieId (optional) 
      * @return Success
      */
-    getMovieById(movieId: number | undefined): Observable<MovieOutputDto> {
+    getMovieById(movieId?: number | undefined): Observable<MovieOutputDto> {
         let url_ = this.baseUrl + "/api/Movie/GetMovieById?";
         if (movieId === null)
             throw new Error("The parameter 'movieId' cannot be null.");
@@ -961,7 +961,7 @@ export class ProxiesService {
      * @param movieId (optional) 
      * @return Success
      */
-    getListGenresByMovieId(movieId: number | undefined): Observable<GenreOutputDto> {
+    getListGenresByMovieId(movieId?: number | undefined): Observable<GenreOutputDto> {
         let url_ = this.baseUrl + "/api/Movie/GetListGenresByMovieId?";
         if (movieId === null)
             throw new Error("The parameter 'movieId' cannot be null.");
@@ -1023,17 +1023,27 @@ export class ProxiesService {
      * @param purpose (optional) 
      * @return Success
      */
-    getListMovies(keyword: string | null | undefined, orderBy: string | null | undefined, sortOrder: string | null | undefined, pageSize: number | null | undefined, status: string | null | undefined, certificationId: (number | undefined)[] | undefined, genreId: (number | undefined)[] | undefined, purpose: string | null | undefined): Observable<ListMoviesOutputDto[]> {
+    getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, pageSize?: number | undefined, status?: string | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined): Observable<ListMoviesOutputDto[]> {
         let url_ = this.baseUrl + "/api/Movie/GetListMovies?";
-        if (keyword !== undefined && keyword !== null)
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
             url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (orderBy !== undefined && orderBy !== null)
+        if (orderBy === null)
+            throw new Error("The parameter 'orderBy' cannot be null.");
+        else if (orderBy !== undefined)
             url_ += "OrderBy=" + encodeURIComponent("" + orderBy) + "&";
-        if (sortOrder !== undefined && sortOrder !== null)
+        if (sortOrder === null)
+            throw new Error("The parameter 'sortOrder' cannot be null.");
+        else if (sortOrder !== undefined)
             url_ += "SortOrder=" + encodeURIComponent("" + sortOrder) + "&";
-        if (pageSize !== undefined && pageSize !== null)
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
             url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-        if (status !== undefined && status !== null)
+        if (status === null)
+            throw new Error("The parameter 'status' cannot be null.");
+        else if (status !== undefined)
             url_ += "Status=" + encodeURIComponent("" + status) + "&";
         if (certificationId === null)
             throw new Error("The parameter 'certificationId' cannot be null.");
@@ -1043,7 +1053,9 @@ export class ProxiesService {
             throw new Error("The parameter 'genreId' cannot be null.");
         else if (genreId !== undefined)
             genreId && genreId.forEach(item => { url_ += "GenreId=" + encodeURIComponent("" + item) + "&"; });
-        if (purpose !== undefined && purpose !== null)
+        if (purpose === null)
+            throw new Error("The parameter 'purpose' cannot be null.");
+        else if (purpose !== undefined)
             url_ += "Purpose=" + encodeURIComponent("" + purpose) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1094,7 +1106,7 @@ export class ProxiesService {
      * @param username (optional) 
      * @return Success
      */
-    getUserByUsername(username: string | undefined): Observable<MemberDto> {
+    getUserByUsername(username?: string | undefined): Observable<MemberDto> {
         let url_ = this.baseUrl + "/api/User/GetUserByUsername?";
         if (username === null)
             throw new Error("The parameter 'username' cannot be null.");
@@ -1149,7 +1161,7 @@ export class ProxiesService {
      * @param userId (optional) 
      * @return Success
      */
-    getUserById(userId: number | undefined): Observable<MemberDto> {
+    getUserById(userId?: number | undefined): Observable<MemberDto> {
         let url_ = this.baseUrl + "/api/User/GetUserById?";
         if (userId === null)
             throw new Error("The parameter 'userId' cannot be null.");
@@ -1254,7 +1266,7 @@ export class ProxiesService {
      * @param body (optional) 
      * @return Success
      */
-    updateUser(body: MemberUpdateDto | undefined): Observable<void> {
+    updateUser(body?: MemberUpdateDto | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/User/UpdateUser";
         url_ = url_.replace(/[?&]$/, "");
 
