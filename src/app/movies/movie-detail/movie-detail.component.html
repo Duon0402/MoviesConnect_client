@@ -1,0 +1,16 @@
+<div *ngIf="movie">
+  <h2>{{ movie.title }}</h2>
+  <p><strong>Summary:</strong> {{ movie.summary }}</p>
+  <p><strong>Duration:</strong> {{ movie.durationMinutes }} minutes</p>
+  <p><strong>Release Date:</strong> {{ movie.releaseDate | date : "dd/MM/yyyy" }}</p>
+  <p><strong>Status:</strong> {{ movie.status }}</p>
+  <div *ngIf="movie.genres && movie.genres.length > 0">
+    <p><strong>Genres:</strong></p>
+    <ul>
+      <li *ngFor="let genre of movie.genres">{{ genre.name }}</li>
+    </ul>
+  </div>
+  <div *ngIf="movie.certification">
+    <p><strong>Certification:</strong> {{ movie.certification.name }}</p>
+  </div>
+</div>

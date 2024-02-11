@@ -4,12 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './accounts/register/register.component';
-import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 
 const routes: Routes = [
   {
@@ -17,8 +15,12 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'list',
-    component: MovieListComponent,
+      path: '',
+      runGuardsAndResolvers: 'always',
+      children: [
+        {path: 'movies', component: MovieListComponent},
+        {path: 'movies/:id', component: MovieDetailComponent, }
+      ]
   },
   {
     path: '',
@@ -38,11 +40,6 @@ const routes: Routes = [
     children: [
       { path: 'profile', component: MemberProfileComponent },
     ],
-  },
-
-  {
-    path: 'card',
-    component: MovieCardComponent
   },
 
 

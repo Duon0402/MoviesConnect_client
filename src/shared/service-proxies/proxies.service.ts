@@ -137,16 +137,11 @@ export class ProxiesService {
     }
 
     /**
-     * @param username (optional) 
      * @param body (optional) 
      * @return Success
      */
-    changePassword(username?: string | undefined, body?: ChangePasswordDto | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Account/ChangePassword?";
-        if (username === null)
-            throw new Error("The parameter 'username' cannot be null.");
-        else if (username !== undefined)
-            url_ += "username=" + encodeURIComponent("" + username) + "&";
+    changePassword(body?: ChangePasswordDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Account/ChangePassword";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -1016,14 +1011,14 @@ export class ProxiesService {
      * @param keyword (optional) 
      * @param orderBy (optional) 
      * @param sortOrder (optional) 
-     * @param pageSize (optional) 
      * @param status (optional) 
+     * @param pageSize (optional) 
      * @param certificationId (optional) 
      * @param genreId (optional) 
      * @param purpose (optional) 
      * @return Success
      */
-    getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, pageSize?: number | undefined, status?: string | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined): Observable<ListMoviesOutputDto[]> {
+    getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined): Observable<ListMoviesOutputDto[]> {
         let url_ = this.baseUrl + "/api/Movie/GetListMovies?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -1037,14 +1032,14 @@ export class ProxiesService {
             throw new Error("The parameter 'sortOrder' cannot be null.");
         else if (sortOrder !== undefined)
             url_ += "SortOrder=" + encodeURIComponent("" + sortOrder) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
         if (status === null)
             throw new Error("The parameter 'status' cannot be null.");
         else if (status !== undefined)
             url_ += "Status=" + encodeURIComponent("" + status) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
         if (certificationId === null)
             throw new Error("The parameter 'certificationId' cannot be null.");
         else if (certificationId !== undefined)
@@ -1319,6 +1314,7 @@ export interface AccountOutputDto {
     id?: number;
     username?: string | undefined;
     roles?: string[] | undefined;
+    avatarId?: number | undefined;
     token?: string | undefined;
 }
 
@@ -1362,6 +1358,7 @@ export interface MemberDto {
     fullName?: string | undefined;
     gender?: string | undefined;
     dateOfBirth?: Date;
+    isPublic?: boolean;
 }
 
 export interface MemberUpdateDto {

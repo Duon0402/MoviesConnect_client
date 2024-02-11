@@ -17,8 +17,8 @@ export class MovieService {
       params.keyword,
       params.orderBy,
       params.sortOrder,
-      params.pageSize,
       params.status,
+      params.pageSize,
       params.certificationId,
       params.genreId,
       params.purpose

@@ -63,8 +63,7 @@ export class ChangePasswordComponent {
     this.changePassData = this.changePassForm.value as any;
     this._service
       .changePassword(
-        this.currentUser?.username,
-        this.changePassData,
+        this.changePassData
       )
       .subscribe(
         () => {

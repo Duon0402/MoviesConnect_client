@@ -1,6 +1,6 @@
 import { MoviesParams } from './../../_models/movieParams';
 import { MovieService } from './../../_services/movie.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   ListMoviesOutputDto,
   ProxiesService,
