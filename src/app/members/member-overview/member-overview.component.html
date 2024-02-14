@@ -4,10 +4,13 @@
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Profile Image</div>
       <div class="col-lg-9 col-md-8">
-        <img src="assets/img/profile-img.jpg" alt="Profile" />
+        <img
+          class="avatar"
+          src="{{ member.avatar?.url }}"
+          alt="{{ member.username }}"
+        />
       </div>
     </div>
-
     <div class="row">
       <div class="col-lg-3 col-md-4 label">Full Name</div>
       <div class="col-lg-9 col-md-8">{{ member.fullName }}</div>

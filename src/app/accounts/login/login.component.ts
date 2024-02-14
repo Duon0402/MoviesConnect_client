@@ -3,20 +3,28 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { LoginDto, ProxiesService } from '../../../shared/service-proxies/proxies.service';
+import {
+  AccountOutputDto,
+  LoginDto,
+  ProxiesService,
+} from '../../../shared/service-proxies/proxies.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginData!: LoginDto;
+  user!: AccountOutputDto;
 
   constructor(
     private accountService: AccountService,
-  ) { }
-  ngOnInit(): void { }
+    private _service: ProxiesService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
+  ngOnInit(): void {}
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -25,6 +33,8 @@ export class LoginComponent {
 
   login() {
     this.loginData = this.loginForm.value as any;
-    this.accountService.login(this.loginData);
+    this.accountService
+      .login(this.loginData)
+      .subscribe((resp) => this.router.navigateByUrl(''));
   }
 }

@@ -13,24 +13,16 @@ import {
 })
 export class MovieListComponent implements OnInit {
   moviesParams: MoviesParams = {};
-  movies: ListMoviesOutputDto[] = [];
+  movies!: ListMoviesOutputDto[];
 
-  constructor(
-    private _service: ProxiesService,
-    private movieService: MovieService
-  ) {}
+  constructor(private movieService: MovieService) {}
   ngOnInit(): void {
     this.loadMovies();
   }
 
   loadMovies() {
-    this.movieService.getListsMovies(this.moviesParams).subscribe(
-      (movies) => {
-        this.movies = movies;
-      },
-      (error) => {
-        console.error('Error loading movies:', error);
-      }
-    );
+    this.movieService
+      .getListsMovies(this.moviesParams)
+      .subscribe((movies: ListMoviesOutputDto[]) => (this.movies = movies));
   }
 }

@@ -26,7 +26,7 @@ export class MemberOverviewComponent implements OnInit{
 
   loadMember() {
     this._service
-      .getUserByUsername(this.currentUser?.username)
+      .getUserByUsername(this.currentUser?.username as any)
       .subscribe((member) => {
         this.member = member;
       });

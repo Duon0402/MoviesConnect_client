@@ -1,4 +1,7 @@
-import { AccountOutputDto, ChangePasswordDto } from './../../../shared/service-proxies/proxies.service';
+import {
+  AccountOutputDto,
+  ChangePasswordDto,
+} from './../../../shared/service-proxies/proxies.service';
 import { Component } from '@angular/core';
 import { ProxiesService } from '../../../shared/service-proxies/proxies.service';
 import { AccountService } from '../../_services/account.service';
@@ -33,8 +36,6 @@ export class ChangePasswordComponent {
       .subscribe((currnetUser) => (this.currentUser = currnetUser));
   }
 
-
-
   changePassForm = new FormGroup({
     currentPassword: new FormControl('', [Validators.required]),
     newPassword: new FormControl('', [
@@ -61,20 +62,10 @@ export class ChangePasswordComponent {
 
   changePassword() {
     this.changePassData = this.changePassForm.value as any;
-    this._service
-      .changePassword(
-        this.changePassData
-      )
-      .subscribe(
-        () => {
-          this.toastr.success('Password changed successful');
-          this.accountService.logout();
-          this.router.navigateByUrl('/login');
-        },
-        (error) => {
-          this.toastr.error('Password changed failed');
-          console.error(error);
-        }
-      );
+    this.accountService.changePass(this.changePassData).subscribe(() => {
+      this.toastr.success('Password changed successful');
+      this.accountService.logout();
+      this.router.navigateByUrl('/login');
+    });
   }
 }

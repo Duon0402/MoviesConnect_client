@@ -189,15 +189,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param certiId (optional) 
      * @return Success
      */
-    getCertificationById(certiId?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Certification/GetCertificationById?";
-        if (certiId === null)
-            throw new Error("The parameter 'certiId' cannot be null.");
-        else if (certiId !== undefined)
-            url_ += "certiId=" + encodeURIComponent("" + certiId) + "&";
+    getCertificationById(certiId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Certification/GetCertificationById/{certiId}";
+        if (certiId === undefined || certiId === null)
+            throw new Error("The parameter 'certiId' must be defined.");
+        url_ = url_.replace("{certiId}", encodeURIComponent("" + certiId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -355,16 +353,14 @@ export class ProxiesService {
     }
 
     /**
-     * @param genreId (optional) 
      * @param body (optional) 
      * @return Success
      */
-    updateGenre(genreId?: number | undefined, body?: GenreUpdateDto | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Genre/UpdateGenre?";
-        if (genreId === null)
-            throw new Error("The parameter 'genreId' cannot be null.");
-        else if (genreId !== undefined)
-            url_ += "genreId=" + encodeURIComponent("" + genreId) + "&";
+    updateGenre(genreId: number, body?: GenreUpdateDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Genre/UpdateGenre/{genreId}";
+        if (genreId === undefined || genreId === null)
+            throw new Error("The parameter 'genreId' must be defined.");
+        url_ = url_.replace("{genreId}", encodeURIComponent("" + genreId));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -412,15 +408,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param genreId (optional) 
      * @return Success
      */
-    deleteGenre(genreId?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Genre/DeleteGenre?";
-        if (genreId === null)
-            throw new Error("The parameter 'genreId' cannot be null.");
-        else if (genreId !== undefined)
-            url_ += "genreId=" + encodeURIComponent("" + genreId) + "&";
+    deleteGenre(genreId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Genre/DeleteGenre/{genreId}";
+        if (genreId === undefined || genreId === null)
+            throw new Error("The parameter 'genreId' must be defined.");
+        url_ = url_.replace("{genreId}", encodeURIComponent("" + genreId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -464,15 +458,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param genreId (optional) 
      * @return Success
      */
-    getGenreById(genreId?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Genre/GetGenreById?";
-        if (genreId === null)
-            throw new Error("The parameter 'genreId' cannot be null.");
-        else if (genreId !== undefined)
-            url_ += "genreId=" + encodeURIComponent("" + genreId) + "&";
+    getGenreById(genreId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Genre/GetGenreById/{genreId}";
+        if (genreId === undefined || genreId === null)
+            throw new Error("The parameter 'genreId' must be defined.");
+        url_ = url_.replace("{genreId}", encodeURIComponent("" + genreId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -633,15 +625,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param genreId (optional) 
      * @return Success
      */
-    getListMoviesByGenreId(genreId?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Genre/GetListMoviesByGenreId?";
-        if (genreId === null)
-            throw new Error("The parameter 'genreId' cannot be null.");
-        else if (genreId !== undefined)
-            url_ += "genreId=" + encodeURIComponent("" + genreId) + "&";
+    getListMoviesByGenreId(genreId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Genre/GetListMoviesByGenreId/{genreId}";
+        if (genreId === undefined || genreId === null)
+            throw new Error("The parameter 'genreId' must be defined.");
+        url_ = url_.replace("{genreId}", encodeURIComponent("" + genreId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -737,15 +727,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
      * @return Success
      */
-    approveMovie(movieId?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Movie/ApproveMovie?";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+    approveMovie(movieId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Movie/ApproveMovie/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -789,16 +777,14 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
      * @param body (optional) 
      * @return Success
      */
-    updateMovie(movieId?: number | undefined, body?: MovieUpdateDto | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Movie/UpdateMovie?";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+    updateMovie(movieId: number, body?: MovieUpdateDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Movie/UpdateMovie/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -846,15 +832,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
      * @return Success
      */
-    deleteMovie(movieId?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Movie/DeleteMovie?";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+    deleteMovie(movieId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Movie/DeleteMovie/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -898,15 +882,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
      * @return Success
      */
-    getMovieById(movieId?: number | undefined): Observable<MovieOutputDto> {
-        let url_ = this.baseUrl + "/api/Movie/GetMovieById?";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+    getMovieById(movieId: number): Observable<MovieOutputDto> {
+        let url_ = this.baseUrl + "/api/Movie/GetMovieById/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -953,15 +935,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
      * @return Success
      */
-    getListGenresByMovieId(movieId?: number | undefined): Observable<GenreOutputDto> {
-        let url_ = this.baseUrl + "/api/Movie/GetListGenresByMovieId?";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+    getListGenresByMovieId(movieId: number): Observable<GenreOutputDto> {
+        let url_ = this.baseUrl + "/api/Movie/GetListGenresByMovieId/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1098,15 +1078,192 @@ export class ProxiesService {
     }
 
     /**
-     * @param username (optional) 
+     * @param movieId (optional) 
+     * @param body (optional) 
      * @return Success
      */
-    getUserByUsername(username?: string | undefined): Observable<MemberDto> {
-        let url_ = this.baseUrl + "/api/User/GetUserByUsername?";
-        if (username === null)
-            throw new Error("The parameter 'username' cannot be null.");
-        else if (username !== undefined)
-            url_ += "username=" + encodeURIComponent("" + username) + "&";
+    addRating(movieId?: number | undefined, body?: RatingCreateDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Rating/AddRating?";
+        if (movieId === null)
+            throw new Error("The parameter 'movieId' cannot be null.");
+        else if (movieId !== undefined)
+            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddRating(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddRating(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processAddRating(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param ratingId (optional) 
+     * @param movieId (optional) 
+     * @param userId (optional) 
+     * @param body (optional) 
+     * @return Success
+     */
+    editRating(ratingId?: number | undefined, movieId?: number | undefined, userId?: number | undefined, body?: RatingUpdateDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Rating/EditRating?";
+        if (ratingId === null)
+            throw new Error("The parameter 'ratingId' cannot be null.");
+        else if (ratingId !== undefined)
+            url_ += "ratingId=" + encodeURIComponent("" + ratingId) + "&";
+        if (movieId === null)
+            throw new Error("The parameter 'movieId' cannot be null.");
+        else if (movieId !== undefined)
+            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+        if (userId === null)
+            throw new Error("The parameter 'userId' cannot be null.");
+        else if (userId !== undefined)
+            url_ += "userId=" + encodeURIComponent("" + userId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEditRating(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEditRating(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processEditRating(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param movieId (optional) 
+     * @return Success
+     */
+    getListRatings(movieId?: number | undefined): Observable<RatingOutputDto[]> {
+        let url_ = this.baseUrl + "/api/Rating/GetListRatings?";
+        if (movieId === null)
+            throw new Error("The parameter 'movieId' cannot be null.");
+        else if (movieId !== undefined)
+            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetListRatings(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetListRatings(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<RatingOutputDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<RatingOutputDto[]>;
+        }));
+    }
+
+    protected processGetListRatings(response: HttpResponseBase): Observable<RatingOutputDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as RatingOutputDto[];
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getUserByUsername(username: string): Observable<MemberDto> {
+        let url_ = this.baseUrl + "/api/User/GetUserByUsername/{username}";
+        if (username === undefined || username === null)
+            throw new Error("The parameter 'username' must be defined.");
+        url_ = url_.replace("{username}", encodeURIComponent("" + username));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1153,15 +1310,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param userId (optional) 
      * @return Success
      */
-    getUserById(userId?: number | undefined): Observable<MemberDto> {
-        let url_ = this.baseUrl + "/api/User/GetUserById?";
-        if (userId === null)
-            throw new Error("The parameter 'userId' cannot be null.");
-        else if (userId !== undefined)
-            url_ += "userId=" + encodeURIComponent("" + userId) + "&";
+    getUserById(userId: number): Observable<MemberDto> {
+        let url_ = this.baseUrl + "/api/User/GetUserById/{userId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1308,14 +1463,282 @@ export class ProxiesService {
         }
         return _observableOf(null as any);
     }
+
+    /**
+     * @param file (optional) 
+     * @return Success
+     */
+    setAvatar(file?: FileParameter | undefined): Observable<AvatarDto> {
+        let url_ = this.baseUrl + "/api/User/SetAvatar";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file === null || file === undefined)
+            throw new Error("The parameter 'file' cannot be null.");
+        else
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSetAvatar(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSetAvatar(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AvatarDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AvatarDto>;
+        }));
+    }
+
+    protected processSetAvatar(response: HttpResponseBase): Observable<AvatarDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as AvatarDto;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    deleteAvatar(): Observable<void> {
+        let url_ = this.baseUrl + "/api/User/DeleteAvatar";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteAvatar(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteAvatar(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDeleteAvatar(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    addMovieToWatchList(movieId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Watchlist/AddMovieToWatchList/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddMovieToWatchList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddMovieToWatchList(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processAddMovieToWatchList(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    removeMovieFromWatchlist(movieId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Watchlist/RemoveMovieFromWatchlist/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRemoveMovieFromWatchlist(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRemoveMovieFromWatchlist(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processRemoveMovieFromWatchlist(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getListMoviesFromWatchlist(userId: number): Observable<ListMoviesOutputDto> {
+        let url_ = this.baseUrl + "/api/Watchlist/GetListMoviesFromWatchlist/{userId}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetListMoviesFromWatchlist(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetListMoviesFromWatchlist(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ListMoviesOutputDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ListMoviesOutputDto>;
+        }));
+    }
+
+    protected processGetListMoviesFromWatchlist(response: HttpResponseBase): Observable<ListMoviesOutputDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ListMoviesOutputDto;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 export interface AccountOutputDto {
     id?: number;
     username?: string | undefined;
-    roles?: string[] | undefined;
-    avatarId?: number | undefined;
+    avatarUrl?: string | undefined;
     token?: string | undefined;
+    roles?: string[] | undefined;
+}
+
+export interface AvatarDto {
+    id?: number;
+    url?: string | undefined;
+}
+
+export interface BannerDto {
+    id?: number;
+    url?: string | undefined;
 }
 
 export interface CertificationOutputDto {
@@ -1346,6 +1769,9 @@ export interface GenreUpdateDto {
 export interface ListMoviesOutputDto {
     id?: number;
     title?: string | undefined;
+    averageRating?: number;
+    totalRatings?: number;
+    banner?: BannerDto;
 }
 
 export interface LoginDto {
@@ -1359,6 +1785,7 @@ export interface MemberDto {
     gender?: string | undefined;
     dateOfBirth?: Date;
     isPublic?: boolean;
+    avatar?: AvatarDto;
 }
 
 export interface MemberUpdateDto {
@@ -1384,6 +1811,9 @@ export interface MovieOutputDto {
     durationMinutes?: number;
     releaseDate?: Date;
     status?: string | undefined;
+    averageRating?: number;
+    totalRatings?: number;
+    banner?: BannerDto;
     genres?: GenreOutputDto[] | undefined;
     certification?: CertificationOutputDto;
 }
@@ -1398,12 +1828,34 @@ export interface MovieUpdateDto {
     genreIds?: number[] | undefined;
 }
 
+export interface RatingCreateDto {
+    score?: number;
+    comment?: string | undefined;
+}
+
+export interface RatingOutputDto {
+    id?: number;
+    score?: number;
+    comment?: string | undefined;
+    appUserId?: number;
+}
+
+export interface RatingUpdateDto {
+    score?: number;
+    comment?: string | undefined;
+}
+
 export interface RegisterDto {
     username: string;
     fullName: string;
     gender: string;
     dateOfBirth: Date;
     password: string;
+}
+
+export interface FileParameter {
+    data: any;
+    fileName: string;
 }
 
 export class ApiException extends Error {

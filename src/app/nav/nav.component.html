@@ -52,8 +52,8 @@
           data-bs-toggle="dropdown"
         >
           <img
-            src="assets/img/profile-img.jpg"
-            alt="Profile"
+            src="{{ user.avatarUrl || './assets/user.png' }}"
+            alt="{{ user.username }}"
             class="rounded-circle"
           />
           <span class="d-none d-md-block dropdown-toggle ps-2">{{

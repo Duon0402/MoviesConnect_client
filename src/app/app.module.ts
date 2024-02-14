@@ -25,6 +25,7 @@ import { MemberProfileSettingComponent } from './members/member-profile-setting/
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { MovieCardComponent } from './movies/movie-card/movie-card.component';
     MemberProfileSettingComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    MovieCardComponent
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +59,11 @@ import { MovieCardComponent } from './movies/movie-card/movie-card.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
