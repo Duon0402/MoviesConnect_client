@@ -8,6 +8,10 @@ import { MemberProfileComponent } from './members/member-profile/member-profile.
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { UploadImageComponent } from './_forms/upload-image/upload-image.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { MenuComponent } from './menu/menu.component';
+import { WatchlistComponent } from './members/watchlist/watchlist.component';
 
 const routes: Routes = [
   {
@@ -15,12 +19,31 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-      path: '',
-      runGuardsAndResolvers: 'always',
-      children: [
-        {path: 'movies', component: MovieListComponent},
-        {path: 'movies/:id', component: MovieDetailComponent, }
-      ]
+    path: 'upload',
+    component: UploadImageComponent,
+  },
+  {
+    path: 'menu',
+    component: MenuComponent,
+  },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'movies', component: MovieListComponent },
+      { path: 'movies/:id', component: MovieDetailComponent },
+      {
+        path: 'member',
+        children: [
+          { path: 'profile', component: MemberProfileComponent },
+          {
+            path: 'watchlist',
+            component: WatchlistComponent,
+          },
+        ],
+      },
+    ],
   },
   {
     path: '',
@@ -35,18 +58,11 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'member',
-    children: [
-      { path: 'profile', component: MemberProfileComponent },
-    ],
-  },
-
 
   // errors
-  {path: 'not-found', component: NotFoundComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {path: '**', component: NotFoundComponent, pathMatch: 'full'}
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

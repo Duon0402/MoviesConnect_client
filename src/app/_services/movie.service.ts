@@ -1,4 +1,7 @@
-import { ListMoviesOutputDto } from './../../shared/service-proxies/proxies.service';
+import {
+  ListMoviesOutputDto,
+  MovieOutputDto,
+} from './../../shared/service-proxies/proxies.service';
 import { Injectable } from '@angular/core';
 import { ProxiesService } from '../../shared/service-proxies/proxies.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +15,7 @@ import { Observable } from 'rxjs';
 export class MovieService {
   baseUrl = environment.apiUrl;
   movies!: ListMoviesOutputDto[];
+  watchlistMovieIds!: number[];
   constructor(private http: HttpClient, private _service: ProxiesService) {}
 
   getListsMovies(params: MoviesParams): Observable<ListMoviesOutputDto[]> {
@@ -27,9 +31,23 @@ export class MovieService {
     );
   }
 
+  getMovie(movieId: any): Observable<MovieOutputDto> {
+    return this._service.getMovieById(movieId);
+  }
+
   addMovieToWatchlist(movieId: number) {
     return this.http.post(
       this.baseUrl + 'Watchlist/AddMovieToWatchList/' + movieId, {}
     );
+  }
+
+  removeMovieFromWatchlist(movieId: number) {
+    return this.http.delete(
+      this.baseUrl + 'Watchlist/RemoveMovieFromWatchlist/' + movieId
+    );
+  }
+
+  getWatchList(userId: any): Observable<ListMoviesOutputDto[]> {
+    return this._service.getListMoviesFromWatchlist(userId);
   }
 }

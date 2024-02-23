@@ -26,6 +26,9 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { UploadImageComponent } from './_forms/upload-image/upload-image.component';
+import { MenuComponent } from './menu/menu.component';
+import { WatchlistComponent } from './members/watchlist/watchlist.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
     NotFoundComponent,
     ServerErrorComponent,
     MovieCardComponent,
+    UploadImageComponent,
+    MenuComponent,
+    WatchlistComponent,
   ],
   imports: [
     BrowserModule,

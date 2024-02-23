@@ -1,6 +1,6 @@
 <div class="card">
   <img
-    src="{{movie.banner?.url || './as'}} "
+    src="{{ movie.banner?.url || './assets/img/moviebanner' }} "
     routerLink="/movies/{{ movie.id }}"
     class="card-img-top banner"
     alt="Movie Banner"
@@ -11,11 +11,23 @@
     </h5>
     <p class="card-text">
       <i class="bi bi-star-fill text-warning me-2"></i>
-      <span style="margin-top: 5px;">{{ movie.averageRating?.toFixed(1) }} ({{movie.totalRatings}})</span>
+      <span style="margin-top: 5px"
+        >{{ movie.averageRating?.toFixed(1) }} ({{ movie.totalRatings }})</span
+      >
     </p>
-    <a class="btn btn-primary align-self-center" (click)="addWatchlist(movie.id)">
-      <i class="bi bi-plus"></i>
-      <span> Watchlist</span>
+    <a
+      *ngIf="!isInWatchlist"
+      class="btn btn-outline-primary align-self-center"
+      (click)="addToWatchlist(movie.id)"
+    >
+      <i class="bi bi-plus"><span>Watchlist</span></i>
+    </a>
+    <a
+      *ngIf="isInWatchlist"
+      class="btn btn-primary align-self-center"
+      (click)="removeFromWatchlist(movie.id)"
+    >
+      <i class="bi bi-check2"><span>Watchlist</span></i>
     </a>
   </div>
 </div>

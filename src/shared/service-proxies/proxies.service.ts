@@ -1672,7 +1672,7 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getListMoviesFromWatchlist(userId: number): Observable<ListMoviesOutputDto> {
+    getListMoviesFromWatchlist(userId: number): Observable<ListMoviesOutputDto[]> {
         let url_ = this.baseUrl + "/api/Watchlist/GetListMoviesFromWatchlist/{userId}";
         if (userId === undefined || userId === null)
             throw new Error("The parameter 'userId' must be defined.");
@@ -1694,14 +1694,14 @@ export class ProxiesService {
                 try {
                     return this.processGetListMoviesFromWatchlist(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<ListMoviesOutputDto>;
+                    return _observableThrow(e) as any as Observable<ListMoviesOutputDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<ListMoviesOutputDto>;
+                return _observableThrow(response_) as any as Observable<ListMoviesOutputDto[]>;
         }));
     }
 
-    protected processGetListMoviesFromWatchlist(response: HttpResponseBase): Observable<ListMoviesOutputDto> {
+    protected processGetListMoviesFromWatchlist(response: HttpResponseBase): Observable<ListMoviesOutputDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1711,7 +1711,7 @@ export class ProxiesService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ListMoviesOutputDto;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ListMoviesOutputDto[];
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {

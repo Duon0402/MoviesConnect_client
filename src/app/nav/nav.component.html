@@ -7,8 +7,14 @@
     </a>
   </div>
 
+  <div class="menu mr-3">
+    <button class="btn btn-light">
+      <i class="bi bi-list" routerLink="/menu"><span class>Menu</span></i>
+    </button>
+  </div>
+
   <!-- search -->
-  <div class="search-bar">
+  <!-- <div class="search-bar">
     <form
       class="search-form d-flex align-items-center"
       method="POST"
@@ -22,19 +28,26 @@
       />
       <button type="submit" title="Search"><i class="bi bi-search"></i></button>
     </form>
-  </div>
+  </div> -->
 
   <!-- user dropdown -->
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
-      <li class="nav-item d-block d-lg-none">
+
+      <li class="nav-item nav-icon watchlist">
+        <a class="btn btn-light" routerLink="/member/watchlist/"><i class="bi bi-bookmark-plus-fill"><span>Watchlist</span></i></a>
+      </li>
+
+      <!-- <li class="nav-item d-block d-lg-none">
         <a class="nav-link nav-icon search-bar-toggle" href="#">
           <i class="bi bi-search"></i>
         </a>
-      </li>
+      </li> -->
+
+
       <div>
         <li
-          class="nav-item pe-5"
+          class="btn-login nav-item pe-5"
           *ngIf="(accountService.currentUser$ | async) === null"
         >
           <a class="btn btn-light" routerLink="/login">
@@ -48,7 +61,6 @@
       >
         <a
           class="nav-link nav-profile d-flex align-items-center pe-1"
-          href="#"
           data-bs-toggle="dropdown"
         >
           <img
@@ -66,6 +78,7 @@
             <hr class="dropdown-divider" />
           </li>
 
+          <!-- profile -->
           <li>
             <a
               class="dropdown-item d-flex align-items-center"
@@ -78,7 +91,7 @@
           <li>
             <hr class="dropdown-divider" />
           </li>
-
+          <!-- logout -->
           <li>
             <a
               class="dropdown-item d-flex align-items-center"

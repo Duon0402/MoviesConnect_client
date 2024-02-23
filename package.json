@@ -28,6 +28,7 @@
     "ngx-bootstrap": "^12.0.0",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^18.0.0",
+    "ngx-uploader": "^17.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

@@ -7,6 +7,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxUploaderModule } from 'ngx-uploader';
 
 @NgModule({
   declarations: [],
@@ -16,6 +17,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       positionClass: 'toast-bottom-right',
     }),
     BsDatepickerModule.forRoot(),
+    NgxUploaderModule
   ],
   exports: [
     ToastrModule,
@@ -24,6 +26,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     NgbPaginationModule,
     ReactiveFormsModule,
     BsDatepickerModule,
+    NgxUploaderModule
   ],
   providers: [ProxiesService],
 })
