@@ -1771,6 +1771,7 @@ export interface ListMoviesOutputDto {
     title?: string | undefined;
     averageRating?: number;
     totalRatings?: number;
+    isInWatchList?: boolean;
     banner?: BannerDto;
 }
 
@@ -1813,6 +1814,7 @@ export interface MovieOutputDto {
     status?: string | undefined;
     averageRating?: number;
     totalRatings?: number;
+    isInWatchlist?: boolean;
     banner?: BannerDto;
     genres?: GenreOutputDto[] | undefined;
     certification?: CertificationOutputDto;

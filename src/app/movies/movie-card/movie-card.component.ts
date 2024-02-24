@@ -16,7 +16,6 @@ import { AccountService } from '../../_services/account.service';
 })
 export class MovieCardComponent {
   @Input() movie!: ListMoviesOutputDto;
-  isInWatchlist: boolean = false;
   currentUser!: AccountOutputDto | null;
   watchlistMovies: ListMoviesOutputDto[] = [];
 
@@ -28,29 +27,18 @@ export class MovieCardComponent {
       .pipe(take(1))
       .subscribe((currentUser) => {
         this.currentUser = currentUser;
-        this.checkWatchList();
       });
   }
 
   addToWatchlist(movieId: any) {
     this.movieService.addMovieToWatchlist(movieId).subscribe(() => {
-      this.checkWatchList();
+      this.movie.isInWatchList = true; // Update the value from the API response
     });
   }
 
   removeFromWatchlist(movieId: any) {
     this.movieService.removeMovieFromWatchlist(movieId).subscribe(() => {
-      this.checkWatchList();
+      this.movie.isInWatchList = false; // Update the value from the API response
     });
-  }
-  checkWatchList() {
-    if (this.currentUser?.id) {
-      this.movieService.getWatchList(this.currentUser?.id).subscribe((watchlist) => {
-        this.watchlistMovies = watchlist;
-        this.isInWatchlist = this.watchlistMovies.some(
-          (watchlistMovie) => watchlistMovie.id === this.movie.id
-        );
-      });
-    }
   }
 }

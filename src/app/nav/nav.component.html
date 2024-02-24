@@ -59,8 +59,8 @@
         class="nav-item dropdown pe-3"
         *ngIf="accountService.currentUser$ | async as user"
       >
-        <a
-          class="nav-link nav-profile d-flex align-items-center pe-1"
+        <button
+          class="nav-link nav-profile d-flex align-items-center pe-1 btn"
           data-bs-toggle="dropdown"
         >
           <img
@@ -71,7 +71,7 @@
           <span class="d-none d-md-block dropdown-toggle ps-2">{{
             user.username | titlecase
           }}</span>
-        </a>
+        </button>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li>
