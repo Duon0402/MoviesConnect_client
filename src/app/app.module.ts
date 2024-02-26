@@ -31,6 +31,7 @@ import { MenuComponent } from './menu/menu.component';
 import { RatingAddOrEditComponent } from './movies/ratings/rating-add-or-edit/rating-add-or-edit.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { WatchlistComponent } from './movies/watchlist/watchlist.component';
+import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { WatchlistComponent } from './movies/watchlist/watchlist.component';
     MenuComponent,
     RatingAddOrEditComponent,
     AdminHomeComponent,
-    WatchlistComponent
+    WatchlistComponent,
+    AdminSidebarComponent
   ],
   imports: [
     BrowserModule,

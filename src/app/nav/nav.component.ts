@@ -16,7 +16,6 @@ export class NavComponent {
 
   constructor(
     public accountService: AccountService,
-
   ) {}
 
   logout() {

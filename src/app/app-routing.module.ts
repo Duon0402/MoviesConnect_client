@@ -12,6 +12,8 @@ import { UploadImageComponent } from './_forms/upload-image/upload-image.compone
 import { AuthGuard } from './_guards/auth.guard';
 import { MenuComponent } from './menu/menu.component';
 import { WatchlistComponent } from './movies/watchlist/watchlist.component';
+import { AdminGuard } from './_guards/admin.guard';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,13 @@ const routes: Routes = [
             component: WatchlistComponent,
           },
         ],
+      },
+
+      // admin or moderator
+      {
+        path: 'admin',
+        canActivate: [AdminGuard],
+        component: AdminHomeComponent
       },
     ],
   },

@@ -74,11 +74,24 @@
         </button>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-          <li>
+          <!-- admin -->
+          <li *ngIf="user.roles?.includes('Admin' || 'Moderator')">
             <hr class="dropdown-divider" />
+          </li>
+          <li *ngIf="user.roles?.includes('Admin' || 'Moderator')">
+            <a
+              class="dropdown-item d-flex align-items-center"
+              routerLink="/admin"
+            >
+              <i class="bi bi-person-gear"></i>
+              <span>Admin</span>
+            </a>
           </li>
 
           <!-- profile -->
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
           <li>
             <a
               class="dropdown-item d-flex align-items-center"
@@ -91,6 +104,7 @@
           <li>
             <hr class="dropdown-divider" />
           </li>
+
           <!-- logout -->
           <li>
             <a
