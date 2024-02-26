@@ -17,12 +17,31 @@
         </ul>
       </div>
       <div *ngIf="movie.certification">
-        <p routerLink=""><strong>Certification:</strong> {{ movie.certification.name }}</p>
+        <p routerLink="">
+          <strong>Certification:</strong> {{ movie.certification.name }}
+        </p>
       </div>
     </form>
   </div>
+
+  <div *ngIf="movie">
+    <app-rating-add-or-edit [movie]="movie"></app-rating-add-or-edit>
+  </div>
+
+  <div class="card-body" *ngIf="movie">
+    <button
+      class="btn"
+      [class.btn-primary]="!showRatings"
+      [class.btn-outline-primary]="showRatings"
+      (click)="toggleRatings()"
+    >
+      {{ showRatings ? "Hide Ratings" : "Show Ratings" }}
+    </button>
+    <div class="mt-3" *ngIf="showRatings">
+      <app-rating-list [ratings]="ratings"></app-rating-list>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="movie">
-  <app-rating-add-or-edit [movie]="movie"></app-rating-add-or-edit>
-</div>
+
+

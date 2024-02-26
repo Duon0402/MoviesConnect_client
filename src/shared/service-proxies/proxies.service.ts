@@ -1820,6 +1820,7 @@ export interface RatingAddOrEditDto {
 export interface RatingOutputDto {
     score?: number;
     comment?: string | undefined;
+    username?: string | undefined;
     appUserId?: number;
 }
 

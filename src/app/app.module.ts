@@ -32,6 +32,7 @@ import { RatingAddOrEditComponent } from './movies/ratings/rating-add-or-edit/ra
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
+import { RatingListComponent } from './movies/ratings/rating-list/rating-list.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.compo
     RatingAddOrEditComponent,
     AdminHomeComponent,
     WatchlistComponent,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    RatingListComponent
   ],
   imports: [
     BrowserModule,
