@@ -17,7 +17,7 @@ import { NgxUploaderModule } from 'ngx-uploader';
       positionClass: 'toast-bottom-right',
     }),
     BsDatepickerModule.forRoot(),
-    NgxUploaderModule
+    NgxUploaderModule,
   ],
   exports: [
     ToastrModule,
@@ -26,7 +26,7 @@ import { NgxUploaderModule } from 'ngx-uploader';
     NgbPaginationModule,
     ReactiveFormsModule,
     BsDatepickerModule,
-    NgxUploaderModule
+    NgxUploaderModule,
   ],
   providers: [ProxiesService],
 })

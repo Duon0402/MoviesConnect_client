@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Your Rating</h3>
+    <form #ratingForm="ngForm" (ngSubmit)="addOrEditRating()">
+      <div class="row mb-3">
+        <div class="col-12">
+          <ngb-rating
+            [max]="5"
+            name="score"
+            [(ngModel)]="ratingData.score"
+          ></ngb-rating>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <textarea
+            class="form-control comment"
+            placeholder="Your comments..."
+            name="comment"
+            [(ngModel)]="ratingData.comment"
+          ></textarea>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-sm-12">
+          <button type="submit" [disabled]="!ratingForm.dirty || ratingData.score! < 1 " class="btn btn-primary">
+            <span>Rating</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

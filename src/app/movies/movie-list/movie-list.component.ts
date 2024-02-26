@@ -12,8 +12,7 @@ import {
   styleUrl: './movie-list.component.css',
 })
 export class MovieListComponent implements OnInit {
-  moviesParams: MoviesParams = {
-  };
+  moviesParams: MoviesParams = {};
   movies!: ListMoviesOutputDto[];
 
   constructor(private movieService: MovieService) {}

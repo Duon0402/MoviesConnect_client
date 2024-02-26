@@ -32,13 +32,13 @@ export class MovieCardComponent {
 
   addToWatchlist(movieId: any) {
     this.movieService.addMovieToWatchlist(movieId).subscribe(() => {
-      this.movie.isInWatchList = true; // Update the value from the API response
+      this.movie.isInWatchList = true;
     });
   }
 
   removeFromWatchlist(movieId: any) {
     this.movieService.removeMovieFromWatchlist(movieId).subscribe(() => {
-      this.movie.isInWatchList = false; // Update the value from the API response
+      this.movie.isInWatchList = false;
     });
   }
 }

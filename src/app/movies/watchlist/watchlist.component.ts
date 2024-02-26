@@ -4,7 +4,7 @@ import {
   ListMoviesOutputDto,
 } from '../../../shared/service-proxies/proxies.service';
 import { AccountService } from '../../_services/account.service';
-import { MovieService } from './../../_services/movie.service';
+import { MovieService } from '../../_services/movie.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -27,6 +27,7 @@ export class WatchlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadWatchlist();
+    console.log(this.movies)
   }
 
   loadWatchlist() {

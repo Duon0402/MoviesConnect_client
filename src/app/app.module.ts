@@ -28,7 +28,9 @@ import { MovieCardComponent } from './movies/movie-card/movie-card.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { UploadImageComponent } from './_forms/upload-image/upload-image.component';
 import { MenuComponent } from './menu/menu.component';
-import { WatchlistComponent } from './members/watchlist/watchlist.component';
+import { RatingAddOrEditComponent } from './movies/ratings/rating-add-or-edit/rating-add-or-edit.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { WatchlistComponent } from './members/watchlist/watchlist.component';
     MovieCardComponent,
     UploadImageComponent,
     MenuComponent,
-    WatchlistComponent,
+    RatingAddOrEditComponent,
+    AdminHomeComponent,
+    WatchlistComponent
   ],
   imports: [
     BrowserModule,

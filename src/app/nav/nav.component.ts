@@ -2,7 +2,6 @@ import { Component, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { MovieService } from '../_services/movie.service';
 import { MoviesParams } from '../_models/movieParams';
-import { ListMoviesOutputDto, MovieOutputDto } from '../../shared/service-proxies/proxies.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,8 +16,7 @@ export class NavComponent {
 
   constructor(
     public accountService: AccountService,
-    private movieService: MovieService,
-    private router: Router
+
   ) {}
 
   logout() {

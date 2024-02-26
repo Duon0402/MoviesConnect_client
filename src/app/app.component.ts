@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountOutputDto } from '../shared/service-proxies/proxies.service';
 import { AccountService } from './_services/account.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,14 @@ import { AccountService } from './_services/account.service';
 })
 export class AppComponent implements OnInit {
   title = 'Movies Connect';
+  currentUser!: AccountOutputDto | null;
 
   constructor(private accountService: AccountService) {}
 
   ngOnInit() {
+    this.accountService.currentUser$
+      .pipe(take(1))
+      .subscribe((currentUser) => (this.currentUser = currentUser));
     this.setCurrentUser();
   }
 

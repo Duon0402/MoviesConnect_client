@@ -1078,16 +1078,14 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
      * @param body (optional) 
      * @return Success
      */
-    addRating(movieId?: number | undefined, body?: RatingCreateDto | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Rating/AddRating?";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+    addOrEditRating(movieId: number, body?: RatingAddOrEditDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Rating/AddOrEditRating/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -1102,11 +1100,11 @@ export class ProxiesService {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processAddRating(response_);
+            return this.processAddOrEditRating(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processAddRating(response_ as any);
+                    return this.processAddOrEditRating(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<void>;
                 }
@@ -1115,7 +1113,7 @@ export class ProxiesService {
         }));
     }
 
-    protected processAddRating(response: HttpResponseBase): Observable<void> {
+    protected processAddOrEditRating(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1135,54 +1133,38 @@ export class ProxiesService {
     }
 
     /**
-     * @param ratingId (optional) 
-     * @param movieId (optional) 
-     * @param userId (optional) 
-     * @param body (optional) 
      * @return Success
      */
-    editRating(ratingId?: number | undefined, movieId?: number | undefined, userId?: number | undefined, body?: RatingUpdateDto | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Rating/EditRating?";
-        if (ratingId === null)
-            throw new Error("The parameter 'ratingId' cannot be null.");
-        else if (ratingId !== undefined)
-            url_ += "ratingId=" + encodeURIComponent("" + ratingId) + "&";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
-        if (userId === null)
-            throw new Error("The parameter 'userId' cannot be null.");
-        else if (userId !== undefined)
-            url_ += "userId=" + encodeURIComponent("" + userId) + "&";
+    getRating(movieId: number): Observable<RatingOutputDto> {
+        let url_ = this.baseUrl + "/api/Rating/GetRating/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
-
         let options_ : any = {
-            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json",
+                "Accept": "text/plain"
             })
         };
 
-        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processEditRating(response_);
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetRating(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processEditRating(response_ as any);
+                    return this.processGetRating(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<RatingOutputDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<RatingOutputDto>;
         }));
     }
 
-    protected processEditRating(response: HttpResponseBase): Observable<void> {
+    protected processGetRating(response: HttpResponseBase): Observable<RatingOutputDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1191,7 +1173,9 @@ export class ProxiesService {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as RatingOutputDto;
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1202,15 +1186,13 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
      * @return Success
      */
-    getListRatings(movieId?: number | undefined): Observable<RatingOutputDto[]> {
-        let url_ = this.baseUrl + "/api/Rating/GetListRatings?";
-        if (movieId === null)
-            throw new Error("The parameter 'movieId' cannot be null.");
-        else if (movieId !== undefined)
-            url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+    getListRatings(movieId: number): Observable<RatingOutputDto[]> {
+        let url_ = this.baseUrl + "/api/Rating/GetListRatings/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1830,21 +1812,15 @@ export interface MovieUpdateDto {
     genreIds?: number[] | undefined;
 }
 
-export interface RatingCreateDto {
+export interface RatingAddOrEditDto {
     score?: number;
     comment?: string | undefined;
 }
 
 export interface RatingOutputDto {
-    id?: number;
     score?: number;
     comment?: string | undefined;
     appUserId?: number;
-}
-
-export interface RatingUpdateDto {
-    score?: number;
-    comment?: string | undefined;
 }
 
 export interface RegisterDto {

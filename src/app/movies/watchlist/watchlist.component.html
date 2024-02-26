@@ -1,9 +1,9 @@
-<div *ngIf="movies.length === 0" class="text-center">
+<div class="text-center" *ngIf="!movies || movies.length === 0">
   <span>Nothing in your watchlist.</span>
   <a class="btn btn-link" routerLink="/movies">Explore Movies</a>
 </div>
 <div class="row">
   <div class="col-lg-2" *ngFor="let movie of movies">
-    <app-movie-card [movie]="movie "></app-movie-card>
+    <app-movie-card [movie]="movie"></app-movie-card>
   </div>
 </div>

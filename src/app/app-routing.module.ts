@@ -11,7 +11,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { UploadImageComponent } from './_forms/upload-image/upload-image.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { MenuComponent } from './menu/menu.component';
-import { WatchlistComponent } from './members/watchlist/watchlist.component';
+import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 
 const routes: Routes = [
   {
