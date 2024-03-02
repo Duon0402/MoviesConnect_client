@@ -1754,7 +1754,7 @@ export interface ListMoviesOutputDto {
     averageRating?: number;
     totalRatings?: number;
     isInWatchList?: boolean;
-    banner?: BannerDto;
+    bannerOutput?: BannerDto;
 }
 
 export interface LoginDto {

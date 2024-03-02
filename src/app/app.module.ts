@@ -33,6 +33,8 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.component';
 import { RatingListComponent } from './movies/ratings/rating-list/rating-list.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/admin-user-roles.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { RatingListComponent } from './movies/ratings/rating-list/rating-list.co
     AdminHomeComponent,
     WatchlistComponent,
     AdminSidebarComponent,
-    RatingListComponent
+    RatingListComponent,
+    AdminUsersComponent,
+    AdminUserRolesComponent
   ],
   imports: [
     BrowserModule,

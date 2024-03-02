@@ -14,6 +14,8 @@ import { MenuComponent } from './menu/menu.component';
 import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/admin-user-roles.component';
 
 const routes: Routes = [
   {
@@ -50,7 +52,17 @@ const routes: Routes = [
       {
         path: 'admin',
         canActivate: [AdminGuard],
-        component: AdminHomeComponent
+        component: AdminHomeComponent,
+        children: [
+          {
+            path: 'users',
+            component: AdminUsersComponent,
+          },
+          {
+            path: 'roles',
+            component: AdminUserRolesComponent,
+          },
+        ],
       },
     ],
   },
