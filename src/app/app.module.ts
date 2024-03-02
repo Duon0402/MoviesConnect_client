@@ -36,6 +36,7 @@ import { RatingListComponent } from './movies/ratings/rating-list/rating-list.co
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/admin-user-roles.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MovieCarouselComponent } from './movies/movie-carousel/movie-carousel.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     RatingListComponent,
     AdminUsersComponent,
     AdminUserRolesComponent,
+    MovieCarouselComponent,
   ],
   imports: [
     BrowserModule,

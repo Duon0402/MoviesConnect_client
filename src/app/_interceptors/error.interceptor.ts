@@ -33,14 +33,19 @@ export class ErrorInterceptor implements HttpInterceptor {
                 throw modalStateErrors.flat();
               } else if (typeof error.error === 'object') {
                 this.toastr.error(error.error.title, error.status);
-                console.error(error)
+                console.error(error);
               } else {
                 this.toastr.error(error.error);
                 // this.toastr.error(error.error, error.status);
               }
               break;
             case 401:
-              this.toastr.error(error.error, error.status);
+              if (error.error === null) {
+                this.toastr.error('Please login to continue');
+                this.router.navigateByUrl('/login');
+              } else {
+                this.toastr.error(error.error, error.status);
+              }
               break;
             case 404:
               this.router.navigateByUrl('/not-found');

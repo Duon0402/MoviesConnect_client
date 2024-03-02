@@ -49,7 +49,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/login');
   }
 
   changePass(model: any) {

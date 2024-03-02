@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MoviesParams } from '../_models/movieParams';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  movieParams: MoviesParams = {
+    pageSize: 3
+  };
+
+  constructor() {}
+
 
 }

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     }),
     BsDatepickerModule.forRoot(),
     NgxUploaderModule,
+    CarouselModule.forRoot()
   ],
   exports: [
     ToastrModule,
@@ -28,7 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     BsDatepickerModule,
     NgxUploaderModule,
-    MatDialogModule
+    MatDialogModule,
+    CarouselModule
   ],
   providers: [ProxiesService],
 })

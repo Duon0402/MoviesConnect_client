@@ -16,7 +16,7 @@ import { AccountService } from '../_services/account.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private accountService: AccountService,
-    private toarstr: ToastrService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
   canActivate(): Observable<boolean> {
@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
         if (user) {
           return true;
         }
-        this.toarstr.error('Please login to continue');
+        this.toastr.error('Please login to continue');
         this.router.navigateByUrl('/login');
         return false;
       })

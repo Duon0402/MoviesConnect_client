@@ -1,0 +1,38 @@
+<div
+  id="carouselExampleIndicators"
+  class="carousel slide pointer-event"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-inner">
+    <div
+      class="carousel-item"
+      *ngFor="let chunk of movieChunks; let i = index"
+      [class.active]="i === 0"
+    >
+      <div class="row justify-content-center">
+        <div class="col-lg-2 mt-3 mb-3" *ngFor="let movie of chunk">
+          <app-movie-card [movie]="movie"></app-movie-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="carousel-control-prev btn btn-outline-secondary"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next btn btn-outline-secondary"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

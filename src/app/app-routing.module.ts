@@ -47,7 +47,6 @@ const routes: Routes = [
           },
         ],
       },
-
       // admin or moderator
       {
         path: 'admin',

@@ -28,7 +28,7 @@ export class MovieService {
       params.pageSize,
       params.certificationId,
       params.genreId,
-      params.purpose
+      params.purpose,
     );
   }
 

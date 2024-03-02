@@ -42,8 +42,8 @@
     </p>
     <button
       class="btn"
-      [class.btn-primary]="!showRatings"
-      [class.btn-outline-primary]="showRatings"
+      [class.btn-outline-primary]="!showRatings"
+      [class.btn-primary]="showRatings"
       (click)="toggleRatings()"
     >
       {{ showRatings ? "Hide All Ratings" : "Show All Ratings" }}
