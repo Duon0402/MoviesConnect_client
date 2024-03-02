@@ -1,13 +1,7 @@
 a {
   text-decoration: none;
 }
-.menu span{
-  font-size: 16px;
-  font-weight: 700;
-  color: #012970;
-  font-family: "Nunito", sans-serif;
-}
-.menu i {
+.menu span, i{
   font-size: 16px;
   font-weight: 700;
   color: #012970;

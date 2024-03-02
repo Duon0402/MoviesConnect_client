@@ -65,7 +65,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AdminSidebarComponent,
     RatingListComponent,
     AdminUsersComponent,
-    AdminUserRolesComponent
+    AdminUserRolesComponent,
   ],
   imports: [
     BrowserModule,

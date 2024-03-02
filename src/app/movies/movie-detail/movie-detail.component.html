@@ -23,11 +23,23 @@
       </div>
     </form>
     <div *ngIf="movie">
-      <button class="btn btn-primary" (click)="openRatingDialog()">Add Or Edit Your Rating</button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="openRatingDialog()"
+      >
+        <i class="bi bi-star me-1"></i> Rate
+      </button>
     </div>
   </div>
 
   <div class="card-body" *ngIf="movie">
+    <p class="card-text">
+      <i class="bi bi-star-fill text-warning me-2"></i>
+      <span style="margin-top: 5px"
+        >{{ movie.averageRating?.toFixed(1) }} ({{ movie.totalRatings }})</span
+      >
+    </p>
     <button
       class="btn"
       [class.btn-primary]="!showRatings"
@@ -41,6 +53,3 @@
     </div>
   </div>
 </div>
-
-
-
