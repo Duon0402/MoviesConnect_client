@@ -7,6 +7,8 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ProxiesService } from '../../../shared/service-proxies/proxies.service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../../_services/movie.service';
+import { RatingAddOrEditComponent } from '../ratings/rating-add-or-edit/rating-add-or-edit.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie-detail',
@@ -17,12 +19,14 @@ export class MovieDetailComponent implements OnInit {
   @ViewChild(RatingListComponent) ratingListComponent!: RatingListComponent;
   movie!: MovieOutputDto;
   showRatings: boolean = false;
+  ratingModalOpen: boolean = false;
   ratings!: RatingOutputDto[];
 
   constructor(
     private _service: ProxiesService,
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.loadMovie();
@@ -34,7 +38,21 @@ export class MovieDetailComponent implements OnInit {
       this.movie = response;
     });
   }
+  // add or edit rating
+  openRatingDialog(): void {
+    const dialogRef = this.dialog.open(RatingAddOrEditComponent, {
+      width: '500px',
+      data: { movie: this.movie },
+    });
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (this.showRatings == true) {
+        this.loadRatings();
+      }
+    });
+  }
+
+  // list ratings
   toggleRatings() {
     this.showRatings = !this.showRatings;
     if (this.showRatings) {

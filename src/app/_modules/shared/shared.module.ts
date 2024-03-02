@@ -8,6 +8,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxUploaderModule } from 'ngx-uploader';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { NgxUploaderModule } from 'ngx-uploader';
     ReactiveFormsModule,
     BsDatepickerModule,
     NgxUploaderModule,
+    MatDialogModule
   ],
   providers: [ProxiesService],
 })

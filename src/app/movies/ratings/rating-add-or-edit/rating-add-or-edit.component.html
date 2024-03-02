@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-body">
-    <h3 class="card-title">Your Rating</h3>
+    <div class="card-header">
+      <h3 class="card-title">Your Rating</h3>
+    </div>
+    <span class="btn btn-close" (click)="closeDialog()"></span>
     <form #ratingForm="ngForm" (ngSubmit)="addOrEditRating()">
       <div class="row mb-3">
         <div class="col-12">
@@ -23,7 +26,12 @@
       </div>
       <div class="row mt-2">
         <div class="col-sm-12">
-          <button type="submit" [disabled]="!ratingForm.dirty || ratingData.score! < 1 " class="btn btn-primary">
+          <button
+            type="submit"
+            [disabled]="!ratingForm.dirty || ratingData.score! < 1"
+            class="btn btn-primary"
+            (click)="closeDialog()"
+          >
             <span>Rating</span>
           </button>
         </div>

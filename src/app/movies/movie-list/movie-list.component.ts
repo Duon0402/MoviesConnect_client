@@ -25,4 +25,12 @@ export class MovieListComponent implements OnInit {
       .getListsMovies(this.moviesParams)
       .subscribe((movies: ListMoviesOutputDto[]) => (this.movies = movies));
   }
+
+  resetFilter() {
+    this.moviesParams = new MoviesParams();
+  }
+
+  filterMovies() {
+    this.loadMovies();
+  }
 }

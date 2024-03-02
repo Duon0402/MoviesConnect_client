@@ -27,7 +27,6 @@ export class WatchlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadWatchlist();
-    console.log(this.movies)
   }
 
   loadWatchlist() {

@@ -35,6 +35,7 @@ import { AdminSidebarComponent } from './admin/admin-sidebar/admin-sidebar.compo
 import { RatingListComponent } from './movies/ratings/rating-list/rating-list.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/admin-user-roles.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/ad
       useClass: ErrorInterceptor,
       multi: true,
     },
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

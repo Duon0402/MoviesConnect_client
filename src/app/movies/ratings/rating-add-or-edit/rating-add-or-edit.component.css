@@ -5,3 +5,16 @@ ngb-rating {
 .comment {
   max-height: 120px;
 }
+
+.card {
+  position: relative;
+}
+
+.btn-close {
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
