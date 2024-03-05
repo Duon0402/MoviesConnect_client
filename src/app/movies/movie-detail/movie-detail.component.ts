@@ -46,12 +46,12 @@ export class MovieDetailComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-
       // Note: neu rating ko thay doi thi ko can load lai (chua fix dc)
-
-      this.loadMovie();
-      if (this.showRatings == true) {
-        this.loadRatings();
+      if (result === true) {
+        this.loadMovie();
+        if (this.showRatings == true) {
+          this.loadRatings();
+        }
       }
     });
   }
