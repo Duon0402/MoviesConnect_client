@@ -11,10 +11,15 @@ export class MemberService {
   constructor(private http: HttpClient, private _service: ProxiesService) { }
 
   changeAvatar(file: any) {
-    return this.http.post(this.baseUrl + '/User/SetAvatar', file);
+    return this.http.post(this.baseUrl + 'User/SetAvatar', file);
   }
 
   getMemberById(userId: any){
     return this._service.getUserById(userId);
   }
+
+  getMemberByUsername(username: any) {
+    return this._service.getUserByUsername(username);
+  }
+
 }

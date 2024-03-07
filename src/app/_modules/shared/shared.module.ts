@@ -10,6 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     }),
     BsDatepickerModule.forRoot(),
     NgxUploaderModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    TabsModule.forRoot()
   ],
   exports: [
     ToastrModule,
@@ -31,7 +33,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     BsDatepickerModule,
     NgxUploaderModule,
     MatDialogModule,
-    CarouselModule
+    CarouselModule,
+    TabsModule
   ],
   providers: [ProxiesService],
 })

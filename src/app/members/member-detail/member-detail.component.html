@@ -1,0 +1,64 @@
+<section
+  class="section profile d-flex justify-content-center align-items-center"
+  *ngIf="member"
+>
+  <div class="col-xl-8">
+    <div class="card">
+      <div class="card-body pt-3">
+        <tabset #memberTabs>
+          <tab heading="Overview" (selectTab)="onTabActivated($event)">
+            <div class="tab-content p-3">
+              <div
+                class="tab-pane fade show active profile-overview"
+                id="profile-overview"
+              >
+                <div class="row mb-3">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Profile Image</div>
+                    <div class="col-lg-9 col-md-8">
+                      <img
+                        class="avatar"
+                        src="{{ member.avatar?.url }}"
+                        alt="{{ member.username }}"
+                        style="height: 150px; width: 150px"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Username</div>
+                    <div class="col-lg-9 col-md-8">
+                      {{ member.username | titlecase }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Full Name</div>
+                    <div class="col-lg-9 col-md-8">{{ member.fullName }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Gender</div>
+                    <div class="col-lg-9 col-md-8">{{ member.gender }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Date Of Birth</div>
+                    <div class="col-lg-9 col-md-8">
+                      {{ member.dateOfBirth | date : "dd/MM/yyyy" }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <tab heading="Watchlist" (selectTab)="onTabActivated($event)">
+            <div class="tab-content p-3">
+              <div
+                class="tab-pane fade show active profile-watchlist"
+              >
+                <app-member-watchlist [movies]="movies"></app-member-watchlist>
+              </div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</section>

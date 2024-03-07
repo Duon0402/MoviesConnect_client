@@ -4,18 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './accounts/register/register.component';
-import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { UploadImageComponent } from './_forms/upload-image/upload-image.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { MenuComponent } from './menu/menu.component';
-import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/admin-user-roles.component';
+import { MemberDetailResolver } from './_resolvers/member-detailed.resolver';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 
 const routes: Routes = [
   {
@@ -35,19 +35,18 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
+      // movies
       { path: 'movies', component: MovieListComponent },
       { path: 'movies/:id', component: MovieDetailComponent },
+
+      // members
       {
-        path: 'member',
-        children: [
-          { path: 'profile', component: MemberProfileComponent },
-          {
-            path: 'watchlist',
-            component: WatchlistComponent,
-          },
-        ],
+        path: 'members/:username',
+        component: MemberDetailComponent,
+        resolve: { member: MemberDetailResolver },
       },
-      // admin or moderator
+
+      // admin
       {
         path: 'admin',
         canActivate: [AdminGuard],

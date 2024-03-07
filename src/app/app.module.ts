@@ -18,10 +18,6 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { LoginComponent } from './accounts/login/login.component';
 import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
-import { MemberProfileComponent } from './members/member-profile/member-profile.component';
-import { MemberOverviewComponent } from './members/member-overview/member-overview.component';
-import { MemberProfileEditComponent } from './members/member-profile-edit/member-profile-edit.component';
-import { MemberProfileSettingComponent } from './members/member-profile-setting/member-profile-setting.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
@@ -37,6 +33,8 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/admin-user-roles.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MovieCarouselComponent } from './movies/movie-carousel/movie-carousel.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberWatchlistComponent } from './members/member-detail/member-watchlist/member-watchlist.component';
 
 @NgModule({
   declarations: [
@@ -51,10 +49,6 @@ import { MovieCarouselComponent } from './movies/movie-carousel/movie-carousel.c
     DateInputComponent,
     LoginComponent,
     ChangePasswordComponent,
-    MemberProfileComponent,
-    MemberOverviewComponent,
-    MemberProfileEditComponent,
-    MemberProfileSettingComponent,
     NotFoundComponent,
     ServerErrorComponent,
     MovieCardComponent,
@@ -68,6 +62,8 @@ import { MovieCarouselComponent } from './movies/movie-carousel/movie-carousel.c
     AdminUsersComponent,
     AdminUserRolesComponent,
     MovieCarouselComponent,
+    MemberDetailComponent,
+    MemberWatchlistComponent,
   ],
   imports: [
     BrowserModule,
