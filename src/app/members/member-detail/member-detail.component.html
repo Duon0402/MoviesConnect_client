@@ -1,6 +1,6 @@
 <section
   class="section profile d-flex justify-content-center align-items-center"
-  *ngIf="member"
+  *ngIf="member && member.isPublic"
 >
   <div class="col-xl-8">
     <div class="card">
@@ -14,7 +14,7 @@
               >
                 <div class="row mb-3">
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Profile Image</div>
+                    <div class="col-lg-3 col-md-4 label">Avatar</div>
                     <div class="col-lg-9 col-md-8">
                       <img
                         class="avatar"
@@ -50,14 +50,30 @@
           </tab>
           <tab heading="Watchlist" (selectTab)="onTabActivated($event)">
             <div class="tab-content p-3">
-              <div
-                class="tab-pane fade show active profile-watchlist"
-              >
+              <div class="tab-pane fade show active profile-overview">
                 <app-member-watchlist [movies]="movies"></app-member-watchlist>
               </div>
             </div>
           </tab>
         </tabset>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section
+  class="section profile d-flex w-auto h-100 justify-content-center align-items-center"
+  *ngIf="member && !member.isPublic"
+>
+  <div class="col-xl-8">
+    <div class="card">
+      <div class="card-body pt-3">
+        <div class="alert alert-warning text-center" role="alert">
+          <strong>This is a Private Account</strong>
+        </div>
+        <div class="text-center mt-3">
+          <button class="btn btn-primary" (click)="goBack()">Back</button>
+        </div>
       </div>
     </div>
   </div>

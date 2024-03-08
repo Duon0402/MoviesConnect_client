@@ -1,11 +1,10 @@
 import { MovieService } from './../../_services/movie.service';
-import { MoviesParams } from './../../_models/movieParams';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import {
   ListMoviesOutputDto,
   MemberDto,
 } from '../../../shared/service-proxies/proxies.service';
-import { MemberService } from '../../_services/member.service';
 import { ActivatedRoute } from '@angular/router';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 
@@ -18,23 +17,18 @@ export class MemberDetailComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs!: TabsetComponent;
   member!: MemberDto;
   movies: ListMoviesOutputDto[] = [];
-
   activeTab!: TabDirective;
 
   constructor(
-    private memberService: MemberService,
     private movieService: MovieService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.member = data['member'];
     });
-
-    // this.route.queryParams.subscribe((params) => {
-    //   params.tab ? this.selectTab(params.tab) : this.selectTab(0);
-    // });
   }
 
   loadWatchlist() {
@@ -52,5 +46,9 @@ export class MemberDetailComponent implements OnInit {
     if (this.activeTab.heading === 'Watchlist' && this.movies.length === 0) {
       this.loadWatchlist();
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

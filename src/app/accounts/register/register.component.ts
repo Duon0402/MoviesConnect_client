@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router
   ) {}
+
   ngOnInit(): void {}
 
   registerForm = new FormGroup({

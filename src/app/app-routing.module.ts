@@ -16,19 +16,14 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/admin-user-roles.component';
 import { MemberDetailResolver } from './_resolvers/member-detailed.resolver';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { WatchlistComponent } from './movies/watchlist/watchlist.component';
+import { MemberService } from './_services/member.service';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-  },
-  {
-    path: 'upload',
-    component: UploadImageComponent,
-  },
-  {
-    path: 'menu',
-    component: MenuComponent,
   },
   {
     path: '',
@@ -44,6 +39,17 @@ const routes: Routes = [
         path: 'members/:username',
         component: MemberDetailComponent,
         resolve: { member: MemberDetailResolver },
+      },
+      {
+        path: 'member',
+        children: [
+          {path: 'profile', component: MemberEditComponent},
+          {path: 'watchlist', component: WatchlistComponent}
+        ]
+      },
+      {
+        path: '',
+        component: WatchlistComponent,
       },
 
       // admin

@@ -22,4 +22,7 @@ export class MemberService {
     return this._service.getUserByUsername(username);
   }
 
+  updateMember(model: any) {
+    return this.http.put(this.baseUrl + 'User/UpdateUser', model);
+  }
 }

@@ -35,6 +35,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MovieCarouselComponent } from './movies/movie-carousel/movie-carousel.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberWatchlistComponent } from './members/member-detail/member-watchlist/member-watchlist.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { MemberWatchlistComponent } from './members/member-detail/member-watchli
     MovieCarouselComponent,
     MemberDetailComponent,
     MemberWatchlistComponent,
+    MemberEditComponent,
   ],
   imports: [
     BrowserModule,

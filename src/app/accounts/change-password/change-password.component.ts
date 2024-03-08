@@ -26,7 +26,6 @@ export class ChangePasswordComponent {
   changePassData!: ChangePasswordDto;
 
   constructor(
-    private _service: ProxiesService,
     private accountService: AccountService,
     private toastr: ToastrService,
     private router: Router
