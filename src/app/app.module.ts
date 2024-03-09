@@ -37,6 +37,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberWatchlistComponent } from './members/member-detail/member-watchlist/member-watchlist.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
+import { TableDataComponent } from './_forms/table-data/table-data.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.componen
     MemberWatchlistComponent,
     MemberEditComponent,
     AdminMoviesComponent,
+    TableDataComponent,
   ],
   imports: [
     BrowserModule,

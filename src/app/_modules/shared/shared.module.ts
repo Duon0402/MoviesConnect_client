@@ -11,6 +11,10 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -22,7 +26,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     BsDatepickerModule.forRoot(),
     NgxUploaderModule,
     CarouselModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
   ],
   exports: [
     ToastrModule,
@@ -34,7 +38,11 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     NgxUploaderModule,
     MatDialogModule,
     CarouselModule,
-    TabsModule
+    TabsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [ProxiesService],
 })
