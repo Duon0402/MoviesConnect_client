@@ -19,6 +19,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 import { MemberService } from './_services/member.service';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
             path: 'roles',
             component: AdminUserRolesComponent,
           },
+          {
+            path: 'movies',
+            component: AdminMoviesComponent
+          }
         ],
       },
     ],

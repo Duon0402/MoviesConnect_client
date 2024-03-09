@@ -1,8 +1,80 @@
 <div class="container">
-  <div class="filter"></div>
   <div class="row">
-    <div class="col-lg-2" *ngFor="let movie of movies">
-      <app-movie-card [movie]="movie"></app-movie-card>
+    <!-- Phần filter -->
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Filter</h1>
+          <form>
+            <div class="form-group row mt-3">
+              <label for="keyword" class="col-sm-3 col-form-label">Title</label>
+              <div class="col-sm-9">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="keyword"
+                  name="keyword"
+                  [(ngModel)]="movieParams.keyword"
+                />
+              </div>
+            </div>
+            <div class="form-group row mt-3">
+              <label for="genre" class="col-sm-3 col-form-label">Genre</label>
+              <div class="col-sm-9">
+                <select
+                  class="form-select"
+                  id="genre"
+                  [(ngModel)]="movieParams.genreId"
+                  multiple
+                  name="genre"
+                >
+                  <option *ngFor="let genre of genres" [value]="genre.id">
+                    {{ genre.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row mt-3">
+              <div class="col-sm-9 offset-sm-3">
+                <button
+                  type="button"
+                  class="btn btn-primary me-2"
+                  (click)="filterMovies()"
+                >
+                  Filter
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="resetFilter()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phần container chứa danh sách phim -->
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mt-3">
+            <div class="col-lg-3" *ngFor="let movie of movies">
+              <app-movie-card [movie]="movie"></app-movie-card>
+            </div>
+          </div>
+          <div
+            *ngIf="!movies || movies.length === 0"
+            class="alert alert-warning text-center mt-3"
+            role="alert"
+          >
+            Not Found Your Movie Want Find
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

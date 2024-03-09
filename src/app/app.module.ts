@@ -36,6 +36,7 @@ import { MovieCarouselComponent } from './movies/movie-carousel/movie-carousel.c
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberWatchlistComponent } from './members/member-detail/member-watchlist/member-watchlist.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
     MemberDetailComponent,
     MemberWatchlistComponent,
     MemberEditComponent,
+    AdminMoviesComponent,
   ],
   imports: [
     BrowserModule,

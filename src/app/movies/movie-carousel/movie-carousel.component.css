@@ -5,4 +5,13 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  background-color: grey;
+}
+.carousel {
+  min-height: 425px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover{
+  background-color: #012970;
 }

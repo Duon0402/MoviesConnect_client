@@ -8,7 +8,7 @@ import { MoviesParams } from '../_models/movieParams';
 })
 export class HomeComponent {
   movieParams: MoviesParams = {
-    pageSize: 3
+    pageSize: 10
   };
 
   constructor() {}

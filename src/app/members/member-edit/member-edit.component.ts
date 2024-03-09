@@ -8,7 +8,6 @@ import {
 import { MemberService } from '../../_services/member.service';
 import { take } from 'rxjs';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-member-edit',
@@ -20,6 +19,7 @@ export class MemberEditComponent implements OnInit {
   activeTab!: TabDirective;
   member!: MemberDto;
   currentUser!: AccountOutputDto | null;
+  editData!: MemberUpdateDto;
 
   constructor(
     private accountService: AccountService,

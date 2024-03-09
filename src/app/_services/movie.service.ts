@@ -66,4 +66,9 @@ export class MovieService {
   getListRatings(movieId: any): Observable<RatingOutputDto[]> {
     return this._service.getListRatings(movieId);
   }
+
+  getListGenres() {
+    return this._service.getListGenres();
+  }
+
 }

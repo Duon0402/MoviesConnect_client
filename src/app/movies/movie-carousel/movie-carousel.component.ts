@@ -30,7 +30,7 @@ export class MovieCarouselComponent implements OnInit {
   }
 
   chunkMovies() {
-    const chunkSize = 2; // Number of movies per slide
+    const chunkSize = 5; // Number of movies per slide
     for (let i = 0; i < this.movies.length; i += chunkSize) {
       this.movieChunks.push(this.movies.slice(i, i + chunkSize));
     }

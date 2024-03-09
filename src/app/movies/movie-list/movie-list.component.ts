@@ -1,3 +1,4 @@
+import { GenreOutputDto } from './../../../shared/service-proxies/proxies.service';
 import { MoviesParams } from './../../_models/movieParams';
 import { MovieService } from './../../_services/movie.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -12,22 +13,38 @@ import {
   styleUrl: './movie-list.component.css',
 })
 export class MovieListComponent implements OnInit {
-  moviesParams: MoviesParams = {};
+  genres!: GenreOutputDto[];
+  movieParams: MoviesParams = {
+    keyword: '',
+    genreId: [],
+  };
   movies!: ListMoviesOutputDto[];
 
   constructor(private movieService: MovieService) {}
+
   ngOnInit(): void {
     this.loadMovies();
+    this.loadGenres();
   }
 
   loadMovies() {
     this.movieService
-      .getListsMovies(this.moviesParams)
+      .getListsMovies(this.movieParams)
       .subscribe((movies: ListMoviesOutputDto[]) => (this.movies = movies));
   }
 
+  loadGenres() {
+    this.movieService.getListGenres().subscribe((genres) => {
+      this.genres = genres;
+    });
+  }
+
   resetFilter() {
-    this.moviesParams = new MoviesParams();
+    this.movieParams = {
+      keyword: '',
+      genreId: [],
+    };
+    this.loadMovies();
   }
 
   filterMovies() {
