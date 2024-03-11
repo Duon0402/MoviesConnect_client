@@ -1,11 +1,11 @@
 <div class="example-container mat-elevation-z8">
   <!-- filter -->
   <div class="example-header">
-    <mat-form-field class="mat-form-field-align-end">
-      <input matInput (keyup)="applyFilter($event.target?.value)" placeholder="Filter">
+    <mat-form-field class="mat-form-field">
+      <mat-label>Filter</mat-label>
+      <input matInput class="input" (keyup)="applyFilter($event.target?.value)">
     </mat-form-field>
   </div>
-
   <!-- table -->
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.displayedColumn">
@@ -19,3 +19,5 @@
   <!-- pagination -->
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
+
+

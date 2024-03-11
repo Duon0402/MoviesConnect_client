@@ -18,6 +18,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
     NgxUploaderModule,
     CarouselModule.forRoot(),
     TabsModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
     ToastrModule,
@@ -49,6 +52,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatSortModule,
     MatIconModule,
     MatButtonModule,
+    MatSelectModule,
+    NgMultiSelectDropDownModule
   ],
   providers: [ProxiesService],
 })

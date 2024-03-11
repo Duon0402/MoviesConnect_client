@@ -38,6 +38,7 @@ import { MemberWatchlistComponent } from './members/member-detail/member-watchli
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
 import { TableDataComponent } from './_forms/table-data/table-data.component';
+import { MultiselectDropdownComponent } from './_forms/multiselect-dropdown/multiselect-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { TableDataComponent } from './_forms/table-data/table-data.component';
     MemberEditComponent,
     AdminMoviesComponent,
     TableDataComponent,
+    MultiselectDropdownComponent,
   ],
   imports: [
     BrowserModule,

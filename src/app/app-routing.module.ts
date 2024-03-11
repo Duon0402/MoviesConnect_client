@@ -17,10 +17,8 @@ import { AdminUserRolesComponent } from './admin/admin-users/admin-user-roles/ad
 import { MemberDetailResolver } from './_resolvers/member-detailed.resolver';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { WatchlistComponent } from './movies/watchlist/watchlist.component';
-import { MemberService } from './_services/member.service';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
-
 const routes: Routes = [
   {
     path: '',

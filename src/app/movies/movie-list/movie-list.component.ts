@@ -1,10 +1,9 @@
 import { GenreOutputDto } from './../../../shared/service-proxies/proxies.service';
 import { MoviesParams } from './../../_models/movieParams';
 import { MovieService } from './../../_services/movie.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  ListMoviesOutputDto,
-  ProxiesService,
+  ListMoviesOutputDto
 } from '../../../shared/service-proxies/proxies.service';
 
 @Component({
