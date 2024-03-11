@@ -27,7 +27,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     register(body?: RegisterDto | undefined): Observable<AccountOutputDto> {
@@ -82,7 +82,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     login(body?: LoginDto | undefined): Observable<AccountOutputDto> {
@@ -137,7 +137,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     changePassword(body?: ChangePasswordDto | undefined): Observable<void> {
@@ -189,7 +189,54 @@ export class ProxiesService {
     }
 
     /**
-     * @param username (optional)
+     * @return Success
+     */
+    changeSettingAccount(): Observable<void> {
+        let url_ = this.baseUrl + "/api/Account/ChangeSettingAccount";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processChangeSettingAccount(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processChangeSettingAccount(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processChangeSettingAccount(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param username (optional) 
      * @return Success
      */
     usersWithRoles(username?: string | undefined): Observable<UsersWithRolesDto[]> {
@@ -244,7 +291,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param roles (optional)
+     * @param roles (optional) 
      * @return Success
      */
     editRoles(username: string, roles?: string | undefined): Observable<void> {
@@ -349,9 +396,9 @@ export class ProxiesService {
     }
 
     /**
-     * @param keyword (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param keyword (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getPagedListCertifications(keyword?: string | undefined, pageNumber?: number | undefined, pageSize?: number | undefined): Observable<void> {
@@ -411,7 +458,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createGenre(body?: GenreCreateDto | undefined): Observable<void> {
@@ -463,7 +510,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateGenre(genreId: number, body?: GenreUpdateDto | undefined): Observable<void> {
@@ -618,9 +665,9 @@ export class ProxiesService {
     }
 
     /**
-     * @param keyword (optional)
-     * @param pageNumber (optional)
-     * @param pageSize (optional)
+     * @param keyword (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
      * @return Success
      */
     getPagedListGenres(keyword?: string | undefined, pageNumber?: number | undefined, pageSize?: number | undefined): Observable<void> {
@@ -680,7 +727,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param keyword (optional)
+     * @param keyword (optional) 
      * @return Success
      */
     getListGenres(keyword?: string | undefined): Observable<GenreOutputDto[]> {
@@ -785,7 +832,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createMovie(body?: MovieCreateDto | undefined): Observable<void> {
@@ -887,7 +934,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateMovie(movieId: number, body?: MovieUpdateDto | undefined): Observable<void> {
@@ -1098,14 +1145,14 @@ export class ProxiesService {
     }
 
     /**
-     * @param keyword (optional)
-     * @param orderBy (optional)
-     * @param sortOrder (optional)
-     * @param status (optional)
-     * @param pageSize (optional)
-     * @param certificationId (optional)
-     * @param genreId (optional)
-     * @param purpose (optional)
+     * @param keyword (optional) 
+     * @param orderBy (optional) 
+     * @param sortOrder (optional) 
+     * @param status (optional) 
+     * @param pageSize (optional) 
+     * @param certificationId (optional) 
+     * @param genreId (optional) 
+     * @param purpose (optional) 
      * @return Success
      */
     getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined): Observable<ListMoviesOutputDto[]> {
@@ -1188,7 +1235,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addOrEditRating(movieId: number, body?: RatingAddOrEditDto | undefined): Observable<void> {
@@ -1505,7 +1552,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateUser(body?: MemberUpdateDto | undefined): Observable<void> {
@@ -1557,7 +1604,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param file (optional)
+     * @param file (optional) 
      * @return Success
      */
     setAvatar(file?: FileParameter | undefined): Observable<AvatarDto> {

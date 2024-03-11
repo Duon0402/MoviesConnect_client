@@ -5,3 +5,7 @@
   (onSelectAll)="onSelectAll($event)"
 >
 </ng-multiselect-dropdown>
+
+<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+  {{option}}
+</ng-template>

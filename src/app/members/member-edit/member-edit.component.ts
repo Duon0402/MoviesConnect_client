@@ -8,6 +8,7 @@ import {
 import { MemberService } from '../../_services/member.service';
 import { take } from 'rxjs';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-member-edit',
@@ -23,7 +24,8 @@ export class MemberEditComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private toastr: ToastrService
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -54,5 +56,12 @@ export class MemberEditComponent implements OnInit {
 
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
+  }
+
+  changeSettingAccount() {
+    this.accountService.changeSettingAccount().subscribe(() => {
+      this.loadMember();
+      this.toastr.success('Change setting succesfull');
+    });
   }
 }

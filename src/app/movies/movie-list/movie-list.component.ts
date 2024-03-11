@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   ListMoviesOutputDto
 } from '../../../shared/service-proxies/proxies.service';
+import { DropdownItem } from '../../_models/dropdownItem';
 
 @Component({
   selector: 'app-movie-list',
@@ -12,7 +13,7 @@ import {
   styleUrl: './movie-list.component.css',
 })
 export class MovieListComponent implements OnInit {
-  genres!: GenreOutputDto[];
+  genres!: DropdownItem[];
   movieParams: MoviesParams = {
     keyword: '',
     genreId: [],
@@ -33,8 +34,13 @@ export class MovieListComponent implements OnInit {
   }
 
   loadGenres() {
-    this.movieService.getListGenres().subscribe((genres) => {
-      this.genres = genres;
+    this.movieService.getListGenres().subscribe((genres: GenreOutputDto[]) => {
+      const dropdownItems: DropdownItem[] = genres.map(genre => ({
+        item_id: genre.id || 0,
+        item_text: genre.name || ''
+      }));
+
+      this.genres = dropdownItems;
     });
   }
 

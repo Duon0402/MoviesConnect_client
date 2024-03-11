@@ -51,7 +51,7 @@
           <tab heading="Watchlist" (selectTab)="onTabActivated($event)">
             <div class="tab-content p-3">
               <div class="tab-pane fade show active profile-overview">
-                <app-member-watchlist [movies]="movies"></app-member-watchlist>
+                <app-member-watchlist [movies]="movies" [username]="member.username"></app-member-watchlist>
               </div>
             </div>
           </tab>

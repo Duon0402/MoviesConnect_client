@@ -55,4 +55,8 @@ export class AccountService {
   changePass(model: any) {
     return this.http.put(this.baseUrl + 'Account/ChangePassword', model);
   }
+
+  changeSettingAccount() {
+    return this.http.put(this.baseUrl + 'Account/ChangeSettingAccount', {});
+  }
 }

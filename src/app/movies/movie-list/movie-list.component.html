@@ -15,16 +15,17 @@
                   id="keyword"
                   name="keyword"
                   [(ngModel)]="movieParams.keyword"
-                  placeholder="Title"
+                  placeholder="Keyword"
                 />
               </div>
             </div>
             <div class="form-group row mt-3">
               <label for="genres" class="col-sm-3 col-form-label">Genres</label>
               <div class="col-sm-9">
-                <app-multiselect-dropdown></app-multiselect-dropdown>
+                <app-multiselect-dropdown
+                  [dropdownList]="genres"> <!-- Thêm thuộc tính name -->
+                </app-multiselect-dropdown>
               </div>
-
             </div>
             <div class="form-group row mt-3">
               <div class="col-sm-9 offset-sm-3">

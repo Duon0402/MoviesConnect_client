@@ -9,4 +9,5 @@ import { ListMoviesOutputDto } from '../../../../shared/service-proxies/proxies.
 })
 export class MemberWatchlistComponent {
   @Input() movies!: ListMoviesOutputDto[];
+  @Input() username?: string;
 }
