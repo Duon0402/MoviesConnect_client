@@ -23,9 +23,6 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     this.setTableDataSource(data);
   }
 
-  @Output() deleteAction: EventEmitter<any> = new EventEmitter<any>();
-  @Output() detailsAction: EventEmitter<any> = new EventEmitter<any>();
-
   public dataSource = new MatTableDataSource<any>([]);
   public displayedColumns: string[] = [];
 
@@ -54,13 +51,5 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim().toLowerCase();
     this.dataSource.filter = filterValue;
-  }
-
-  emitDeleteAction(row: any) {
-    this.deleteAction.emit(row);
-  }
-
-  emitDetailsAction(row: any) {
-    this.detailsAction.emit(row);
   }
 }

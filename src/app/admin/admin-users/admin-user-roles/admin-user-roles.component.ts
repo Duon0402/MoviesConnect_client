@@ -2,7 +2,6 @@ import { AdminService } from './../../../_services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { TableColumn } from '../../../_models/tableColumn';
 import { UsersWithRolesDto } from '../../../../shared/service-proxies/proxies.service';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-admin-user-roles',
@@ -15,7 +14,6 @@ export class AdminUserRolesComponent implements OnInit {
     { displayedColumn: 'id', header: 'ID' },
     { displayedColumn: 'username', header: 'Username' },
     { displayedColumn: 'roles', header: 'Roles' },
-    { displayedColumn: 'actions', header: 'Actions' },
   ];
   tableData: UsersWithRolesDto[] = [];
 
@@ -31,10 +29,5 @@ export class AdminUserRolesComponent implements OnInit {
       .subscribe((data: any[]) => {
         this.tableData = data;
       });
-  }
-
-  onDetail(row: UsersWithRolesDto) {
-    console.log('Detail action clicked for user:', row);
-    // Implement your detail action logic here
   }
 }
