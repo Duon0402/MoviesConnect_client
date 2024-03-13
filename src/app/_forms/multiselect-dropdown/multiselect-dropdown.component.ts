@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { DropdownItem } from '../../_models/dropdownItem';
 
@@ -9,8 +9,11 @@ import { DropdownItem } from '../../_models/dropdownItem';
 })
 export class MultiselectDropdownComponent implements OnInit {
   @Input() dropdownList: DropdownItem[] = [];
+  @Output() selectedItemsChange = new EventEmitter<DropdownItem[]>();
 
   dropdownSettings: IDropdownSettings = {};
+  selectedItems: DropdownItem[] = [];
+
   ngOnInit() {
     this.dropdownSettings = {
       singleSelection: false,
@@ -23,11 +26,11 @@ export class MultiselectDropdownComponent implements OnInit {
     };
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
+  onDropDownClose() {
+    this.emitSelectedItems();
   }
 
-  onSelectAll(items: any) {
-    console.log(items);
+  private emitSelectedItems() {
+    this.selectedItemsChange.emit(this.selectedItems);
   }
 }

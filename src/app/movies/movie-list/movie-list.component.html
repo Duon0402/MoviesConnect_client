@@ -7,8 +7,8 @@
           <h1 class="card-title">Filter</h1>
           <form>
             <div class="form-group row mt-3">
-              <label for="keyword" class="col-sm-3 col-form-label">Title</label>
-              <div class="col-sm-9">
+              <label for="keyword" class="col-sm-4 col-form-label">Title</label>
+              <div class="col-sm-8">
                 <input
                   type="text"
                   class="form-control"
@@ -20,10 +20,20 @@
               </div>
             </div>
             <div class="form-group row mt-3">
-              <label for="genres" class="col-sm-3 col-form-label">Genres</label>
-              <div class="col-sm-9">
+              <label for="genres" class="col-sm-4 col-form-label">Genres</label>
+              <div class="col-sm-8">
                 <app-multiselect-dropdown
-                  [dropdownList]="genres"> <!-- Thêm thuộc tính name -->
+                  [dropdownList]="genres"
+                  (selectedItemsChange)="onGenresSelected($event)">
+                </app-multiselect-dropdown>
+              </div>
+            </div>
+            <div class="form-group row mt-3">
+              <label for="genres" class="col-sm-4 col-form-label">Certifications</label>
+              <div class="col-sm-8">
+                <app-multiselect-dropdown
+                  [dropdownList]="certifs"
+                  (selectedItemsChange)="onCertifisSelected($event)">
                 </app-multiselect-dropdown>
               </div>
             </div>
@@ -39,7 +49,7 @@
                 <button
                   type="button"
                   class="btn btn-secondary"
-                  (click)="resetFilter()"
+                  (click)="resetFilters()"
                 >
                   Reset
                 </button>

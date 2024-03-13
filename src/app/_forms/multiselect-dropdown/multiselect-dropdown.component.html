@@ -1,11 +1,7 @@
 <ng-multiselect-dropdown
   [settings]="dropdownSettings"
   [data]="dropdownList"
-  (onSelect)="onItemSelect($event)"
-  (onSelectAll)="onSelectAll($event)"
+  (onDropDownClose)="onDropDownClose()"
+  [(ngModel)]="selectedItems"
 >
 </ng-multiselect-dropdown>
-
-<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
-  {{option}}
-</ng-template>

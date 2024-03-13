@@ -67,8 +67,13 @@ export class MovieService {
     return this._service.getListRatings(movieId);
   }
 
+  // genres
   getListGenres() {
     return this._service.getListGenres();
   }
 
+  // certification
+  getListCertifications() {
+    return this._service.getListCertifications();
+  }
 }
