@@ -39,6 +39,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
 import { TableDataComponent } from './_forms/table-data/table-data.component';
 import { MultiselectDropdownComponent } from './_forms/multiselect-dropdown/multiselect-dropdown.component';
+import { AdminUserRolesEditComponent } from './admin/admin-users/admin-user-roles/admin-user-roles-edit/admin-user-roles-edit.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { MultiselectDropdownComponent } from './_forms/multiselect-dropdown/mult
     AdminMoviesComponent,
     TableDataComponent,
     MultiselectDropdownComponent,
+    AdminUserRolesEditComponent,
   ],
   imports: [
     BrowserModule,

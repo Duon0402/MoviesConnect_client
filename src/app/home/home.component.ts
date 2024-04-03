@@ -12,6 +12,4 @@ export class HomeComponent {
   };
 
   constructor() {}
-
-
 }

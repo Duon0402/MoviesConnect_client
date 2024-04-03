@@ -29,6 +29,8 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
+  @Output() rowSelected = new EventEmitter<any>();
+
   constructor() {}
 
   ngOnInit(): void {
@@ -51,5 +53,9 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim().toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  onRowClick(row: any) {
+    this.rowSelected.emit(row);
   }
 }

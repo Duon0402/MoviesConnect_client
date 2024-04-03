@@ -2,6 +2,8 @@ import { AdminService } from './../../../_services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { TableColumn } from '../../../_models/tableColumn';
 import { UsersWithRolesDto } from '../../../../shared/service-proxies/proxies.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminUserRolesEditComponent } from './admin-user-roles-edit/admin-user-roles-edit.component';
 
 @Component({
   selector: 'app-admin-user-roles',
@@ -16,8 +18,9 @@ export class AdminUserRolesComponent implements OnInit {
     { displayedColumn: 'roles', header: 'Roles' },
   ];
   tableData: UsersWithRolesDto[] = [];
+  rowSelected: any;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadUsersWithRoles();
@@ -29,5 +32,22 @@ export class AdminUserRolesComponent implements OnInit {
       .subscribe((data: any[]) => {
         this.tableData = data;
       });
+  }
+  onRowSelected(selectedRow: any) {
+    this.rowSelected = selectedRow;
+  }
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(AdminUserRolesEditComponent, {
+      width: '800px',
+      height: '600px',
+      data: { data: this.rowSelected },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // Note: neu rating ko thay doi thi ko can load lai (chua fix dc)
+      if (result === true) {
+      }
+    });
   }
 }
