@@ -31,6 +31,8 @@ export class TableDataComponent implements OnInit, AfterViewInit {
 
   @Output() rowSelected = new EventEmitter<any>();
 
+  selectedRow: any;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -56,6 +58,15 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   }
 
   onRowClick(row: any) {
-    this.rowSelected.emit(row);
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
+    this.rowSelected.emit(this.selectedRow);
+  }
+
+  isRowSelected(row: any) {
+    return this.selectedRow === row;
   }
 }

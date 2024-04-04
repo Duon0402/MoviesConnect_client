@@ -6,7 +6,8 @@
         type="text"
         class="form-control"
         id="filter"
-        (keyup)="applyFilter($event.target?.value)" placeholder="Filter"
+        (keyup)="applyFilter($event.target?.value)"
+        placeholder="Filter"
       />
     </div>
   </div>
@@ -27,7 +28,9 @@
     <mat-row
       *matRowDef="let row; columns: displayedColumns"
       (click)="onRowClick(row)"
-    ></mat-row>
+      [class.selected-row]="isRowSelected(row)"
+    >
+    </mat-row>
   </mat-table>
 
   <!-- pagination -->
