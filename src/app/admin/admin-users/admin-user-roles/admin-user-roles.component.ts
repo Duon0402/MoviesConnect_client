@@ -4,6 +4,7 @@ import { TableColumn } from '../../../_models/tableColumn';
 import { UsersWithRolesDto } from '../../../../shared/service-proxies/proxies.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminUserRolesEditComponent } from './admin-user-roles-edit/admin-user-roles-edit.component';
+import { auto } from '@popperjs/core';
 
 @Component({
   selector: 'app-admin-user-roles',
@@ -39,8 +40,8 @@ export class AdminUserRolesComponent implements OnInit {
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(AdminUserRolesEditComponent, {
-      width: '800px',
-      height: '600px',
+      width: '500px',
+      height: auto,
       data: { data: this.rowSelected },
     });
 
