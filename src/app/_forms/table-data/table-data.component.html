@@ -13,23 +13,22 @@
   </div>
   <!-- table -->
   <mat-table [dataSource]="dataSource" matSort>
-    <ng-container
-      *ngFor="let column of tableColumns"
-      [matColumnDef]="column.displayedColumn"
-    >
+    <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.displayedColumn">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ column.header }}
       </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        {{ element[column.displayedColumn] }}
+        <ng-container *ngIf="column.dateColumn; else defaultFormat">
+          {{ element[column.displayedColumn] | dateFormat }}
+        </ng-container>
+        <ng-template #defaultFormat>
+          {{ element[column.displayedColumn] }}
+        </ng-template>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      (click)="onRowClick(row)"
-      [class.selected-row]="isRowSelected(row)"
-    >
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)"
+      [class.selected-row]="isRowSelected(row)">
     </mat-row>
   </mat-table>
 

@@ -1,32 +1,26 @@
-
-  <div class="card-body">
-    <span class="btn btn-close" (click)="closeDialog()"></span>
-    <form class="mt-3" #editForm="ngForm" (ngSubmit)="editRole()">
-      <div class="row">
-        <div class="col-sm-12">
-          <p>{{data.data.username | titlecase}}</p>
-        </div>
-        <div class="col-sm-12">
-          <div class="form-floating mb-3">
-            <select class="form-select" id="floatingSelect">
-              <option selected="">{{userWithRole.roles}}</option>
-              <option value="1">Member</option>
-              <option value="2">Moderator</option>
-            </select>
-            <label for="floatingSelect">Role</label>
-          </div>
+<div class="card-body">
+  <span class="btn btn-close" (click)="closeDialog()"></span>
+  <form class="mt-3" #editForm="ngForm" (ngSubmit)="editRole()">
+    <div class="row">
+      <div class="col-sm-12">
+        <p>{{userWithRole.username | titlecase}}</p>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-floating mb-3">
+          <select class="form-select" id="floatingSelect" [(ngModel)]="userWithRole.roles" name="roles">
+            <option value="Member">Member</option>
+            <option value="Moderator">Moderator</option>
+          </select>
+          <label for="floatingSelect">Role</label>
         </div>
       </div>
-      <div class="row text-center mt-2">
-        <div class="col-sm-12">
-          <button
-            type="submit"
-            class="btn btn-primary"
-          >
-            <span>Save</span>
-          </button>
-        </div>
+    </div>
+    <div class="row text-center mt-2">
+      <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary">
+          <span>Save</span>
+        </button>
       </div>
-    </form>
-  </div>
-
+    </div>
+  </form>
+</div>

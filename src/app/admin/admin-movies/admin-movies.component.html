@@ -1,1 +1,12 @@
-<p>admin-movies works!</p>
+<div class="card">
+  <div class="card-title d-flex justify-content-end">
+    <button type="button" class="btn btn-success me-3" (click)="openCreateOrEditDialog()">Create</button>
+    <button type="button" class="btn btn-primary me-3" [disabled]="!rowSelected" (click)="openCreateOrEditDialog()">Edit</button>
+  </div>
+  <app-table-data
+    [tableColumns]="tableColumns"
+    [tableData]="tableData"
+    (rowSelected)="onRowSelected($event)"
+  >
+  </app-table-data>
+</div>

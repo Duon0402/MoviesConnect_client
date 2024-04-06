@@ -1,6 +1,10 @@
 import { environment } from './../../environments/environment.development';
 import { Injectable } from '@angular/core';
-import { ProxiesService, UsersWithRolesDto } from '../../shared/service-proxies/proxies.service';
+import {
+  Movie,
+  ProxiesService,
+  UsersWithRolesDto,
+} from '../../shared/service-proxies/proxies.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -13,8 +17,8 @@ export class AdminService {
   constructor(private _service: ProxiesService, private http: HttpClient) {}
   // roles
 
-  getUsersWithRoles(username: any): Observable<UsersWithRolesDto[]> {
-    return this._service.usersWithRoles(username);
+  getUsersWithRoles(): Observable<UsersWithRolesDto[]> {
+    return this._service.usersWithRoles();
   }
 
   updateUserRoles(username: string, roles: string[]) {
@@ -23,4 +27,21 @@ export class AdminService {
       {}
     );
   }
+
+  // movies
+
+  getMovies(): Observable<Movie[]> {
+    return this._service.movies();
+  }
+
+  getMovie() {}
+
+  createOrEditMovie(data: any, movieId?: number) {
+    if (movieId != null && movieId !== 0) {
+      return this.http.put(this.baseUrl + 'Movie/UpdateMovie/' + movieId, data);
+    } else {
+      return this.http.post(this.baseUrl + 'Movie/CreateMovie', data);
+    }
+  }
+
 }

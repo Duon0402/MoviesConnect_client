@@ -33,4 +33,5 @@ export class MultiselectDropdownComponent implements OnInit {
   private emitSelectedItems() {
     this.selectedItemsChange.emit(this.selectedItems);
   }
+
 }

@@ -236,15 +236,10 @@ export class ProxiesService {
     }
 
     /**
-     * @param username (optional) 
      * @return Success
      */
-    usersWithRoles(username?: string | undefined): Observable<UsersWithRolesDto[]> {
-        let url_ = this.baseUrl + "/api/Admin/users-with-roles?";
-        if (username === null)
-            throw new Error("The parameter 'username' cannot be null.");
-        else if (username !== undefined)
-            url_ += "username=" + encodeURIComponent("" + username) + "&";
+    usersWithRoles(): Observable<UsersWithRolesDto[]> {
+        let url_ = this.baseUrl + "/api/Admin/users-with-roles";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -336,6 +331,56 @@ export class ProxiesService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    movies(): Observable<Movie[]> {
+        let url_ = this.baseUrl + "/api/Admin/movies";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMovies(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processMovies(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Movie[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Movie[]>;
+        }));
+    }
+
+    protected processMovies(response: HttpResponseBase): Observable<Movie[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Movie[];
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1873,14 +1918,80 @@ export interface AccountOutputDto {
     roles?: string[] | undefined;
 }
 
+export interface AppRole {
+    id?: number;
+    name?: string | undefined;
+    normalizedName?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    userRoles?: AppUserRole[] | undefined;
+}
+
+export interface AppUser {
+    id?: number;
+    userName?: string | undefined;
+    normalizedUserName?: string | undefined;
+    email?: string | undefined;
+    normalizedEmail?: string | undefined;
+    emailConfirmed?: boolean;
+    passwordHash?: string | undefined;
+    securityStamp?: string | undefined;
+    concurrencyStamp?: string | undefined;
+    phoneNumber?: string | undefined;
+    phoneNumberConfirmed?: boolean;
+    twoFactorEnabled?: boolean;
+    lockoutEnd?: Date | undefined;
+    lockoutEnabled?: boolean;
+    accessFailedCount?: number;
+    fullName?: string | undefined;
+    gender?: string | undefined;
+    isPublic?: boolean;
+    dateOfBirth?: Date;
+    createAt?: Date;
+    userRoles?: AppUserRole[] | undefined;
+    avatar?: Avatar;
+    ratings?: Rating[] | undefined;
+    watchlists?: Watchlist[] | undefined;
+}
+
+export interface AppUserRole {
+    userId?: number;
+    roleId?: number;
+    user?: AppUser;
+    role?: AppRole;
+}
+
+export interface Avatar {
+    id?: number;
+    url?: string | undefined;
+    publicId?: string | undefined;
+    appUserId?: number;
+    appUser?: AppUser;
+}
+
 export interface AvatarDto {
     id?: number;
     url?: string | undefined;
 }
 
+export interface Banner {
+    id?: number;
+    url?: string | undefined;
+    publicId?: string | undefined;
+    movieId?: number;
+    movie?: Movie;
+}
+
 export interface BannerDto {
     id?: number;
     url?: string | undefined;
+}
+
+export interface Certification {
+    id?: number;
+    name?: string | undefined;
+    description?: string | undefined;
+    minimumAge?: number;
+    movies?: Movie[] | undefined;
 }
 
 export interface CertificationOutputDto {
@@ -1893,6 +2004,19 @@ export interface CertificationOutputDto {
 export interface ChangePasswordDto {
     currentPassword?: string | undefined;
     newPassword?: string | undefined;
+}
+
+export interface Genre {
+    id?: number;
+    createdId?: number;
+    createdAt?: Date;
+    updatedId?: number | undefined;
+    updatedAt?: Date | undefined;
+    deletedId?: number | undefined;
+    deletedAt?: Date | undefined;
+    isDeleted?: boolean;
+    name?: string | undefined;
+    movieGenres?: MovieGenre[] | undefined;
 }
 
 export interface GenreCreateDto {
@@ -1938,6 +2062,30 @@ export interface MemberUpdateDto {
     dateOfBirth?: Date;
 }
 
+export interface Movie {
+    id?: number;
+    createdId?: number;
+    createdAt?: Date;
+    updatedId?: number | undefined;
+    updatedAt?: Date | undefined;
+    deletedId?: number | undefined;
+    deletedAt?: Date | undefined;
+    isDeleted?: boolean;
+    title?: string | undefined;
+    summary?: string | undefined;
+    durationMinutes?: number;
+    releaseDate?: Date;
+    status?: string | undefined;
+    approvedId?: number;
+    isApproved?: boolean;
+    certificationId?: number;
+    certification?: Certification;
+    movieGenres?: MovieGenre[] | undefined;
+    banner?: Banner;
+    watchlists?: Watchlist[] | undefined;
+    ratings?: Rating[] | undefined;
+}
+
 export interface MovieCreateDto {
     title?: string | undefined;
     summary?: string | undefined;
@@ -1946,6 +2094,13 @@ export interface MovieCreateDto {
     status?: string | undefined;
     certificationId?: number;
     genreIds?: number[] | undefined;
+}
+
+export interface MovieGenre {
+    movieId?: number;
+    movie?: Movie;
+    genreId?: number;
+    genre?: Genre;
 }
 
 export interface MovieOutputDto {
@@ -1973,6 +2128,15 @@ export interface MovieUpdateDto {
     genreIds?: number[] | undefined;
 }
 
+export interface Rating {
+    score?: number;
+    comment?: string | undefined;
+    appUserId?: number;
+    appUser?: AppUser;
+    movieId?: number;
+    movie?: Movie;
+}
+
 export interface RatingAddOrEditDto {
     score?: number;
     comment?: string | undefined;
@@ -1997,6 +2161,13 @@ export interface UsersWithRolesDto {
     id?: number;
     username?: string | undefined;
     roles?: string[] | undefined;
+}
+
+export interface Watchlist {
+    appUserId?: number;
+    appUser?: AppUser;
+    movieId?: number;
+    movie?: Movie;
 }
 
 export interface FileParameter {

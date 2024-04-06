@@ -40,6 +40,9 @@ import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.componen
 import { TableDataComponent } from './_forms/table-data/table-data.component';
 import { MultiselectDropdownComponent } from './_forms/multiselect-dropdown/multiselect-dropdown.component';
 import { AdminUserRolesEditComponent } from './admin/admin-users/admin-user-roles/admin-user-roles-edit/admin-user-roles-edit.component';
+import { AdminMoviesCreateOrEditComponent } from './admin/admin-movies/admin-movies-create-or-edit/admin-movies-create-or-edit.component';
+import { DateFormatPipe } from './_pipes/date-format.pipe';
+import { AdminGenresComponent } from './admin/admin-genres/admin-genres.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +77,10 @@ import { AdminUserRolesEditComponent } from './admin/admin-users/admin-user-role
     TableDataComponent,
     MultiselectDropdownComponent,
     AdminUserRolesEditComponent,
-  ],
+    AdminMoviesCreateOrEditComponent,
+    DateFormatPipe,
+    AdminGenresComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

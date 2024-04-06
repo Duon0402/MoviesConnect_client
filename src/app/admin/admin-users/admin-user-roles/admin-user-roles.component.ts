@@ -12,7 +12,6 @@ import { auto } from '@popperjs/core';
   styleUrls: ['./admin-user-roles.component.css'],
 })
 export class AdminUserRolesComponent implements OnInit {
-  keyword?: string;
   tableColumns: TableColumn[] = [
     { displayedColumn: 'id', header: 'ID' },
     { displayedColumn: 'username', header: 'Username' },
@@ -29,7 +28,7 @@ export class AdminUserRolesComponent implements OnInit {
 
   loadUsersWithRoles() {
     this.adminService
-      .getUsersWithRoles(this.keyword)
+      .getUsersWithRoles()
       .subscribe((data: any[]) => {
         this.tableData = data;
       });
@@ -46,8 +45,8 @@ export class AdminUserRolesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // Note: neu rating ko thay doi thi ko can load lai (chua fix dc)
       if (result === true) {
+        this.loadUsersWithRoles();
       }
     });
   }
