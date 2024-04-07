@@ -44,4 +44,7 @@ export class AdminService {
     }
   }
 
+  deleteMovie(movieId: number) {
+    return this.http.delete(this.baseUrl + 'Movie/DeleteMovie/' + movieId)
+  }
 }

@@ -1,6 +1,6 @@
 <div class="card-body">
   <span class="btn btn-close" (click)="closeDialog()"></span>
-  <form class="mt-3" #editForm="ngForm" (ngSubmit)="editRole()">
+  <form class="mt-3" #editForm="ngForm">
     <div class="row">
       <div class="col-sm-12">
         <p>{{userWithRole.username | titlecase}}</p>
@@ -17,8 +17,11 @@
     </div>
     <div class="row text-center mt-2">
       <div class="col-sm-12">
-        <button type="submit" class="btn btn-primary">
-          <span>Save</span>
+        <button type="submit" class="btn btn-primary me-2" (click)="editRole()">
+          Save
+        </button>
+        <button class="btn btn-secondary me-2" (click)="closeDialog()">
+          Cancel
         </button>
       </div>
     </div>

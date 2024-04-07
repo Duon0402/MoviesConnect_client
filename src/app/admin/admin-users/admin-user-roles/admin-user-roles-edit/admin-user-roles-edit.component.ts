@@ -14,8 +14,6 @@ export class AdminUserRolesEditComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AdminUserRolesEditComponent>,
-    private adminService: AdminService,
-    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -23,11 +21,7 @@ export class AdminUserRolesEditComponent implements OnInit {
   }
 
   editRole() {
-    this.adminService.updateUserRoles(this.userWithRole.username, [this.userWithRole.roles])
-      .subscribe(() => {
-        this.toastr.success("Change Role User Successfully");
-        this.dialogRef.close(true);
-      });
+    this.dialogRef.close(this.userWithRole);
   }
 
   closeDialog(): void {

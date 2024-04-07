@@ -43,6 +43,7 @@ import { AdminUserRolesEditComponent } from './admin/admin-users/admin-user-role
 import { AdminMoviesCreateOrEditComponent } from './admin/admin-movies/admin-movies-create-or-edit/admin-movies-create-or-edit.component';
 import { DateFormatPipe } from './_pipes/date-format.pipe';
 import { AdminGenresComponent } from './admin/admin-genres/admin-genres.component';
+import { DeleteDialogComponent } from './_forms/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AdminGenresComponent } from './admin/admin-genres/admin-genres.componen
     AdminMoviesCreateOrEditComponent,
     DateFormatPipe,
     AdminGenresComponent,
+    DeleteDialogComponent,
     ],
   imports: [
     BrowserModule,

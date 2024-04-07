@@ -5,6 +5,8 @@ import { UsersWithRolesDto } from '../../../../shared/service-proxies/proxies.se
 import { MatDialog } from '@angular/material/dialog';
 import { AdminUserRolesEditComponent } from './admin-user-roles-edit/admin-user-roles-edit.component';
 import { auto } from '@popperjs/core';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-admin-user-roles',
@@ -20,18 +22,20 @@ export class AdminUserRolesComponent implements OnInit {
   tableData: UsersWithRolesDto[] = [];
   rowSelected: any;
 
-  constructor(private adminService: AdminService, private dialog: MatDialog) {}
+  constructor(
+    private adminService: AdminService,
+    private dialog: MatDialog,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.loadUsersWithRoles();
   }
 
   loadUsersWithRoles() {
-    this.adminService
-      .getUsersWithRoles()
-      .subscribe((data: any[]) => {
-        this.tableData = data;
-      });
+    this.adminService.getUsersWithRoles().subscribe((data: any[]) => {
+      this.tableData = data;
+    });
   }
   onRowSelected(selectedRow: any) {
     this.rowSelected = selectedRow;
@@ -45,9 +49,23 @@ export class AdminUserRolesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.loadUsersWithRoles();
+      if (result) {
+        console.log(result);
+        this.editRole(result.username, [result.roles]);
       }
     });
+  }
+
+  editRole(username: any, role: any[]) {
+    this.adminService
+      .updateUserRoles(username, role)
+      .pipe(
+        finalize(() => {
+          this.toastr.success('Change Role User Successfully');
+        })
+      )
+      .subscribe(() => {
+        this.loadUsersWithRoles();
+      });
   }
 }

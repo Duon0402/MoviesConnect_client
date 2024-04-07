@@ -5,6 +5,7 @@ import { AdminService } from '../../../_services/admin.service';
 import { ToastrService } from 'ngx-toastr';
 import {
   MovieCreateDto,
+  MovieOutputDto,
   MovieUpdateDto,
 } from '../../../../shared/service-proxies/proxies.service';
 
@@ -16,6 +17,7 @@ import {
 export class AdminMoviesCreateOrEditComponent implements OnInit {
   movieData!: MovieUpdateDto | MovieCreateDto;
   movieId?: number;
+  movie: MovieOutputDto = {}
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,17 +27,24 @@ export class AdminMoviesCreateOrEditComponent implements OnInit {
     private movieService: MovieService
   ) {}
 
-  ngOnInit(): void {}
-
-  loadMovie() {
-    this.movieService.getMovie(this.movieId).subscribe(() => {
-
-    })
+  ngOnInit(): void {
+    if(this.data.movieId != null) {
+      this.loadMovie(this.data.movieId);
+    }
   }
 
+  loadMovie(movieId: any) {
+    this.movieService.getMovie(movieId).subscribe((result) => {
+      this.movie = result;
+    })
+  }
   createOrEditMovie() {
     this.adminService
       .createOrEditMovie(this.movieData, this.movieId)
       .subscribe(() => this.toastr.success('Successfully'));
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }
