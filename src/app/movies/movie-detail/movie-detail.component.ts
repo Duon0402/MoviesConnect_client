@@ -3,12 +3,14 @@ import {
   MovieOutputDto,
   RatingOutputDto,
 } from './../../../shared/service-proxies/proxies.service';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Pipe } from '@angular/core';
 import { ProxiesService } from '../../../shared/service-proxies/proxies.service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../../_services/movie.service';
 import { RatingAddOrEditComponent } from '../ratings/rating-add-or-edit/rating-add-or-edit.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-movie-detail',
@@ -26,7 +28,8 @@ export class MovieDetailComponent implements OnInit {
     private _service: ProxiesService,
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastr: ToastrService
   ) {}
   ngOnInit(): void {
     this.loadMovie();
@@ -47,11 +50,8 @@ export class MovieDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       // Note: neu rating ko thay doi thi ko can load lai (chua fix dc)
-      if (result === true) {
-        this.loadMovie();
-        if (this.showRatings == true) {
-          this.loadRatings();
-        }
+      if (result) {
+        this.addOrEditRating(result);
       }
     });
   }
@@ -62,6 +62,22 @@ export class MovieDetailComponent implements OnInit {
     if (this.showRatings) {
       this.loadRatings();
     }
+  }
+
+  addOrEditRating(ratingData: any) {
+    this.movieService
+      .addOrEditRating(this.movie.id, ratingData)
+      .pipe(
+        finalize(() => {
+          this.toastr.success('Rating Successfuly');
+        })
+      )
+      .subscribe(() => {
+        this.loadMovie();
+        if (this.showRatings == true) {
+          this.loadRatings();
+        }
+      });
   }
 
   loadRatings() {

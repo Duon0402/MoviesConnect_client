@@ -39,12 +39,7 @@ export class RatingAddOrEditComponent implements OnInit {
   }
 
   addOrEditRating() {
-    this.movieService
-      .addOrEditRating(this.movie.id, this.ratingData)
-      .subscribe(() => {
-        this.toastr.success('Rating Successfully');
-        this.dialogRef.close(true);
-      });
+    this.dialogRef.close(this.ratingData);
   }
 
   closeDialog(): void {
