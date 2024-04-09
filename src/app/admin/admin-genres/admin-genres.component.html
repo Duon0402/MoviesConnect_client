@@ -1,1 +1,17 @@
-<p>admin-genres works!</p>
+<div class="card">
+  <div class="d-flex justify-content-end mt-3">
+    <button type="button" class="btn btn-success me-2" (click)="openCreateOrEditDialog(null)">Create</button>
+    <button type="button" class="btn btn-primary me-2"
+      [disabled]="!rowSelected" (click)="openCreateOrEditDialog(rowSelected.id)">Edit
+    </button>
+    <!-- <button type="button" class="btn btn-danger me-2"
+      [disabled]="!rowSelected" (click)="openDeleteDialog(rowSelected.id)">Delete
+    </button> -->
+  </div>
+  <app-table-data
+    [tableColumns]="tableColumns"
+    [tableData]="tableData"
+    (rowSelected)="onRowSelected($event)"
+  >
+  </app-table-data>
+</div>

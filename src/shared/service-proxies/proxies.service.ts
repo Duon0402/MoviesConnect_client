@@ -393,6 +393,59 @@ export class ProxiesService {
     /**
      * @return Success
      */
+    movie(movieId: number): Observable<Movie> {
+        let url_ = this.baseUrl + "/api/Admin/movie/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMovie(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processMovie(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Movie>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Movie>;
+        }));
+    }
+
+    protected processMovie(response: HttpResponseBase): Observable<Movie> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Movie;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
     getCertificationById(certiId: number): Observable<void> {
         let url_ = this.baseUrl + "/api/Certification/GetCertificationById/{certiId}";
         if (certiId === undefined || certiId === null)
@@ -1330,6 +1383,56 @@ export class ProxiesService {
     }
 
     /**
+     * @return Success
+     */
+    getListRecommendMovies(): Observable<ListMoviesOutputDto[]> {
+        let url_ = this.baseUrl + "/api/Movie/GetListRecommendMovies";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetListRecommendMovies(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetListRecommendMovies(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ListMoviesOutputDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ListMoviesOutputDto[]>;
+        }));
+    }
+
+    protected processGetListRecommendMovies(response: HttpResponseBase): Observable<ListMoviesOutputDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ListMoviesOutputDto[];
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @param body (optional) 
      * @return Success
      */
@@ -1981,7 +2084,7 @@ export interface Banner {
     movie?: Movie;
 }
 
-export interface BannerDto {
+export interface BannerOutput {
     id?: number;
     url?: string | undefined;
 }
@@ -2038,7 +2141,7 @@ export interface ListMoviesOutputDto {
     averageRating?: number;
     totalRatings?: number;
     isInWatchList?: boolean;
-    bannerOutput?: BannerDto;
+    bannerOutput?: BannerOutput;
 }
 
 export interface LoginDto {
@@ -2113,7 +2216,7 @@ export interface MovieOutputDto {
     averageRating?: number;
     totalRatings?: number;
     isInWatchlist?: boolean;
-    banner?: BannerDto;
+    banner?: BannerOutput;
     genres?: GenreOutputDto[] | undefined;
     certification?: CertificationOutputDto;
 }

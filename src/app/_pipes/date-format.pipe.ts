@@ -6,6 +6,6 @@ import { formatDate } from '@angular/common';
 })
 export class DateFormatPipe implements PipeTransform {
   transform(value: string | any): string {
-    return formatDate(value, 'yyyy-MM-dd', 'en-US');
+    return formatDate(value, 'yyyy/MM/dd', 'en-US');
   }
 }

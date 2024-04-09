@@ -32,6 +32,10 @@ export class MovieService {
     );
   }
 
+  getRecommendMovies(): Observable<ListMoviesOutputDto[]> {
+    return this._service.getListRecommendMovies();
+  }
+
   getMovie(movieId: any): Observable<MovieOutputDto> {
     return this._service.getMovieById(movieId);
   }

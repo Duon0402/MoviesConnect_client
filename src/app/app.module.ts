@@ -44,6 +44,7 @@ import { AdminMoviesCreateOrEditComponent } from './admin/admin-movies/admin-mov
 import { DateFormatPipe } from './_pipes/date-format.pipe';
 import { AdminGenresComponent } from './admin/admin-genres/admin-genres.component';
 import { DeleteDialogComponent } from './_forms/delete-dialog/delete-dialog.component';
+import { AdminGenresCreateOrEditComponent } from './admin/admin-genres/admin-genres-create-or-edit/admin-genres-create-or-edit.component';
 
 @NgModule({
   declarations: [
