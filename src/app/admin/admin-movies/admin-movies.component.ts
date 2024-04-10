@@ -18,7 +18,6 @@ export class AdminMoviesComponent implements OnInit {
   tableColumns: TableColumn[] = [
     { displayedColumn: 'id', header: 'ID' },
     { displayedColumn: 'title', header: 'Title' },
-    { displayedColumn: 'summary', header: 'Summary' },
     { displayedColumn: 'durationMinutes', header: 'Duration Minutes' },
     {
       displayedColumn: 'releaseDate',

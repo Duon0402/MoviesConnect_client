@@ -444,6 +444,173 @@ export class ProxiesService {
     }
 
     /**
+     * @param body (optional) 
+     * @return Success
+     */
+    report(body?: ReportCreateDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Admin/report";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReport(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReport(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processReport(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param status (optional) 
+     * @param objectType (optional) 
+     * @return Success
+     */
+    reports(status?: string | undefined, objectType?: string | undefined): Observable<Report[]> {
+        let url_ = this.baseUrl + "/api/Admin/reports?";
+        if (status === null)
+            throw new Error("The parameter 'status' cannot be null.");
+        else if (status !== undefined)
+            url_ += "Status=" + encodeURIComponent("" + status) + "&";
+        if (objectType === null)
+            throw new Error("The parameter 'objectType' cannot be null.");
+        else if (objectType !== undefined)
+            url_ += "ObjectType=" + encodeURIComponent("" + objectType) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processReports(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processReports(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<Report[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<Report[]>;
+        }));
+    }
+
+    protected processReports(response: HttpResponseBase): Observable<Report[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Report[];
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    updateStatusReport(reportId: number, body?: ReportUpdateDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Admin/update-status-report/{reportId}";
+        if (reportId === undefined || reportId === null)
+            throw new Error("The parameter 'reportId' must be defined.");
+        url_ = url_.replace("{reportId}", encodeURIComponent("" + reportId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateStatusReport(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateStatusReport(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processUpdateStatusReport(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @return Success
      */
     getCertificationById(certiId: number): Observable<void> {
@@ -475,68 +642,6 @@ export class ProxiesService {
     }
 
     protected processGetCertificationById(response: HttpResponseBase): Observable<void> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @param keyword (optional) 
-     * @param pageNumber (optional) 
-     * @param pageSize (optional) 
-     * @return Success
-     */
-    getPagedListCertifications(keyword?: string | undefined, pageNumber?: number | undefined, pageSize?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Certification/GetPagedListCertifications?";
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetPagedListCertifications(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetPagedListCertifications(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<void>;
-        }));
-    }
-
-    protected processGetPagedListCertifications(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -813,77 +918,10 @@ export class ProxiesService {
     }
 
     /**
-     * @param keyword (optional) 
-     * @param pageNumber (optional) 
-     * @param pageSize (optional) 
      * @return Success
      */
-    getPagedListGenres(keyword?: string | undefined, pageNumber?: number | undefined, pageSize?: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/Genre/GetPagedListGenres?";
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
-        if (pageNumber === null)
-            throw new Error("The parameter 'pageNumber' cannot be null.");
-        else if (pageNumber !== undefined)
-            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
-        if (pageSize === null)
-            throw new Error("The parameter 'pageSize' cannot be null.");
-        else if (pageSize !== undefined)
-            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetPagedListGenres(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetPagedListGenres(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<void>;
-        }));
-    }
-
-    protected processGetPagedListGenres(response: HttpResponseBase): Observable<void> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @param keyword (optional) 
-     * @return Success
-     */
-    getListGenres(keyword?: string | undefined): Observable<GenreOutputDto[]> {
-        let url_ = this.baseUrl + "/api/Genre/GetListGenres?";
-        if (keyword === null)
-            throw new Error("The parameter 'keyword' cannot be null.");
-        else if (keyword !== undefined)
-            url_ += "keyword=" + encodeURIComponent("" + keyword) + "&";
+    getListGenres(): Observable<GenreOutputDto[]> {
+        let url_ = this.baseUrl + "/api/Genre/GetListGenres";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1032,56 +1070,6 @@ export class ProxiesService {
     }
 
     /**
-     * @return Success
-     */
-    approveMovie(movieId: number): Observable<void> {
-        let url_ = this.baseUrl + "/api/Movie/ApproveMovie/{movieId}";
-        if (movieId === undefined || movieId === null)
-            throw new Error("The parameter 'movieId' must be defined.");
-        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-            })
-        };
-
-        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processApproveMovie(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processApproveMovie(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<void>;
-        }));
-    }
-
-    protected processApproveMovie(response: HttpResponseBase): Observable<void> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
      * @param body (optional) 
      * @return Success
      */
@@ -1187,13 +1175,23 @@ export class ProxiesService {
     }
 
     /**
+     * @param scorce (optional) 
+     * @param isSpoil (optional) 
      * @return Success
      */
-    getMovieById(movieId: number): Observable<MovieOutputDto> {
-        let url_ = this.baseUrl + "/api/Movie/GetMovieById/{movieId}";
+    getMovieById(movieId: number, scorce?: number | undefined, isSpoil?: boolean | undefined): Observable<MovieOutputDto> {
+        let url_ = this.baseUrl + "/api/Movie/GetMovieById/{movieId}?";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
         url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        if (scorce === null)
+            throw new Error("The parameter 'scorce' cannot be null.");
+        else if (scorce !== undefined)
+            url_ += "Scorce=" + encodeURIComponent("" + scorce) + "&";
+        if (isSpoil === null)
+            throw new Error("The parameter 'isSpoil' cannot be null.");
+        else if (isSpoil !== undefined)
+            url_ += "IsSpoil=" + encodeURIComponent("" + isSpoil) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1301,9 +1299,11 @@ export class ProxiesService {
      * @param certificationId (optional) 
      * @param genreId (optional) 
      * @param purpose (optional) 
+     * @param minRating (optional) 
+     * @param maxRating (optional) 
      * @return Success
      */
-    getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined): Observable<ListMoviesOutputDto[]> {
+    getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined, minRating?: number | undefined, maxRating?: number | undefined): Observable<ListMoviesOutputDto[]> {
         let url_ = this.baseUrl + "/api/Movie/GetListMovies?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -1337,6 +1337,14 @@ export class ProxiesService {
             throw new Error("The parameter 'purpose' cannot be null.");
         else if (purpose !== undefined)
             url_ += "Purpose=" + encodeURIComponent("" + purpose) + "&";
+        if (minRating === null)
+            throw new Error("The parameter 'minRating' cannot be null.");
+        else if (minRating !== undefined)
+            url_ += "MinRating=" + encodeURIComponent("" + minRating) + "&";
+        if (maxRating === null)
+            throw new Error("The parameter 'maxRating' cannot be null.");
+        else if (maxRating !== undefined)
+            url_ += "MaxRating=" + encodeURIComponent("" + maxRating) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1422,6 +1430,67 @@ export class ProxiesService {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ListMoviesOutputDto[];
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param file (optional) 
+     * @return Success
+     */
+    setBanner(movieId: number, file?: FileParameter | undefined): Observable<AvatarDto> {
+        let url_ = this.baseUrl + "/api/Movie/SetBanner/{movieId}";
+        if (movieId === undefined || movieId === null)
+            throw new Error("The parameter 'movieId' must be defined.");
+        url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = new FormData();
+        if (file === null || file === undefined)
+            throw new Error("The parameter 'file' cannot be null.");
+        else
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSetBanner(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSetBanner(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<AvatarDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<AvatarDto>;
+        }));
+    }
+
+    protected processSetBanner(response: HttpResponseBase): Observable<AvatarDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as AvatarDto;
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1541,19 +1610,24 @@ export class ProxiesService {
     }
 
     /**
+     * @param body (optional) 
      * @return Success
      */
-    getListRatings(movieId: number): Observable<RatingOutputDto[]> {
+    getListRatings(movieId: number, body?: RatingParams | undefined): Observable<RatingOutputDto[]> {
         let url_ = this.baseUrl + "/api/Rating/GetListRatings/{movieId}";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
         url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(body);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json",
                 "Accept": "text/plain"
             })
         };
@@ -2084,13 +2158,20 @@ export interface Banner {
     movie?: Movie;
 }
 
-export interface BannerOutput {
+export interface BannerDto {
     id?: number;
     url?: string | undefined;
 }
 
 export interface Certification {
     id?: number;
+    createdId?: number;
+    createdAt?: Date;
+    updatedId?: number | undefined;
+    updatedAt?: Date | undefined;
+    deletedId?: number | undefined;
+    deletedAt?: Date | undefined;
+    isDeleted?: boolean;
     name?: string | undefined;
     description?: string | undefined;
     minimumAge?: number;
@@ -2141,7 +2222,7 @@ export interface ListMoviesOutputDto {
     averageRating?: number;
     totalRatings?: number;
     isInWatchList?: boolean;
-    bannerOutput?: BannerOutput;
+    bannerOutput?: BannerDto;
 }
 
 export interface LoginDto {
@@ -2179,8 +2260,6 @@ export interface Movie {
     durationMinutes?: number;
     releaseDate?: Date;
     status?: string | undefined;
-    approvedId?: number;
-    isApproved?: boolean;
     certificationId?: number;
     certification?: Certification;
     movieGenres?: MovieGenre[] | undefined;
@@ -2216,7 +2295,7 @@ export interface MovieOutputDto {
     averageRating?: number;
     totalRatings?: number;
     isInWatchlist?: boolean;
-    banner?: BannerOutput;
+    banner?: BannerDto;
     genres?: GenreOutputDto[] | undefined;
     certification?: CertificationOutputDto;
 }
@@ -2233,7 +2312,8 @@ export interface MovieUpdateDto {
 
 export interface Rating {
     score?: number;
-    comment?: string | undefined;
+    review?: string | undefined;
+    isSpoil?: boolean;
     appUserId?: number;
     appUser?: AppUser;
     movieId?: number;
@@ -2252,12 +2332,40 @@ export interface RatingOutputDto {
     appUserId?: number;
 }
 
+export interface RatingParams {
+    scorce?: number | undefined;
+    isSpoil?: boolean | undefined;
+}
+
 export interface RegisterDto {
     username: string;
     fullName: string;
     gender: string;
     dateOfBirth: Date;
     password: string;
+}
+
+export interface Report {
+    id?: number;
+    content?: string | undefined;
+    status?: string | undefined;
+    objectType?: string | undefined;
+    objectId?: number;
+    reporterId?: number;
+    reportTime?: Date;
+    handlerId?: number;
+    handlingTime?: Date;
+}
+
+export interface ReportCreateDto {
+    content?: string | undefined;
+    objectType?: string | undefined;
+    objectId?: number;
+    reporterId?: number;
+}
+
+export interface ReportUpdateDto {
+    status?: string | undefined;
 }
 
 export interface UsersWithRolesDto {
