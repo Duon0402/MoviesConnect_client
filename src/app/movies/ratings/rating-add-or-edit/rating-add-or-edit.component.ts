@@ -17,7 +17,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class RatingAddOrEditComponent implements OnInit {
   movie!: MovieOutputDto;
   ratingForm!: NgForm;
-  ratingData: RatingAddOrEditDto = { score: 0, comment: '' };
+  ratingData: RatingAddOrEditDto = { score: 0, review: '' };
 
   constructor(
     private movieService: MovieService,
@@ -33,7 +33,7 @@ export class RatingAddOrEditComponent implements OnInit {
 
   loadRating() {
     this.movieService.getRating(this.movie.id).subscribe((rating) => {
-      (this.ratingData.comment = rating.comment),
+      (this.ratingData.review = rating.review),
         (this.ratingData.score = rating.score);
     });
   }

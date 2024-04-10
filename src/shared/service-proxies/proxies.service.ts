@@ -2322,12 +2322,12 @@ export interface Rating {
 
 export interface RatingAddOrEditDto {
     score?: number;
-    comment?: string | undefined;
+    review?: string | undefined;
 }
 
 export interface RatingOutputDto {
     score?: number;
-    comment?: string | undefined;
+    review?: string | undefined;
     username?: string | undefined;
     appUserId?: number;
 }
