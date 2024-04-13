@@ -50,7 +50,6 @@ export class AdminUserRolesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
         this.editRole(result.username, [result.roles]);
       }
     });

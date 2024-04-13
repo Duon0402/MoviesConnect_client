@@ -20,6 +20,7 @@ import { WatchlistComponent } from './movies/watchlist/watchlist.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
 import { AdminGenresComponent } from './admin/admin-genres/admin-genres.component';
+import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 const routes: Routes = [
   {
     path: '',
@@ -73,6 +74,10 @@ const routes: Routes = [
           {
             path: 'genres',
             component: AdminGenresComponent
+          },
+          {
+            path: 'reports',
+            component: AdminReportsComponent
           }
         ],
       },

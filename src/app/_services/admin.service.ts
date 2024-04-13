@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   Movie,
   ProxiesService,
+  ReportDto,
   UsersWithRolesDto,
 } from '../../shared/service-proxies/proxies.service';
 import { HttpClient } from '@angular/common/http';
@@ -46,5 +47,9 @@ export class AdminService {
 
   deleteMovie(movieId: number) {
     return this.http.delete(this.baseUrl + 'Movie/DeleteMovie/' + movieId)
+  }
+
+  getReports(): Observable<ReportDto[]> {
+    return this._service.getListReports();
   }
 }

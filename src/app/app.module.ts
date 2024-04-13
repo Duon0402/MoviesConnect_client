@@ -47,6 +47,7 @@ import { DeleteDialogComponent } from './_forms/delete-dialog/delete-dialog.comp
 import { AdminGenresCreateOrEditComponent } from './admin/admin-genres/admin-genres-create-or-edit/admin-genres-create-or-edit.component';
 import { AdminCertificationsComponent } from './admin/admin-certifications/admin-certifications.component';
 import { ReportFormComponent } from './_forms/report-form/report-form.component';
+import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { ReportFormComponent } from './_forms/report-form/report-form.component'
     DeleteDialogComponent,
     AdminCertificationsComponent,
     ReportFormComponent,
+    AdminReportsComponent,
     ],
   imports: [
     BrowserModule,

@@ -1560,7 +1560,7 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getReport(reportId: number): Observable<void> {
+    getReport(reportId: number): Observable<ReportDto> {
         let url_ = this.baseUrl + "/api/Report/GetReport/{reportId}";
         if (reportId === undefined || reportId === null)
             throw new Error("The parameter 'reportId' must be defined.");
@@ -1571,6 +1571,7 @@ export class ProxiesService {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "text/plain"
             })
         };
 
@@ -1581,14 +1582,14 @@ export class ProxiesService {
                 try {
                     return this.processGetReport(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<ReportDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<ReportDto>;
         }));
     }
 
-    protected processGetReport(response: HttpResponseBase): Observable<void> {
+    protected processGetReport(response: HttpResponseBase): Observable<ReportDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1597,7 +1598,9 @@ export class ProxiesService {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ReportDto;
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1612,7 +1615,7 @@ export class ProxiesService {
      * @param objectType (optional) 
      * @return Success
      */
-    getListReports(status?: string | undefined, objectType?: string | undefined): Observable<void> {
+    getListReports(status?: string | undefined, objectType?: string | undefined): Observable<ReportDto[]> {
         let url_ = this.baseUrl + "/api/Report/GetListReports?";
         if (status === null)
             throw new Error("The parameter 'status' cannot be null.");
@@ -1628,6 +1631,7 @@ export class ProxiesService {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "text/plain"
             })
         };
 
@@ -1638,14 +1642,14 @@ export class ProxiesService {
                 try {
                     return this.processGetListReports(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<ReportDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<ReportDto[]>;
         }));
     }
 
-    protected processGetListReports(response: HttpResponseBase): Observable<void> {
+    protected processGetListReports(response: HttpResponseBase): Observable<ReportDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1654,7 +1658,9 @@ export class ProxiesService {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as ReportDto[];
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -2397,6 +2403,18 @@ export interface ReportCreateDto {
     objectType?: string | undefined;
     objectId?: number;
     objectId2?: number | undefined;
+}
+
+export interface ReportDto {
+    id?: number;
+    status?: string | undefined;
+    objectType?: string | undefined;
+    objectId?: number;
+    objectId2?: number | undefined;
+    reporterId?: number;
+    reportTime?: Date;
+    handlerId?: number;
+    handlingTime?: Date;
 }
 
 export interface ReportUpdateDto {
