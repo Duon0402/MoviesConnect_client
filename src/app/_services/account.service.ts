@@ -20,7 +20,7 @@ export class AccountService {
     private router: Router
   ) {}
 
-  setCurrentUser(user: AccountOutputDto) {
+  setCurrentUser(user: AccountOutputDto | null) {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }

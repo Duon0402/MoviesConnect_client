@@ -52,9 +52,6 @@ export class MemberEditComponent implements OnInit {
   }
 
   updateMember() {
-    if (this.selectedFile) {
-      this.memberService.changeAvatar(this.selectedFile);
-    }
     this.memberService
       .updateMember(this.editData)
       .pipe(
@@ -63,6 +60,14 @@ export class MemberEditComponent implements OnInit {
         })
       )
       .subscribe(() => {
+        if (this.selectedFile) {
+          this.memberService.changeAvatar(this.selectedFile).subscribe((result: any) => {
+            this.currentUser!.avatarUrl = result.url;
+            this.member.avatar!.url = result.url;
+            this.accountService.setCurrentUser(this.currentUser);
+            this.loadMember();
+          })
+        }
         this.loadMember();
       });
   }
@@ -88,5 +93,6 @@ export class MemberEditComponent implements OnInit {
 
   onFileSelected(file: File) {
     this.selectedFile = file;
+    console.log(this.selectedFile);
   }
 }

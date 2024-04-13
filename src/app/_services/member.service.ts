@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { ProxiesService } from '../../shared/service-proxies/proxies.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class MemberService {
   constructor(private http: HttpClient, private _service: ProxiesService) { }
 
   changeAvatar(file: any) {
-    return this.http.post(this.baseUrl + 'User/SetAvatar', file);
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(this.baseUrl + 'User/SetAvatar', formData);
   }
 
   getMemberById(userId: any){
