@@ -28,4 +28,9 @@ export class MemberService {
   updateMember(model: any) {
     return this.http.put(this.baseUrl + 'User/UpdateUser', model);
   }
+
+  // report
+  createReport(model: any) {
+    return this.http.post(this.baseUrl + '', model);
+  }
 }

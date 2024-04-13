@@ -1,18 +1,27 @@
 <div *ngIf="ratings && ratings.length > 0; else noRatings">
-  <div class="card" *ngFor="let rating of ratings">
+  <div class="card rating-card" *ngFor="let rating of ratings">
     <div class="card-body">
-      <div class="card-title">
-        <a [routerLink]="['/members', rating.username]">Username: {{ rating.username }}</a>
+      <div class="card-title d-flex justify-content-between">
+        <ng-container *ngIf="rating.username === currentUser?.username; else otherProfile">
+          <a [routerLink]="['/member/profile']">{{ rating.username | titlecase}}</a>
+        </ng-container>
+        <ng-template #otherProfile>
+          <a [routerLink]="['/members', rating.username]">{{ rating.username | titlecase }}</a>
+          <i class="bi bi-three-dots"></i>
+        </ng-template>
       </div>
-      <div>
-        <span>Score: {{ rating.score }}</span>
+      <div class="rating-section">
+        <span class="score">Score: {{ rating.score }}</span>
+        <i class="bi bi-star-fill text-warning me-3"></i>
       </div>
-      <div>
-        <span>Comment: {{ rating.comment }}</span>
+      <div *ngIf="rating.review != null" class="review-section">
+        <span>Review: {{ rating.review }}</span>
       </div>
     </div>
   </div>
 </div>
 <ng-template #noRatings>
-  <p>This movie has not been rated yet.</p>
+  <div class="text-center">
+    <p>This movie hasn't been rated yet. Would you like to be the first to review it?</p>
+  </div>
 </ng-template>

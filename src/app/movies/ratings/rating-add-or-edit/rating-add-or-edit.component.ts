@@ -21,7 +21,6 @@ export class RatingAddOrEditComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<RatingAddOrEditComponent>
   ) {}

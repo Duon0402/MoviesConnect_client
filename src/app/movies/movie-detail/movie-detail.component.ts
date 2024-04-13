@@ -3,7 +3,7 @@ import {
   MovieOutputDto,
   RatingOutputDto,
 } from './../../../shared/service-proxies/proxies.service';
-import { Component, Input, OnInit, ViewChild, Pipe } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProxiesService } from '../../../shared/service-proxies/proxies.service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../../_services/movie.service';
@@ -51,7 +51,6 @@ export class MovieDetailComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // Note: neu rating ko thay doi thi ko can load lai (chua fix dc)
       if (result) {
         this.addOrEditRating(result);
       }

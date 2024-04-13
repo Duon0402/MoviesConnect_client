@@ -27,8 +27,8 @@ export class NavComponent {
 
   openMenuDialog(): void {
     const dialogRef = this.dialog.open(MenuComponent, {
-      width: '90%',
-      height: '90%',
+      width: '80%',
+      height: '80%',
       panelClass: 'fullscreen-dialog-container'
     });
   }

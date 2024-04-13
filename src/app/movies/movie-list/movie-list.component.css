@@ -8,3 +8,7 @@
   transform: translateX(-50%);
   bottom: 10px;
 }
+.movie-list-container {
+  max-height: 542px;
+  overflow-y: auto;
+}

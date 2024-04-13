@@ -38,7 +38,7 @@
             (mouseleave)="showCertificationInfo = false"
           >
             <strong>Certification: </strong>
-            <span class="me-2 badge bg-primary">{{
+            <span class="certi me-2 badge bg-primary">{{
               movie.certification.name
             }}</span>
             <span *ngIf="showCertificationInfo">
@@ -53,7 +53,7 @@
             <span style="margin-top: 5px">{{ movie.averageRating?.toFixed(1) }} ({{ movie.totalRatings }})</span>
           </p>
         </div>
-        <div class="col text-center">
+        <div class="col mt-3">
           <button
             type="button"
             class="btn btn-outline-primary"
@@ -66,11 +66,12 @@
     </div>
     <hr />
   </div>
-
+</div>
+<div class="card">
   <div class="card-body" *ngIf="movie">
     <div>
       <button
-        class="btn"
+        class="btn mt-3"
         [class.btn-outline-primary]="!showRatings"
         [class.btn-primary]="showRatings"
         (click)="toggleRatings()"
