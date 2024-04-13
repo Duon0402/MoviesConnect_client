@@ -7,4 +7,6 @@ export class MoviesParams {
   certificationId?: number[];
   genreId?: number[];
   purpose?: string;
+  maxRating?: number;
+  minRating?: number;
 }

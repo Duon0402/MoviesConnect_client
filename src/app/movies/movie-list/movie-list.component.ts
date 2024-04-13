@@ -21,6 +21,9 @@ export class MovieListComponent implements OnInit {
   movieParams: MoviesParams = {
     keyword: '',
     genreId: [],
+    maxRating: 5,
+    minRating: 0,
+    status: ''
   };
   movies!: ListMoviesOutputDto[];
 
@@ -70,7 +73,9 @@ export class MovieListComponent implements OnInit {
     this.movieParams = {
       keyword: '',
       genreId: [],
-      certificationId: []
+      maxRating: 5,
+      minRating: 1,
+      status: ''
     };
     this.loadMovies();
     this.selectedItems = [];

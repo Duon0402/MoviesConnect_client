@@ -19,6 +19,49 @@
                 />
               </div>
             </div>
+
+            <div class="form-group row mt-3">
+              <label for="status" class="col-sm-4 col-form-label">Status</label>
+              <div class="col-sm-8">
+                <select
+                class="form-select"
+                [(ngModel)]="movieParams.status"
+                name="gender"
+              >
+                <option value="">All</option>
+                <option value="released">Released</option>
+                <option value="unreleased ">Unreleased</option>
+              </select>
+              </div>
+            </div>
+
+            <div class="form-group row mt-3">
+              <label for="rating" class="col-sm-4 col-form-label">Score</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <input
+                    type="number"
+                    min="0"
+                    max="5"
+                    class="form-control"
+                    placeholder="Min"
+                    [(ngModel)]="movieParams.minRating"
+                    name="minRating"
+                  >
+                  <div class="input-group-text">-</div>
+                  <input
+                    type="number"
+                    min="0"
+                    max="5"
+                    class="form-control"
+                    placeholder="Max"
+                    [(ngModel)]="movieParams.maxRating"
+                    name="maxRating"
+                  >
+                </div>
+              </div>
+            </div>
+
             <div class="form-group row mt-3">
               <label for="genres" class="col-sm-4 col-form-label">Genres</label>
               <div class="col-sm-8">
