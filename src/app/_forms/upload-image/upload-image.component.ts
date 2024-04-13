@@ -1,38 +1,44 @@
-import { Component, EventEmitter, Input, input } from '@angular/core';
-import {
-  UploadFile,
-  UploadInput,
-  UploadOutput,
-  UploaderOptions,
-} from 'ngx-uploader';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
-  styleUrl: './upload-image.component.css',
+  styleUrls: ['./upload-image.component.css'],
 })
 export class UploadImageComponent {
+  @Input() imgUrl!: string | undefined;
   @Input() imgHeight: number = 120;
   @Input() imgWidth: number = 120;
-
-  imageUrl: string = ''; // URL của hình ảnh
+  @Output() fileSelected: EventEmitter<File> = new EventEmitter<File>();
 
   constructor() {}
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0]; // Lấy tệp đã chọn từ sự kiện
+  ngOnChanges() {
+    if (this.imgUrl) {
+      if (this.isValidImageUrl(this.imgUrl)) {
+        this.displayImage(this.imgUrl);
+      }
+    }
+  }
 
-    // Nếu không có file hoặc không phải là hình ảnh, không làm gì cả
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
     if (!file || !file.type.startsWith('image')) {
       return;
     }
-
-    const reader = new FileReader(); // Sử dụng FileReader để đọc tệp
-
+    this.fileSelected.emit(file); // Gửi sự kiện với tệp đã chọn
+    const reader = new FileReader();
     reader.onload = () => {
-      this.imageUrl = reader.result as string; // Đặt URL của hình ảnh
+      this.displayImage(reader.result as string);
     };
+    reader.readAsDataURL(file);
+  }
 
-    reader.readAsDataURL(file); // Đọc dữ liệu của tệp dưới dạng URL
+  isValidImageUrl(url: string): boolean {
+    return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+  }
+
+  displayImage(url: string) {
+    this.imgUrl = url;
   }
 }

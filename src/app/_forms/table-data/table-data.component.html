@@ -7,7 +7,7 @@
         class="form-control"
         id="filter"
         (keyup)="applyFilter($event.target?.value)"
-        placeholder="Filter"
+        placeholder="Keyword"
       />
     </div>
   </div>
@@ -18,9 +18,12 @@
         {{ column.header }}
       </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <ng-container *ngIf="column.dateColumn; else defaultFormat">
+        <ng-container *ngIf="column.dateColumn; else ifImageColumn; else defaultFormat">
           {{ element[column.displayedColumn] | dateFormat }}
         </ng-container>
+        <ng-template #ifImageColumn>
+          <img *ngIf="column.imageColumn" [src]="element[column.displayedColumn]" alt="Image" width="50" height="50">
+        </ng-template>
         <ng-template #defaultFormat>
           {{ element[column.displayedColumn] }}
         </ng-template>
@@ -31,6 +34,7 @@
       [class.selected-row]="isRowSelected(row)">
     </mat-row>
   </mat-table>
+
 
   <!-- pagination -->
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

@@ -19,19 +19,102 @@
       <div class="card">
         <div class="card-body pt-3">
           <tabset #memberTabs>
+            <!-- edit profile -->
             <tab heading="Edit Profile" (selectTab)="onTabActivated($event)">
-              <div class="tab-content p-3">
-                  <p>edit member</p>
+              <div class="tab-content m-3">
+                <div class="card-body">
+                  <h5 class="card-title">{{ member.username | titlecase }}'s Profile</h5>
+                  <form #memberForm="ngForm">
+                    <!-- Your form fields -->
+                    <div class="row mb-3">
+                      <label for="inputText" class="col-sm-2 col-form-label"
+                        >Avatar</label
+                      >
+                      <div class="col-sm-10">
+                        <app-upload-image
+                          [imgUrl]="member.avatar!.url"
+                          [imgHeight]="125"
+                          [imgWidth]="125"
+                          (fileSelected)="onFileSelected($event)">
+                        </app-upload-image>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputText" class="col-sm-2 col-form-label"
+                        >Full Name</label
+                      >
+                      <div class="col-sm-10">
+                        <input
+                          type="text"
+                          class="form-control"
+                          [(ngModel)]="editData.fullName"
+                          name="fullName"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputText" class="col-sm-2 col-form-label"
+                        >Gender</label
+                      >
+                      <div class="col-sm-10">
+                        <select
+                          class="form-select"
+                          [(ngModel)]="editData.gender"
+                          name="gender"
+                        >
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="dateOfBirth" class="col-sm-2 col-form-label"
+                        >Date Of Birth</label
+                      >
+                      <div class="col-sm-10">
+                        <input
+                          type="date"
+                          class="form-control"
+                          [value]="editData.dateOfBirth | date : 'yyyy-MM-dd'"
+                          name="dateOfBirth"
+                          (input)="editData.dateOfBirth = $event.target.value"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col mb-3 text-center">
+                      <button
+                        class="btn btn-primary me-2"
+                        [disabled]="!memberForm.valid"
+                        (click)="updateMember()"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </tab>
             <tab heading="Settings" (selectTab)="onTabActivated($event)">
               <div class="tab-content p-3">
                 <form (submit)="changeSettingAccount()">
                   <div class="row mb-3">
-                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Account</label>
+                    <label
+                      for="fullName"
+                      class="col-md-4 col-lg-3 col-form-label"
+                      >Account</label
+                    >
                     <div class="col-md-8 col-lg-9">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="changesMade" [(ngModel)]="member.isPublic">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="changesMade"
+                          [(ngModel)]="member.isPublic"
+                          name="isPublic"
+                        />
                         <label class="form-check-label" for="changesMade">
                           Private Account
                         </label>
@@ -39,7 +122,7 @@
                     </div>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Save Change</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                   </div>
                 </form>
               </div>

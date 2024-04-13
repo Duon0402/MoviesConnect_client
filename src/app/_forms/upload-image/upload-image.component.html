@@ -1,15 +1,15 @@
-<div>
-  <label for="profileImage" class="col-md-4 col-lg-3 col-form-label"></label>
-  <div class="col-md-8 col-lg-9">
-    <img
+<div class="row">
+    <div class="col-sm-2">
+      <img
       id="profileImage"
       class="image"
-      [src]="imageUrl"
+      [src]="imgUrl"
       alt="Image"
       [ngStyle]="{ 'max-width.px': imgWidth, 'max-height.px': imgHeight }"
     />
-    <div class="pt-2">
-      <label for="uploadInput" class="btn btn-primary btn-sm">
+    </div>
+    <div class="col-sm-1 p-5">
+      <label for="uploadInput" class="btn btn-success btn-sm">
         <i class="bi bi-upload"></i>
       </label>
       <input
@@ -19,5 +19,4 @@
         style="display: none"
       />
     </div>
-  </div>
 </div>

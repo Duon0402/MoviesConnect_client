@@ -45,6 +45,7 @@ import { DateFormatPipe } from './_pipes/date-format.pipe';
 import { AdminGenresComponent } from './admin/admin-genres/admin-genres.component';
 import { DeleteDialogComponent } from './_forms/delete-dialog/delete-dialog.component';
 import { AdminGenresCreateOrEditComponent } from './admin/admin-genres/admin-genres-create-or-edit/admin-genres-create-or-edit.component';
+import { AdminCertificationsComponent } from './admin/admin-certifications/admin-certifications.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { AdminGenresCreateOrEditComponent } from './admin/admin-genres/admin-gen
     DateFormatPipe,
     AdminGenresComponent,
     DeleteDialogComponent,
+    AdminCertificationsComponent,
     ],
   imports: [
     BrowserModule,
