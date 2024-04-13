@@ -16,6 +16,7 @@ import { DropdownItem } from '../../_models/dropdownItem';
 export class MovieListComponent implements OnInit {
   genres!: DropdownItem[];
   certifs!: DropdownItem[];
+  selectedItems!: any[];
 
   movieParams: MoviesParams = {
     keyword: '',
@@ -72,6 +73,7 @@ export class MovieListComponent implements OnInit {
       certificationId: []
     };
     this.loadMovies();
+    this.selectedItems = [];
   }
 
   filterMovies() {
