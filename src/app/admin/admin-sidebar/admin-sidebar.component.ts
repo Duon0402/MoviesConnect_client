@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './admin-sidebar.component.css'
 })
 export class AdminSidebarComponent {
-
+  constructor(public accountService: AccountService) {}
 }

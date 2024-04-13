@@ -1,3 +1,4 @@
+import { MemberService } from './../../_services/member.service';
 import { RatingListComponent } from './../ratings/rating-list/rating-list.component';
 import {
   MovieOutputDto,
@@ -11,6 +12,7 @@ import { RatingAddOrEditComponent } from '../ratings/rating-add-or-edit/rating-a
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
+import { ReportFormComponent } from '../../_forms/report-form/report-form.component';
 
 @Component({
   selector: 'app-movie-detail',
@@ -30,7 +32,8 @@ export class MovieDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private movieService: MovieService,
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private memberService: MemberService
   ) {}
   ngOnInit(): void {
     this.loadMovie();
@@ -87,5 +90,26 @@ export class MovieDetailComponent implements OnInit {
         this.ratings = ratings;
       });
     }
+  }
+
+  //reportMovie
+  openReportFormMovie() {
+    const dialogRef = this.dialog.open(ReportFormComponent, {
+      width: '800px',
+      height: 'auto',
+      data: { objectId: this.movie.id, objectType: "Movie"},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.createReportMovie(result);
+      }
+    });
+  }
+
+  createReportMovie(data: any) {
+    this.memberService.createReport(data).subscribe(() => {
+      this.toastr.success("Send report sucessful");
+    })
   }
 }

@@ -7,12 +7,12 @@
         </ng-container>
         <ng-template #otherProfile>
           <a [routerLink]="['/members', rating.username]">{{ rating.username | titlecase }}</a>
-          <i class="bi bi-three-dots"></i>
+          <i class="btn bi bi-three-dots" (click)="openReportFormRating()"></i>
         </ng-template>
       </div>
       <div class="rating-section">
-        <span class="score">Score: {{ rating.score }}</span>
-        <i class="bi bi-star-fill text-warning me-3"></i>
+        <span class="score me-3">Score: {{ rating.score }}</span>
+          <i class="bi bi-star-fill text-warning" ></i>
       </div>
       <div *ngIf="rating.review != null" class="review-section">
         <span>Review: {{ rating.review }}</span>

@@ -1,0 +1,16 @@
+<div class="card-body">
+  <span class="btn btn-close" (click)="closeDialog()"></span>
+  <h2 class="card-title">Report</h2>
+  <form #reportForm = "ngForm">
+    <div class="row mb-3">
+      <label for="content" class="col-sm-2 col-form-label">Content</label>
+      <div class="col-sm-10 content">
+        <textarea type="text" class="form-control" [(ngModel)]="report.content" name="content" required=""></textarea>
+      </div>
+    </div>
+    <div class="col text-center mt-3">
+      <button class="btn btn-primary me-2" [disabled]="!reportForm.valid" (click)="sendReport()">Send Report</button>
+      <button class="btn btn-secondary me-2" (click)="closeDialog()">Cancel</button>
+    </div>
+  </form>
+</div>

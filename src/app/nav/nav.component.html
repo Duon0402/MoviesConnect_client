@@ -75,10 +75,10 @@
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <!-- admin -->
-          <li *ngIf="user.roles?.includes('Admin' || 'Moderator')">
+          <li *ngIf="user.roles?.includes('Moderator')">
             <hr class="dropdown-divider" />
           </li>
-          <li *ngIf="user.roles?.includes('Admin' || 'Moderator')">
+          <li *ngIf="user.roles?.includes('Moderator')">
             <a
               class="dropdown-item d-flex align-items-center"
               routerLink="/admin"

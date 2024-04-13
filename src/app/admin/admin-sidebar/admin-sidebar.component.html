@@ -1,4 +1,4 @@
-<ul class="sidebar-nav" id="sidebar-nav">
+<ul class="sidebar-nav" id="sidebar-nav" *ngIf="accountService.currentUser$ | async as user">
     <li class="nav-item">
       <a class="nav-link " routerLink="/admin">
         <i class="bi bi-grid"></i>
@@ -6,7 +6,7 @@
       </a>
     </li>
     <!-- users manager -->
-    <li class="nav-item">
+    <li *ngIf="user.roles?.includes('Admin')">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse">
         <i class="bi bi-person"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>

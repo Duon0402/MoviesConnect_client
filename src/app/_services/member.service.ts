@@ -31,6 +31,6 @@ export class MemberService {
 
   // report
   createReport(model: any) {
-    return this.http.post(this.baseUrl + '', model);
+    return this.http.post(this.baseUrl + 'Report/CreateReport', model);
   }
 }

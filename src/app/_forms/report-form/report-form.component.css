@@ -1,0 +1,14 @@
+.content textarea {
+  min-height: 200px; /* Chiều cao tối thiểu */
+  max-height: 300px; /* Chiều cao tối đa */
+  overflow-y: auto; /* Hiển thị thanh cuộn khi cần thiết */
+  width: 100%; /* Chiều rộng tự động mở rộng */
+}
+
+.btn-close {
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
