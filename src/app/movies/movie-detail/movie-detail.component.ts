@@ -18,6 +18,7 @@ import { finalize } from 'rxjs';
   styleUrl: './movie-detail.component.css',
 })
 export class MovieDetailComponent implements OnInit {
+  showCertificationInfo: boolean = false;
   @ViewChild(RatingListComponent) ratingListComponent!: RatingListComponent;
   movie!: MovieOutputDto;
   showRatings: boolean = false;
@@ -41,6 +42,7 @@ export class MovieDetailComponent implements OnInit {
       this.movie = response;
     });
   }
+
   // add or edit rating
   openRatingDialog(): void {
     const dialogRef = this.dialog.open(RatingAddOrEditComponent, {

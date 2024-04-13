@@ -1,53 +1,83 @@
 <div class="card">
   <div *ngIf="movie" class="card-body">
-    <h3 class="card-title">Movie Detail</h3>
-    <form>
-      <h2>{{ movie.title }}</h2>
-      <p><strong>Summary:</strong> {{ movie.summary }}</p>
-      <p><strong>Duration:</strong> {{ movie.durationMinutes }} minutes</p>
-      <p>
-        <strong>Release Date:</strong>
-        {{ movie.releaseDate | date : "dd/MM/yyyy" }}
-      </p>
-      <p><strong>Status:</strong> {{ movie.status }}</p>
-      <div *ngIf="movie.genres && movie.genres.length > 0">
-        <p><strong>Genres:</strong></p>
-        <ul>
-          <li *ngFor="let genre of movie.genres">{{ genre.name }}</li>
-        </ul>
+    <div class="row">
+      <div class="col-md-4">
+        <img
+          class="banner img-fluid m-2"
+          src="{{ movie.banner?.url }}"
+          alt="{{ movie.title }}"
+        />
       </div>
-      <div *ngIf="movie.certification">
-        <p routerLink="">
-          <strong>Certification:</strong> {{ movie.certification.name }}
+      <div class="col-md-8">
+        <h1>{{ movie.title }}</h1>
+        <p class="text-muted">
+          <strong>Summary:</strong> {{ movie.summary }} minutes
         </p>
+        <p class="text-muted">
+          <strong>Duration:</strong> {{ movie.durationMinutes }} minutes
+        </p>
+        <p class="text-muted">
+          <strong>Release Date:</strong>
+          {{ movie.releaseDate | date : "dd/MM/yyyy" }}
+        </p>
+        <p class="text-muted"><strong>Status:</strong> {{ movie.status }}</p>
+        <div *ngIf="movie.genres && movie.genres.length > 0">
+          <p class="text-muted"><strong>Genres:</strong></p>
+          <div class="row">
+            <ul class="list-unstyled d-flex flex-wrap">
+              <li *ngFor="let genre of movie.genres" class="me-2 badge bg-primary">
+                {{ genre.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="movie.certification">
+          <p
+            class="text-muted"
+            (mouseenter)="showCertificationInfo = true"
+            (mouseleave)="showCertificationInfo = false"
+          >
+            <strong>Certification: </strong>
+            <span class="me-2 badge bg-primary">{{
+              movie.certification.name
+            }}</span>
+            <span *ngIf="showCertificationInfo">
+              {{ movie.certification.description }}
+              ({{ movie.certification.minimumAge }}+)
+            </span>
+          </p>
+        </div>
+        <div class="row mt-3">
+          <p class="card-text">
+            <i class="bi bi-star-fill text-warning me-2"></i>
+            <span style="margin-top: 5px">{{ movie.averageRating?.toFixed(1) }} ({{ movie.totalRatings }})</span>
+          </p>
+        </div>
+        <div class="col text-center">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            (click)="openRatingDialog()"
+          >
+            <i class="bi bi-star me-1"></i> Rate
+          </button>
+        </div>
       </div>
-    </form>
-    <div *ngIf="movie">
-      <button
-        type="button"
-        class="btn btn-outline-primary"
-        (click)="openRatingDialog()"
-      >
-        <i class="bi bi-star me-1"></i> Rate
-      </button>
     </div>
+    <hr />
   </div>
 
   <div class="card-body" *ngIf="movie">
-    <p class="card-text">
-      <i class="bi bi-star-fill text-warning me-2"></i>
-      <span style="margin-top: 5px"
-        >{{ movie.averageRating?.toFixed(1) }} ({{ movie.totalRatings }})</span
+    <div>
+      <button
+        class="btn"
+        [class.btn-outline-primary]="!showRatings"
+        [class.btn-primary]="showRatings"
+        (click)="toggleRatings()"
       >
-    </p>
-    <button
-      class="btn"
-      [class.btn-outline-primary]="!showRatings"
-      [class.btn-primary]="showRatings"
-      (click)="toggleRatings()"
-    >
-      {{ showRatings ? "Hide All Ratings" : "Show All Ratings" }}
-    </button>
+        {{ showRatings ? "Hide All Ratings" : "Show All Ratings" }}
+      </button>
+    </div>
     <div class="mt-3" *ngIf="showRatings">
       <app-rating-list [ratings]="ratings"></app-rating-list>
     </div>

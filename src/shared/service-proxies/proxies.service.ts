@@ -1610,24 +1610,29 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param scorce (optional) 
+     * @param isSpoil (optional) 
      * @return Success
      */
-    getListRatings(movieId: number, body?: RatingParams | undefined): Observable<RatingOutputDto[]> {
-        let url_ = this.baseUrl + "/api/Rating/GetListRatings/{movieId}";
+    getListRatings(movieId: number, scorce?: number | undefined, isSpoil?: boolean | undefined): Observable<RatingOutputDto[]> {
+        let url_ = this.baseUrl + "/api/Rating/GetListRatings/{movieId}?";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
         url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
+        if (scorce === null)
+            throw new Error("The parameter 'scorce' cannot be null.");
+        else if (scorce !== undefined)
+            url_ += "Scorce=" + encodeURIComponent("" + scorce) + "&";
+        if (isSpoil === null)
+            throw new Error("The parameter 'isSpoil' cannot be null.");
+        else if (isSpoil !== undefined)
+            url_ += "IsSpoil=" + encodeURIComponent("" + isSpoil) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(body);
-
         let options_ : any = {
-            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Content-Type": "application/json",
                 "Accept": "text/plain"
             })
         };
@@ -2330,11 +2335,6 @@ export interface RatingOutputDto {
     review?: string | undefined;
     username?: string | undefined;
     appUserId?: number;
-}
-
-export interface RatingParams {
-    scorce?: number | undefined;
-    isSpoil?: boolean | undefined;
 }
 
 export interface RegisterDto {

@@ -8,3 +8,7 @@
 .card-title:hover {
   cursor: pointer;
 }
+
+.title {
+  min-height: 80px;
+}

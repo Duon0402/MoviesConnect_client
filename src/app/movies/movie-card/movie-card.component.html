@@ -6,9 +6,11 @@
     alt="Movie Banner"
   />
   <div class="card-body d-flex flex-column justify-content-center">
-    <h5 class="card-title" routerLink="/movies/{{ movie.id }}">
-      {{ movie.title }}
-    </h5>
+    <div class="title">
+      <h5 class="card-title" routerLink="/movies/{{ movie.id }}">
+        {{ movie.title }}
+      </h5>
+    </div>
     <p class="card-text">
       <i class="bi bi-star-fill text-warning me-2"></i>
       <span style="margin-top: 5px"
