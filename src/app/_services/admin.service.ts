@@ -41,19 +41,28 @@ export class AdminService {
   changeBanner(file: File, movieId: any) {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post(this.baseUrl + 'Movie/SetBanner/'+ movieId, formData);
+    return this.http.post(
+      this.baseUrl + 'Movie/SetBanner/' + movieId,
+      formData
+    );
   }
 
-  createOrEditMovie(movieData: MovieCreateDto | MovieUpdateDto, movieId?: number) {
+  createOrEditMovie(
+    movieData: MovieCreateDto | MovieUpdateDto,
+    movieId?: number
+  ) {
     if (movieId != null && movieId !== 0) {
-      return this.http.put(this.baseUrl + 'Movie/UpdateMovie/' + movieId, movieData);
+      return this.http.put(
+        this.baseUrl + 'Movie/UpdateMovie/' + movieId,
+        movieData
+      );
     } else {
       return this.http.post(this.baseUrl + 'Movie/CreateMovie', movieData);
     }
   }
 
   deleteMovie(movieId: number) {
-    return this.http.delete(this.baseUrl + 'Movie/DeleteMovie/' + movieId)
+    return this.http.delete(this.baseUrl + 'Movie/DeleteMovie/' + movieId);
   }
 
   getReports(): Observable<ReportDto[]> {
@@ -64,7 +73,40 @@ export class AdminService {
     return this._service.getReport(reportId);
   }
 
-  updateStatusReport(reportId: number, reportUpdateDto: ReportUpdateDto): Observable<any> {
-    return this.http.put(this.baseUrl + 'Report/UpdateStatusReport/' + reportId, reportUpdateDto);
+  updateStatusReport(
+    reportId: number,
+    reportUpdateDto: ReportUpdateDto
+  ): Observable<any> {
+    return this.http.put(
+      this.baseUrl + 'Report/UpdateStatusReport/' + reportId,
+      reportUpdateDto
+    );
+  }
+
+  deleteRating(userId: number, movieId: number) {
+    return this.http.delete(
+      this.baseUrl +
+        'Admin/DeleteRating?userId=' +
+        userId +
+        '&movieId=' +
+        movieId
+    );
+  }
+
+  updateStatusRating(userId: number, movieId: number, isViolation: boolean) {
+    return this.http.put(
+      this.baseUrl +
+        'Admin/DeleteRating?userId=' +
+        userId +
+        '&movieId=' +
+        movieId +
+        '&isViolation=' +
+        isViolation,
+      {}
+    );
+  }
+
+  loadRating(userId: number, movieId: number) {
+    return this._service.getRatingForHandle(userId, movieId);
   }
 }

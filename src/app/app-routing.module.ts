@@ -31,10 +31,6 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      // movies
-      { path: 'movies', component: MovieListComponent },
-      { path: 'movies/:id', component: MovieDetailComponent },
-
       // members
       {
         path: 'members/:username',
@@ -94,10 +90,9 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
       },
-      {
-        path: 'img',
-        component: UploadImageComponent
-      }
+      // movies
+      { path: 'movies', component: MovieListComponent },
+      { path: 'movies/:id', component: MovieDetailComponent },
     ],
   },
 

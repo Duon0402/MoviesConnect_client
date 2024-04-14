@@ -17,19 +17,19 @@
         >{{ movie.averageRating?.toFixed(1) }} ({{ movie.totalRatings }})</span
       >
     </p>
-    <a
+    <div
       *ngIf="!movie.isInWatchList"
       class="btn btn-outline-primary align-self-center"
       (click)="addToWatchlist(movie.id)"
     >
       <i class="bi bi-plus"><span>Watchlist</span></i>
-    </a>
-    <a
+    </div>
+    <div
       *ngIf="movie.isInWatchList"
       class="btn btn-primary align-self-center"
       (click)="removeFromWatchlist(movie.id)"
     >
       <i class="bi bi-check2"><span>Watchlist</span></i>
-    </a>
+    </div>
   </div>
 </div>

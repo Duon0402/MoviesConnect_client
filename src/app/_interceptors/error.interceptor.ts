@@ -40,12 +40,14 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               break;
             case 401:
-              if (error.error === null) {
-                this.toastr.error('Please login to continue');
-                this.router.navigateByUrl('/login');
-              } else {
-                this.toastr.error(error.error, error.status);
-              }
+              // if (error.error === null) {
+              //   this.toastr.error('Please login to continue');
+              //   this.router.navigateByUrl('/login');
+              // } else {
+              //   this.toastr.error(error.error, error.status);
+              // }
+              this.toastr.error('Please login to continue');
+              this.router.navigateByUrl('/login')
               break;
               case 403:
                 this.toastr.error("You do not have permission to access this resource");

@@ -50,6 +50,7 @@ import { ReportFormComponent } from './_forms/report-form/report-form.component'
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { AdminReportDetailComponent } from './admin/admin-reports/admin-report-detail/admin-report-detail.component';
 import { FillterRatingComponent } from './movies/ratings/fillter-rating/fillter-rating.component';
+import { AdminReportHandleComponent } from './admin/admin-reports/admin-report-handle/admin-report-handle.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { FillterRatingComponent } from './movies/ratings/fillter-rating/fillter-
     AdminReportsComponent,
     AdminReportDetailComponent,
     FillterRatingComponent,
+    AdminReportHandleComponent,
     ],
   imports: [
     BrowserModule,

@@ -2,19 +2,21 @@ import { RatingParams } from './../../_models/ratingParams';
 import { MemberService } from './../../_services/member.service';
 import { RatingListComponent } from './../ratings/rating-list/rating-list.component';
 import {
+  AccountOutputDto,
   MovieOutputDto,
   RatingOutputDto,
 } from './../../../shared/service-proxies/proxies.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProxiesService } from '../../../shared/service-proxies/proxies.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
 import { MovieService } from '../../_services/movie.service';
 import { RatingAddOrEditComponent } from '../ratings/rating-add-or-edit/rating-add-or-edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { finalize } from 'rxjs';
+import { take } from 'rxjs';
 import { ReportFormComponent } from '../../_forms/report-form/report-form.component';
 import { FillterRatingComponent } from '../ratings/fillter-rating/fillter-rating.component';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -29,6 +31,7 @@ export class MovieDetailComponent implements OnInit {
   ratingModalOpen: boolean = false;
   ratings!: RatingOutputDto[];
   ratingParams?: RatingParams;
+  currentUser!: AccountOutputDto | null;
 
   constructor(
     private _service: ProxiesService,
@@ -36,8 +39,14 @@ export class MovieDetailComponent implements OnInit {
     private movieService: MovieService,
     private dialog: MatDialog,
     private toastr: ToastrService,
-    private memberService: MemberService
-  ) {}
+    private memberService: MemberService,
+    private accountService: AccountService,
+    private router: Router
+  ) {
+    this.accountService.currentUser$
+    .pipe(take(1))
+    .subscribe((currentUser) => (this.currentUser = currentUser));
+  }
   ngOnInit(): void {
     this.loadMovie();
   }
@@ -49,18 +58,36 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
+  addToWatchlist(movieId: any) {
+    this.movieService.addMovieToWatchlist(movieId).subscribe(() => {
+      this.movie.isInWatchlist = true;
+    });
+  }
+
+  removeFromWatchlist(movieId: any) {
+    this.movieService.removeMovieFromWatchlist(movieId).subscribe(() => {
+      this.movie.isInWatchlist = false;
+    });
+  }
+
   // add or edit rating
   openRatingDialog(): void {
-    const dialogRef = this.dialog.open(RatingAddOrEditComponent, {
-      width: '500px',
-      data: { movie: this.movie },
-    });
+    if(this.currentUser != null) {
+      const dialogRef = this.dialog.open(RatingAddOrEditComponent, {
+        width: '500px',
+        data: { movie: this.movie },
+      });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.addOrEditRating(result);
-      }
-    });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.addOrEditRating(result);
+        }
+      });
+    }
+    else {
+      this.toastr.error('Please login to continue');
+      this.router.navigateByUrl('/login')
+    }
   }
 
   // list ratings
@@ -74,12 +101,8 @@ export class MovieDetailComponent implements OnInit {
   addOrEditRating(ratingData: any) {
     this.movieService
       .addOrEditRating(this.movie.id, ratingData)
-      .pipe(
-        finalize(() => {
-          this.toastr.success('Rating Successfuly');
-        })
-      )
       .subscribe(() => {
+        this.toastr.success('Rating Successfuly');
         this.loadMovie();
         if (this.showRatings == true) {
           this.loadRatings();

@@ -18,7 +18,6 @@ export class AdminReportDetailComponent {
   }
 
   save() {
-    console.log(this.report);
     this.dialogRef.close(this.report);
   }
 

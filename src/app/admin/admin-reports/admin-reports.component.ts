@@ -6,6 +6,8 @@ import { AdminService } from '../../_services/admin.service';
 import { auto } from '@popperjs/core';
 import { ReportDto, ReportUpdateDto } from '../../../shared/service-proxies/proxies.service';
 import { AdminReportDetailComponent } from './admin-report-detail/admin-report-detail.component';
+import { AdminMoviesCreateOrEditComponent } from '../admin-movies/admin-movies-create-or-edit/admin-movies-create-or-edit.component';
+import { AdminReportHandleComponent } from './admin-report-handle/admin-report-handle.component';
 
 @Component({
   selector: 'app-admin-reports',
@@ -62,4 +64,51 @@ export class AdminReportsComponent {
       this.loadReports();
     });
   }
+
+  openHandleDialog(): void {
+    if(this.rowSelected && this.rowSelected.objectType === 'Rating') {
+      const dialogRef = this.dialog.open(AdminReportHandleComponent, {
+        width: '500px',
+        height: auto,
+        data: { data: this.rowSelected },
+      });
+
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if (result) {
+          console.log(result);
+        }
+      });
+    }
+    if(this.rowSelected && this.rowSelected.objectType === 'Movie') {
+      const dialogRef = this.dialog.open(AdminMoviesCreateOrEditComponent, {
+        width: '800px',
+        height: auto,
+        data: { movieId: this.rowSelected.objectId},
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          console.log(result);
+          if(result.fileBanner) {
+            this.createOrEditMovie(result.movieData, result.movieId, result.fileBanner);
+          }
+          else {
+            this.createOrEditMovie(result.movieData, result.movieId);
+          }
+        }
+      });
+    }
+  }
+
+    // create or edit movie
+    createOrEditMovie(movieData: any, movieId?: number, fileBanner?: any) {
+      this.adminService.createOrEditMovie(movieData, movieId).subscribe(() => {
+        if (fileBanner != null) {
+          this.adminService.changeBanner(fileBanner, movieId).subscribe(() => {
+          });
+        }
+        const message = movieId ? 'Edit' : 'Create';
+        this.toastr.success(`${message} movie successful`);
+      });
+    }
 }

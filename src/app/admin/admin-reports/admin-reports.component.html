@@ -1,6 +1,11 @@
 <div class="card">
   <div class="d-flex justify-content-end mt-3">
-    <button type="button" class="btn btn-primary me-3" [disabled]="!rowSelected" (click)="openDetailDialog()">Detail</button>
+    <button type="button" class="btn btn-success me-3"
+    [disabled]="!rowSelected" (click)="openHandleDialog()">Handle
+  </button>
+    <button type="button" class="btn btn-primary me-3"
+      [disabled]="!rowSelected" (click)="openDetailDialog()">Detail
+    </button>
   </div>
   <app-table-data
     [tableColumns]="tableColumns"
