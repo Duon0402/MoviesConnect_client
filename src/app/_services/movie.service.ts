@@ -69,8 +69,8 @@ export class MovieService {
     return this._service.getRating(movieId);
   }
 
-  getListRatings(movieId: any): Observable<RatingOutputDto[]> {
-    return this._service.getListRatings(movieId);
+  getListRatings(movieId: any, score?: number, ratingViolation?: boolean): Observable<RatingOutputDto[]> {
+    return this._service.getListRatings(movieId, score, ratingViolation);
   }
 
   // genres

@@ -1008,19 +1008,19 @@ export class ProxiesService {
     }
 
     /**
-     * @param scorce (optional) 
+     * @param score (optional) 
      * @param ratingViolation (optional) 
      * @return Success
      */
-    getMovieById(movieId: number, scorce?: number | undefined, ratingViolation?: boolean | undefined): Observable<MovieOutputDto> {
+    getMovieById(movieId: number, score?: number | undefined, ratingViolation?: boolean | undefined): Observable<MovieOutputDto> {
         let url_ = this.baseUrl + "/api/Movie/GetMovieById/{movieId}?";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
         url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
-        if (scorce === null)
-            throw new Error("The parameter 'scorce' cannot be null.");
-        else if (scorce !== undefined)
-            url_ += "Scorce=" + encodeURIComponent("" + scorce) + "&";
+        if (score === null)
+            throw new Error("The parameter 'score' cannot be null.");
+        else if (score !== undefined)
+            url_ += "Score=" + encodeURIComponent("" + score) + "&";
         if (ratingViolation === null)
             throw new Error("The parameter 'ratingViolation' cannot be null.");
         else if (ratingViolation !== undefined)
@@ -1443,19 +1443,19 @@ export class ProxiesService {
     }
 
     /**
-     * @param scorce (optional) 
+     * @param score (optional) 
      * @param ratingViolation (optional) 
      * @return Success
      */
-    getListRatings(movieId: number, scorce?: number | undefined, ratingViolation?: boolean | undefined): Observable<RatingOutputDto[]> {
+    getListRatings(movieId: number, score?: number | undefined, ratingViolation?: boolean | undefined): Observable<RatingOutputDto[]> {
         let url_ = this.baseUrl + "/api/Rating/GetListRatings/{movieId}?";
         if (movieId === undefined || movieId === null)
             throw new Error("The parameter 'movieId' must be defined.");
         url_ = url_.replace("{movieId}", encodeURIComponent("" + movieId));
-        if (scorce === null)
-            throw new Error("The parameter 'scorce' cannot be null.");
-        else if (scorce !== undefined)
-            url_ += "Scorce=" + encodeURIComponent("" + scorce) + "&";
+        if (score === null)
+            throw new Error("The parameter 'score' cannot be null.");
+        else if (score !== undefined)
+            url_ += "Score=" + encodeURIComponent("" + score) + "&";
         if (ratingViolation === null)
             throw new Error("The parameter 'ratingViolation' cannot be null.");
         else if (ratingViolation !== undefined)

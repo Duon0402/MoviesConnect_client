@@ -1,3 +1,4 @@
+import { RatingParams } from './../../_models/ratingParams';
 import { MemberService } from './../../_services/member.service';
 import { RatingListComponent } from './../ratings/rating-list/rating-list.component';
 import {
@@ -13,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { ReportFormComponent } from '../../_forms/report-form/report-form.component';
+import { FillterRatingComponent } from '../ratings/fillter-rating/fillter-rating.component';
 
 @Component({
   selector: 'app-movie-detail',
@@ -26,6 +28,7 @@ export class MovieDetailComponent implements OnInit {
   showRatings: boolean = false;
   ratingModalOpen: boolean = false;
   ratings!: RatingOutputDto[];
+  ratingParams?: RatingParams;
 
   constructor(
     private _service: ProxiesService,
@@ -97,7 +100,7 @@ export class MovieDetailComponent implements OnInit {
     const dialogRef = this.dialog.open(ReportFormComponent, {
       width: '800px',
       height: 'auto',
-      data: { objectId: this.movie.id, objectType: "Movie"},
+      data: { objectId: this.movie.id, objectType: 'Movie' },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -109,7 +112,24 @@ export class MovieDetailComponent implements OnInit {
 
   createReportMovie(data: any) {
     this.memberService.createReport(data).subscribe(() => {
-      this.toastr.success("Send report sucessful");
-    })
+      this.toastr.success('Send report sucessful');
+    });
+  }
+
+  openFilterRating() {
+    const dialogRef = this.dialog.open(FillterRatingComponent, {
+      width: '500px',
+      height: 'auto',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.movieService
+          .getListRatings(this.movie.id, result.score, result.ratingViolation)
+          .subscribe((ratings) => {
+            this.ratings = ratings;
+          });
+      }
+    });
   }
 }

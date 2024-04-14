@@ -49,6 +49,7 @@ import { AdminCertificationsComponent } from './admin/admin-certifications/admin
 import { ReportFormComponent } from './_forms/report-form/report-form.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { AdminReportDetailComponent } from './admin/admin-reports/admin-report-detail/admin-report-detail.component';
+import { FillterRatingComponent } from './movies/ratings/fillter-rating/fillter-rating.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { AdminReportDetailComponent } from './admin/admin-reports/admin-report-d
     ReportFormComponent,
     AdminReportsComponent,
     AdminReportDetailComponent,
+    FillterRatingComponent,
     ],
   imports: [
     BrowserModule,
