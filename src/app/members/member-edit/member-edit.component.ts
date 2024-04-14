@@ -52,24 +52,20 @@ export class MemberEditComponent implements OnInit {
   }
 
   updateMember() {
-    this.memberService
-      .updateMember(this.editData)
-      .pipe(
-        finalize(() => {
-          this.toastr.success('Edit profile successful!');
-        })
-      )
-      .subscribe(() => {
-        if (this.selectedFile) {
-          this.memberService.changeAvatar(this.selectedFile).subscribe((result: any) => {
+    this.memberService.updateMember(this.editData).subscribe(() => {
+      if (this.selectedFile) {
+        this.memberService
+          .changeAvatar(this.selectedFile)
+          .subscribe((result: any) => {
             this.currentUser!.avatarUrl = result.url;
             this.member.avatar!.url = result.url;
             this.accountService.setCurrentUser(this.currentUser);
             this.loadMember();
-          })
-        }
-        this.loadMember();
-      });
+          });
+      }
+      this.loadMember();
+      this.toastr.success('Edit profile successful!');
+    });
   }
 
   selectTab(tabId: number) {
@@ -93,6 +89,5 @@ export class MemberEditComponent implements OnInit {
 
   onFileSelected(file: File) {
     this.selectedFile = file;
-    console.log(this.selectedFile);
   }
 }

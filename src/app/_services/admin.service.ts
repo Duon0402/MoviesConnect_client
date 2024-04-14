@@ -2,8 +2,11 @@ import { environment } from './../../environments/environment.development';
 import { Injectable } from '@angular/core';
 import {
   Movie,
+  MovieCreateDto,
+  MovieUpdateDto,
   ProxiesService,
   ReportDto,
+  ReportUpdateDto,
   UsersWithRolesDto,
 } from '../../shared/service-proxies/proxies.service';
 import { HttpClient } from '@angular/common/http';
@@ -35,13 +38,17 @@ export class AdminService {
     return this._service.movies();
   }
 
-  getMovie() {}
+  changeBanner(file: File, movieId: any) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(this.baseUrl + 'Movie/SetBanner/'+ movieId, formData);
+  }
 
-  createOrEditMovie(data: any, movieId?: number) {
+  createOrEditMovie(movieData: MovieCreateDto | MovieUpdateDto, movieId?: number) {
     if (movieId != null && movieId !== 0) {
-      return this.http.put(this.baseUrl + 'Movie/UpdateMovie/' + movieId, data);
+      return this.http.put(this.baseUrl + 'Movie/UpdateMovie/' + movieId, movieData);
     } else {
-      return this.http.post(this.baseUrl + 'Movie/CreateMovie', data);
+      return this.http.post(this.baseUrl + 'Movie/CreateMovie', movieData);
     }
   }
 
@@ -51,5 +58,13 @@ export class AdminService {
 
   getReports(): Observable<ReportDto[]> {
     return this._service.getListReports();
+  }
+
+  getReport(reportId: number) {
+    return this._service.getReport(reportId);
+  }
+
+  updateStatusReport(reportId: number, reportUpdateDto: ReportUpdateDto): Observable<any> {
+    return this.http.put(this.baseUrl + 'Report/UpdateStatusReport/' + reportId, reportUpdateDto);
   }
 }

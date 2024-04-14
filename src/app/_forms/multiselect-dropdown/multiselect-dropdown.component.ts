@@ -29,7 +29,10 @@ export class MultiselectDropdownComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    this.selectedItems.push(item);
+    const exists = this.selectedItems.some(selectedItem => selectedItem.item_id === item.item_id);
+    if (!exists) {
+      this.selectedItems.push(item);
+    }
     this.emitSelectedItems();
   }
 

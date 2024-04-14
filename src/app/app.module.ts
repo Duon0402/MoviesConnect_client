@@ -48,6 +48,7 @@ import { AdminGenresCreateOrEditComponent } from './admin/admin-genres/admin-gen
 import { AdminCertificationsComponent } from './admin/admin-certifications/admin-certifications.component';
 import { ReportFormComponent } from './_forms/report-form/report-form.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
+import { AdminReportDetailComponent } from './admin/admin-reports/admin-report-detail/admin-report-detail.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { AdminReportsComponent } from './admin/admin-reports/admin-reports.compo
     AdminCertificationsComponent,
     ReportFormComponent,
     AdminReportsComponent,
+    AdminReportDetailComponent,
     ],
   imports: [
     BrowserModule,

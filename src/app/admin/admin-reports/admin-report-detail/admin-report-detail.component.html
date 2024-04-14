@@ -1,0 +1,45 @@
+<div class="card-body">
+  <span class="btn btn-close" (click)="closeDialog()"></span>
+  <h2 class="card-title">Reprot Detail</h2>
+  <form class="mt-3">
+    <div class="row mb-3">
+      <label for="type" class="col-sm-2 col-form-label">Type</label>
+      <div class="col-sm-10">
+        <div class="form-control">{{ report.objectType }}</div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="content" class="col-sm-2 col-form-label">Content</label>
+      <div class="col-sm-10">
+        <div class="form-control" style="min-height: 100px; overflow-y: auto;">
+          {{ report.content }}
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row mb-3">
+      <label for="status" class="col-sm-2 col-form-label">Status</label>
+      <div class="col-sm-10">
+        <select class="form-select" [(ngModel)]="report.status" name="status">
+          <option value="Unprocessed">Unprocessed</option>
+          <option value="Processed">Processed</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row text-center mt-2">
+      <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary me-2" (click)="save()">
+          Save
+        </button>
+        <button class="btn btn-secondary me-2" (click)="closeDialog()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

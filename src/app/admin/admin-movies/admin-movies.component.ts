@@ -57,9 +57,29 @@ export class AdminMoviesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.loadMovies();
+      if (result) {
+        console.log(result);
+        if(result.fileBanner) {
+          this.createOrEditMovie(result.movieData, result.movieId, result.fileBanner);
+        }
+        else {
+          this.createOrEditMovie(result.movieData, result.movieId);
+        }
       }
+    });
+  }
+
+  // create or edit movie
+  createOrEditMovie(movieData: any, movieId?: number, fileBanner?: any) {
+    this.adminService.createOrEditMovie(movieData, movieId).subscribe(() => {
+      if (fileBanner != null) {
+        this.adminService.changeBanner(fileBanner, movieId).subscribe(() => {
+          this.loadMovies();
+        });
+      }
+      const message = movieId ? 'Edit' : 'Create';
+      this.toastr.success(`${message} movie successful`);
+      this.loadMovies();
     });
   }
 

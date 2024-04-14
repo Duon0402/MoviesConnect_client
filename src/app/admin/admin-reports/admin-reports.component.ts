@@ -4,12 +4,13 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../_services/admin.service';
 import { auto } from '@popperjs/core';
-import { ReportDto } from '../../../shared/service-proxies/proxies.service';
+import { ReportDto, ReportUpdateDto } from '../../../shared/service-proxies/proxies.service';
+import { AdminReportDetailComponent } from './admin-report-detail/admin-report-detail.component';
 
 @Component({
   selector: 'app-admin-reports',
   templateUrl: './admin-reports.component.html',
-  styleUrl: './admin-reports.component.css'
+  styleUrl: './admin-reports.component.css',
 })
 export class AdminReportsComponent {
   tableColumns: TableColumn[] = [
@@ -41,8 +42,8 @@ export class AdminReportsComponent {
     this.rowSelected = selectedRow;
   }
 
-  openEditDialog(): void {
-    const dialogRef = this.dialog.open(AdminReportsComponent, {
+  openDetailDialog(): void {
+    const dialogRef = this.dialog.open(AdminReportDetailComponent, {
       width: '500px',
       height: auto,
       data: { data: this.rowSelected },
@@ -50,7 +51,15 @@ export class AdminReportsComponent {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
+        this.updateStatusReport(result.id, result.status);
       }
+    });
+  }
+  updateStatusReport(reportId: number, status: string) {
+    const reportUpdateDto: ReportUpdateDto = { status: status };
+    this.adminService.updateStatusReport(reportId, reportUpdateDto).subscribe(() => {
+      this.toastr.success('Update status report successful');
+      this.loadReports();
     });
   }
 }

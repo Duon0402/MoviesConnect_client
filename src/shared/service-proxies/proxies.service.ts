@@ -2407,6 +2407,7 @@ export interface ReportCreateDto {
 
 export interface ReportDto {
     id?: number;
+    content?: string | undefined;
     status?: string | undefined;
     objectType?: string | undefined;
     objectId?: number;
