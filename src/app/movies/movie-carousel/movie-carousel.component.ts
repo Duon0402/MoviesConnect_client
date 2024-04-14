@@ -13,6 +13,7 @@ import { MovieService } from '../../_services/movie.service';
 })
 export class MovieCarouselComponent implements OnInit {
   @Input() movieParams!: MoviesParams;
+  @Input() id!: string;
   movies: MovieOutputDto[] = [];
   movieChunks: MovieOutputDto[][] = [];
 
@@ -30,7 +31,7 @@ export class MovieCarouselComponent implements OnInit {
   }
 
   chunkMovies() {
-    const chunkSize = 5; // Number of movies per slide
+    const chunkSize = 5;
     for (let i = 0; i < this.movies.length; i += chunkSize) {
       this.movieChunks.push(this.movies.slice(i, i + chunkSize));
     }

@@ -1,6 +1,6 @@
 .banner {
   max-width: 100%;
-  max-height: 200px;
+  max-height: 250px;
 }
 .banner:hover {
   cursor: pointer;
@@ -10,5 +10,9 @@
 }
 
 .title {
-  min-height: 80px;
+  min-height: 100px;
+}
+
+.card {
+  min-height: 450px;
 }

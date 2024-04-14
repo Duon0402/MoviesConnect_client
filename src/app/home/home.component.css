@@ -1,0 +1,17 @@
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: grey;
+}
+.carousel {
+  min-height: 425px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover{
+  background-color: #012970;
+}

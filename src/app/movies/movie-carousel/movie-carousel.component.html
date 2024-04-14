@@ -1,5 +1,5 @@
 <div
-  id="carouselExampleIndicators"
+  [id]="id"
   class="carousel slide pointer-event"
   data-bs-ride="carousel"
 >
@@ -20,7 +20,7 @@
   <button
     class="carousel-control-prev btn btn-outline-secondary"
     type="button"
-    data-bs-target="#carouselExampleIndicators"
+    [attr.data-bs-target]="'#' + id"
     data-bs-slide="prev"
   >
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -29,7 +29,7 @@
   <button
     class="carousel-control-next btn btn-outline-secondary"
     type="button"
-    data-bs-target="#carouselExampleIndicators"
+    [attr.data-bs-target]="'#' + id"
     data-bs-slide="next"
   >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
