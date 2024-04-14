@@ -189,16 +189,21 @@ export class ProxiesService {
     }
 
     /**
+     * @param body (optional) 
      * @return Success
      */
-    changeSettingAccount(): Observable<void> {
+    changeSettingAccount(body?: boolean | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Account/ChangeSettingAccount";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(body);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json",
             })
         };
 
@@ -2179,7 +2184,7 @@ export interface AppUser {
     accessFailedCount?: number;
     fullName?: string | undefined;
     gender?: string | undefined;
-    isPublic?: boolean;
+    isPrivate?: boolean;
     dateOfBirth?: Date;
     createAt?: Date;
     userRoles?: AppUserRole[] | undefined;
@@ -2294,7 +2299,7 @@ export interface MemberDto {
     fullName?: string | undefined;
     gender?: string | undefined;
     dateOfBirth?: Date;
-    isPublic?: boolean;
+    isPrivate?: boolean;
     avatar?: AvatarDto;
 }
 
@@ -2372,6 +2377,9 @@ export interface Rating {
     score?: number;
     review?: string | undefined;
     ratingViolation?: boolean;
+    deletedId?: number | undefined;
+    deletedAt?: Date | undefined;
+    isDeleted?: boolean;
     appUserId?: number;
     appUser?: AppUser;
     movieId?: number;

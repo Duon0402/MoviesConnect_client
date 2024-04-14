@@ -1,6 +1,6 @@
 <section
   class="section profile d-flex justify-content-center align-items-center"
-  *ngIf="member && member.isPublic"
+  *ngIf="member && !member.isPrivate"
 >
   <div class="col-xl-8">
     <div class="card">
@@ -63,7 +63,7 @@
 
 <section
   class="section profile d-flex w-auto h-100 justify-content-center align-items-center"
-  *ngIf="member && !member.isPublic"
+  *ngIf="member && member.isPrivate"
 >
   <div class="col-xl-8">
     <div class="card">

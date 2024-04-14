@@ -77,7 +77,7 @@ export class MemberEditComponent implements OnInit {
   }
 
   changeSettingAccount() {
-    this.accountService.changeSettingAccount().subscribe(() => {
+    this.accountService.changeSettingAccount(this.member.isPrivate).subscribe(() => {
       this.loadMember();
       this.toastr.success('Change setting succesfull');
     });

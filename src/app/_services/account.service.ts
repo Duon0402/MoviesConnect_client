@@ -56,7 +56,7 @@ export class AccountService {
     return this.http.put(this.baseUrl + 'Account/ChangePassword', model);
   }
 
-  changeSettingAccount() {
-    return this.http.put(this.baseUrl + 'Account/ChangeSettingAccount', {});
+  changeSettingAccount(data: any) {
+    return this.http.put(this.baseUrl + 'Account/ChangeSettingAccount', data);
   }
 }
