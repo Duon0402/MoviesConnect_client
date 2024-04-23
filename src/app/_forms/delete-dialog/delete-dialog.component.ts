@@ -17,6 +17,6 @@ export class DeleteDialogComponent {
   }
 
   confirmDelete() {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(true);
   }
 }

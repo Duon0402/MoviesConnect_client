@@ -51,6 +51,8 @@ import { AdminReportsComponent } from './admin/admin-reports/admin-reports.compo
 import { AdminReportDetailComponent } from './admin/admin-reports/admin-report-detail/admin-report-detail.component';
 import { FillterRatingComponent } from './movies/ratings/fillter-rating/fillter-rating.component';
 import { AdminReportHandleComponent } from './admin/admin-reports/admin-report-handle/admin-report-handle.component';
+import { ConfirmDialogComponent } from './_forms/confirm-dialog/confirm-dialog.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,8 @@ import { AdminReportHandleComponent } from './admin/admin-reports/admin-report-h
     AdminReportDetailComponent,
     FillterRatingComponent,
     AdminReportHandleComponent,
+    ConfirmDialogComponent,
+    FooterComponent,
     ],
   imports: [
     BrowserModule,

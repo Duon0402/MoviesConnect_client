@@ -3,68 +3,47 @@
     <h5 class="card-title">Top 10 New Movies</h5>
     <div class="row">
       <div class="col">
-        <app-movie-carousel [movieParams]="newMovies" [id]="'newMovies'"></app-movie-carousel>
+        <app-movie-carousel
+          [movieParams]="newMovies"
+          [id]="'newMovies'"
+        ></app-movie-carousel>
       </div>
     </div>
   </div>
 </div>
 
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Top 10 Movies Comimg Soon</h5>
-    <div class="row">
-      <div class="col">
-        <app-movie-carousel [movieParams]="moviesComimgSoon" [id]="'moiveCommingSoon'"></app-movie-carousel>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card" *ngIf="currentUser">
-  <div class="card-body">
-    <h5 class="card-title">Top 10 Recommend For You</h5>
-    <div class="row">
-      <div class="col">
-        <div
-        id="recmdMovies"
-        class="carousel slide pointer-event"
-        data-bs-ride="carousel"
-      >
-        <div class="carousel-inner">
-          <div
-            class="carousel-item"
-            *ngFor="let chunk of movieChunks; let i = index"
-            [class.active]="i === 0"
-          >
-            <div class="row justify-content-center">
-              <div class="col-lg-2 mt-3 mb-3" *ngFor="let movie of chunk">
-                <app-movie-card [movie]="movie"></app-movie-card>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card h-50 d-flex flex-column">
+        <div class="card-body d-flex flex-column overflow-auto">
+          <h5 class="card-title">Genres</h5>
+          <div class="genres flex-grow-1" *ngIf="genres.length > 0">
+            <ul class="list-unstyled">
+              <li *ngFor="let genre of genres">
+                <span class="badge bg-primary">{{ genre.name }}</span>
+              </li>
+            </ul>
           </div>
         </div>
-
-        <button
-          class="carousel-control-prev btn btn-outline-secondary"
-          type="button"
-          [attr.data-bs-target]="'#recmdMovies'"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next btn btn-outline-secondary"
-          type="button"
-          [attr.data-bs-target]="'#recmdMovies'"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-
+    </div>
+    <div class="col">
+      <div class="card h-50 d-flex flex-column">
+        <div class="card-body d-flex flex-column overflow-auto">
+          <h5 class="card-title">Certification</h5>
+          <div class="genres flex-grow-1" *ngIf="certifs.length > 0">
+            <ul class="list-unstyled">
+              <li *ngFor="let certif of certifs">
+                <span class="badge bg-primary">{{ certif.name }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+

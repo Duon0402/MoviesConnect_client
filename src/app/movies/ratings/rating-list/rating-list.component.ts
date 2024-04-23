@@ -50,7 +50,7 @@ export class RatingListComponent implements OnInit {
     const dialogRef = this.dialog.open(ReportFormComponent, {
       width: '800px',
       height: 'auto',
-      data: { objectId2: this.movieId, objectId: this.currentUser?.id, objectType: "Rating" },
+      data: { objectId: this.movieId, objectId2: this.currentUser?.id, objectType: "Rating" },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

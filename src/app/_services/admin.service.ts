@@ -93,20 +93,12 @@ export class AdminService {
     );
   }
 
-  updateStatusRating(userId: number, movieId: number, isViolation: boolean) {
-    return this.http.put(
-      this.baseUrl +
-        'Admin/DeleteRating?userId=' +
-        userId +
-        '&movieId=' +
-        movieId +
-        '&isViolation=' +
-        isViolation,
-      {}
-    );
+  updateStatusRating(userId: number, movieId: number) {
+    return this.http.put(this.baseUrl + 'Admin/UpdateRatingStatus?userId=' + userId + '&movieId=' + movieId, {});
   }
 
+
   loadRating(userId: number, movieId: number) {
-    return this._service.getRatingForHandle(userId, movieId);
+    return this.http.get(this.baseUrl + 'Admin/GetRatingForHandle?userId=' + userId + '&movieId=' + movieId,);
   }
 }

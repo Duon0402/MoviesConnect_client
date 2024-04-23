@@ -508,10 +508,9 @@ export class ProxiesService {
     /**
      * @param userId (optional) 
      * @param movieId (optional) 
-     * @param isViolation (optional) 
      * @return Success
      */
-    updateRatingStatus(userId?: number | undefined, movieId?: number | undefined, isViolation?: boolean | undefined): Observable<void> {
+    updateRatingStatus(userId?: number | undefined, movieId?: number | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/Admin/UpdateRatingStatus?";
         if (userId === null)
             throw new Error("The parameter 'userId' cannot be null.");
@@ -521,10 +520,6 @@ export class ProxiesService {
             throw new Error("The parameter 'movieId' cannot be null.");
         else if (movieId !== undefined)
             url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
-        if (isViolation === null)
-            throw new Error("The parameter 'isViolation' cannot be null.");
-        else if (isViolation !== undefined)
-            url_ += "isViolation=" + encodeURIComponent("" + isViolation) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -568,26 +563,27 @@ export class ProxiesService {
     }
 
     /**
-     * @param userId (optional) 
      * @param movieId (optional) 
+     * @param userId (optional) 
      * @return Success
      */
-    getRatingForHandle(userId?: number | undefined, movieId?: number | undefined): Observable<void> {
+    getRatingForHandle(movieId?: number | undefined, userId?: number | undefined): Observable<RatingOutputDto> {
         let url_ = this.baseUrl + "/api/Admin/GetRatingForHandle?";
-        if (userId === null)
-            throw new Error("The parameter 'userId' cannot be null.");
-        else if (userId !== undefined)
-            url_ += "userId=" + encodeURIComponent("" + userId) + "&";
         if (movieId === null)
             throw new Error("The parameter 'movieId' cannot be null.");
         else if (movieId !== undefined)
             url_ += "movieId=" + encodeURIComponent("" + movieId) + "&";
+        if (userId === null)
+            throw new Error("The parameter 'userId' cannot be null.");
+        else if (userId !== undefined)
+            url_ += "userId=" + encodeURIComponent("" + userId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "text/plain"
             })
         };
 
@@ -598,14 +594,14 @@ export class ProxiesService {
                 try {
                     return this.processGetRatingForHandle(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<RatingOutputDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<RatingOutputDto>;
         }));
     }
 
-    protected processGetRatingForHandle(response: HttpResponseBase): Observable<void> {
+    protected processGetRatingForHandle(response: HttpResponseBase): Observable<RatingOutputDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -614,7 +610,59 @@ export class ProxiesService {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as RatingOutputDto;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getStatistics(): Observable<StatisticsDto> {
+        let url_ = this.baseUrl + "/api/Admin/GetStatistics";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetStatistics(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetStatistics(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<StatisticsDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<StatisticsDto>;
+        }));
+    }
+
+    protected processGetStatistics(response: HttpResponseBase): Observable<StatisticsDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as StatisticsDto;
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -715,6 +763,111 @@ export class ProxiesService {
             let result200: any = null;
             result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as CertificationOutputDto[];
             return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEditCertifi(certiId: number, body?: CertificationCreateOrEditDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Certification/CreateOrEditCertifi/{certiId}";
+        if (certiId === undefined || certiId === null)
+            throw new Error("The parameter 'certiId' must be defined.");
+        url_ = url_.replace("{certiId}", encodeURIComponent("" + certiId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEditCertifi(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEditCertifi(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processCreateOrEditCertifi(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    deleteCertification(certiId: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/Certification/DeleteCertification/{certiId}";
+        if (certiId === undefined || certiId === null)
+            throw new Error("The parameter 'certiId' must be defined.");
+        url_ = url_.replace("{certiId}", encodeURIComponent("" + certiId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDeleteCertification(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDeleteCertification(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processDeleteCertification(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -2417,6 +2570,12 @@ export interface Certification {
     movies?: Movie[] | undefined;
 }
 
+export interface CertificationCreateOrEditDto {
+    name?: string | undefined;
+    description?: string | undefined;
+    minimumAge?: number;
+}
+
 export interface CertificationOutputDto {
     id?: number;
     name?: string | undefined;
@@ -2604,6 +2763,16 @@ export interface ReportDto {
 
 export interface ReportUpdateDto {
     status?: string | undefined;
+}
+
+export interface StatisticsDto {
+    totalMovies?: number;
+    totalUsers?: number;
+    totalReports?: number;
+    totalReportUnprocesseds?: number;
+    totalReportProcesseds?: number;
+    totalGenres?: number;
+    totalCertifications?: number;
 }
 
 export interface UsersWithRolesDto {

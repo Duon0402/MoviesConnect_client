@@ -21,6 +21,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.component';
 import { AdminGenresComponent } from './admin/admin-genres/admin-genres.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
+import { AdminCertificationsComponent } from './admin/admin-certifications/admin-certifications.component';
 const routes: Routes = [
   {
     path: '',
@@ -70,6 +71,10 @@ const routes: Routes = [
           {
             path: 'genres',
             component: AdminGenresComponent
+          },
+          {
+            path: 'certifications',
+            component: AdminCertificationsComponent
           },
           {
             path: 'reports',

@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit{
 
   genres: any[] = [];
   recommendMovies!: any[];
+  certifs: any[] = [];
   constructor(
     private movieService: MovieService,
     private accountService: AccountService,
@@ -40,10 +41,11 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if(this.currentUser) {
-      this.loadListRecommendMovies();
-    }
+    // if(this.currentUser) {
+    //   this.loadListRecommendMovies();
+    // }
     this.loadGenres();
+    this.loadCertification();
   }
 
   loadGenres() {
@@ -52,18 +54,24 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  loadListRecommendMovies() {
-    this._service.getListRecommendMovies().subscribe(result => {
-      this.recommendMovies = result;
-      this.chunkMovies(this.recommendMovies);
+  loadCertification() {
+    this.movieService.getListCertifications().subscribe(result => {
+      this.certifs = result;
     })
   }
 
-  movieChunks: MovieOutputDto[][] = [];
-  chunkMovies(listMovies: any[]) {
-    const chunkSize = 5;
-    for (let i = 0; i < listMovies.length; i += chunkSize) {
-      this.movieChunks.push(listMovies.slice(i, i + chunkSize));
-    }
-  }
+  // loadListRecommendMovies() {
+  //   this._service.getListRecommendMovies().subscribe(result => {
+  //     this.recommendMovies = result;
+  //     this.chunkMovies(this.recommendMovies);
+  //   })
+  // }
+
+  // movieChunks: MovieOutputDto[][] = [];
+  // chunkMovies(listMovies: any[]) {
+  //   const chunkSize = 5;
+  //   for (let i = 0; i < listMovies.length; i += chunkSize) {
+  //     this.movieChunks.push(listMovies.slice(i, i + chunkSize));
+  //   }
+  // }
 }

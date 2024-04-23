@@ -3,3 +3,10 @@
   padding: 20px 30px;
   transition: all 0.3s;
 }
+
+.footer {
+  padding: 20px 0;
+  font-size: 14px;
+  transition: all 0.3s;
+  border-top: 1px solid #cddfff;
+}

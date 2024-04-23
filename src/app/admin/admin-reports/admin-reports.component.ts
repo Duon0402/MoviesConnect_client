@@ -65,6 +65,18 @@ export class AdminReportsComponent {
     });
   }
 
+  deleteRating(movieId: number, userId: number) {
+    this.adminService.deleteRating(userId, movieId).subscribe(() => {
+      this.toastr.success("Delete rating succesful");
+    })
+  }
+
+  violationRating(movieId: number, userId: number) {
+    this.adminService.updateStatusRating(userId, movieId).subscribe(() => {
+      this.toastr.success("Mark rating as violation succesful");
+    })
+  }
+
   openHandleDialog(): void {
     if(this.rowSelected && this.rowSelected.objectType === 'Rating') {
       const dialogRef = this.dialog.open(AdminReportHandleComponent, {
@@ -75,7 +87,7 @@ export class AdminReportsComponent {
 
       dialogRef.afterClosed().subscribe((result: any) => {
         if (result) {
-          console.log(result);
+          this.violationRating(result.movieId, result.userId);
         }
       });
     }
@@ -99,7 +111,6 @@ export class AdminReportsComponent {
       });
     }
   }
-
     // create or edit movie
     createOrEditMovie(movieData: any, movieId?: number, fileBanner?: any) {
       this.adminService.createOrEditMovie(movieData, movieId).subscribe(() => {

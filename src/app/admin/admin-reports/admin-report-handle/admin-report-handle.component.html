@@ -1,5 +1,25 @@
-<div class="card-body">
-  <form action="">
-
+<div class="card-body mt-3">
+  <form>
+    <div *ngIf="rating != null">
+      <div class="col-sm-12">
+        <span>Username: {{ rating.username }}</span>
+      </div>
+      <div class="col-sm-12">
+        <span class="score me-3">Score: {{ rating.score }}</span>
+        <i class="bi bi-star-fill text-warning" ></i>
+      </div>
+      <div class="col-sm-12">
+        <span>Review: {{ rating.review }}</span>
+      </div>
+    </div>
+    <hr>
+    <div class="col-sm-12 mt-3 text-center">
+      <button type="submit" class="btn btn-primary me-2" (click)="openConfirmDialog()">
+        Mark as Violation
+      </button>
+      <button class="btn btn-secondary me-2" (click)="closeDialog()">
+        Cancel
+      </button>
+    </div>
   </form>
 </div>
