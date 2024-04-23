@@ -32,8 +32,10 @@ export class RatingAddOrEditComponent implements OnInit {
 
   loadRating() {
     this.movieService.getRating(this.movie.id).subscribe((rating) => {
-      (this.ratingData.review = rating.review),
-        (this.ratingData.score = rating.score);
+      this.ratingData = {
+        score: rating.score,
+        review: rating.review
+      }
     });
   }
 

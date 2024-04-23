@@ -27,7 +27,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     register(body?: RegisterDto | undefined): Observable<AccountOutputDto> {
@@ -82,7 +82,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     login(body?: LoginDto | undefined): Observable<AccountOutputDto> {
@@ -137,7 +137,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     changePassword(body?: ChangePasswordDto | undefined): Observable<void> {
@@ -189,7 +189,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     changeSettingAccount(body?: boolean | undefined): Observable<void> {
@@ -291,7 +291,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param roles (optional)
+     * @param roles (optional) 
      * @return Success
      */
     editRoles(username: string, roles?: string | undefined): Observable<void> {
@@ -449,8 +449,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param userId (optional)
-     * @param movieId (optional)
+     * @param userId (optional) 
+     * @param movieId (optional) 
      * @return Success
      */
     deleteRating(userId?: number | undefined, movieId?: number | undefined): Observable<void> {
@@ -506,8 +506,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param userId (optional)
-     * @param movieId (optional)
+     * @param userId (optional) 
+     * @param movieId (optional) 
      * @return Success
      */
     updateRatingStatus(userId?: number | undefined, movieId?: number | undefined): Observable<void> {
@@ -563,8 +563,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional)
-     * @param userId (optional)
+     * @param movieId (optional) 
+     * @param userId (optional) 
      * @return Success
      */
     getRatingForHandle(movieId?: number | undefined, userId?: number | undefined): Observable<RatingOutputDto> {
@@ -776,7 +776,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createOrEditCertifi(certiId: number, body?: CertificationCreateOrEditDto | undefined): Observable<void> {
@@ -881,7 +881,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createGenre(body?: GenreCreateDto | undefined): Observable<void> {
@@ -933,7 +933,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateGenre(genreId: number, body?: GenreUpdateDto | undefined): Observable<void> {
@@ -1244,7 +1244,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createMovie(body?: MovieCreateDto | undefined): Observable<void> {
@@ -1296,7 +1296,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateMovie(movieId: number, body?: MovieUpdateDto | undefined): Observable<void> {
@@ -1401,8 +1401,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param score (optional)
-     * @param ratingViolation (optional)
+     * @param score (optional) 
+     * @param ratingViolation (optional) 
      * @return Success
      */
     getMovieById(movieId: number, score?: number | undefined, ratingViolation?: boolean | undefined): Observable<MovieOutputDto> {
@@ -1517,16 +1517,16 @@ export class ProxiesService {
     }
 
     /**
-     * @param keyword (optional)
-     * @param orderBy (optional)
-     * @param sortOrder (optional)
-     * @param status (optional)
-     * @param pageSize (optional)
-     * @param certificationId (optional)
-     * @param genreId (optional)
-     * @param purpose (optional)
-     * @param minRating (optional)
-     * @param maxRating (optional)
+     * @param keyword (optional) 
+     * @param orderBy (optional) 
+     * @param sortOrder (optional) 
+     * @param status (optional) 
+     * @param pageSize (optional) 
+     * @param certificationId (optional) 
+     * @param genreId (optional) 
+     * @param purpose (optional) 
+     * @param minRating (optional) 
+     * @param maxRating (optional) 
      * @return Success
      */
     getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined, minRating?: number | undefined, maxRating?: number | undefined): Observable<ListMoviesOutputDto[]> {
@@ -1667,7 +1667,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param file (optional)
+     * @param file (optional) 
      * @return Success
      */
     setBanner(movieId: number, file?: FileParameter | undefined): Observable<AvatarDto> {
@@ -1728,7 +1728,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     addOrEditRating(movieId: number, body?: RatingAddOrEditDto | undefined): Observable<void> {
@@ -1836,8 +1836,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param score (optional)
-     * @param ratingViolation (optional)
+     * @param score (optional) 
+     * @param ratingViolation (optional) 
      * @return Success
      */
     getListRatings(movieId: number, score?: number | undefined, ratingViolation?: boolean | undefined): Observable<RatingOutputDto[]> {
@@ -1899,7 +1899,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     createReport(body?: ReportCreateDto | undefined): Observable<void> {
@@ -2004,8 +2004,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param status (optional)
-     * @param objectType (optional)
+     * @param status (optional) 
+     * @param objectType (optional) 
      * @return Success
      */
     getListReports(status?: string | undefined, objectType?: string | undefined): Observable<ReportDto[]> {
@@ -2064,7 +2064,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateStatusReport(reportId: number, body?: ReportUpdateDto | undefined): Observable<void> {
@@ -2275,7 +2275,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional)
+     * @param body (optional) 
      * @return Success
      */
     updateUser(body?: MemberUpdateDto | undefined): Observable<void> {
@@ -2327,7 +2327,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param file (optional)
+     * @param file (optional) 
      * @return Success
      */
     setAvatar(file?: FileParameter | undefined): Observable<AvatarDto> {
