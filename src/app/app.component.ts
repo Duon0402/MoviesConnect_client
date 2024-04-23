@@ -11,6 +11,7 @@ import { take } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'Movies Connect';
   currentUser!: AccountOutputDto | null;
+  isAdminPage: boolean = false;
 
   constructor(private accountService: AccountService) {}
 

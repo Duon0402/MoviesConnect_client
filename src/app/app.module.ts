@@ -53,6 +53,7 @@ import { FillterRatingComponent } from './movies/ratings/fillter-rating/fillter-
 import { AdminReportHandleComponent } from './admin/admin-reports/admin-report-handle/admin-report-handle.component';
 import { ConfirmDialogComponent } from './_forms/confirm-dialog/confirm-dialog.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { FooterComponent } from './footer/footer.component';
     AdminReportHandleComponent,
     ConfirmDialogComponent,
     FooterComponent,
+    AdminDashboardComponent,
     ],
   imports: [
     BrowserModule,

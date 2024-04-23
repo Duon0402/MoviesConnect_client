@@ -22,6 +22,7 @@ import { AdminMoviesComponent } from './admin/admin-movies/admin-movies.componen
 import { AdminGenresComponent } from './admin/admin-genres/admin-genres.component';
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { AdminCertificationsComponent } from './admin/admin-certifications/admin-certifications.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 const routes: Routes = [
   {
     path: '',
@@ -56,6 +57,10 @@ const routes: Routes = [
         canActivate: [AdminGuard],
         component: AdminHomeComponent,
         children: [
+          {
+            path: 'dashboard',
+            component: AdminDashboardComponent,
+          },
           {
             path: 'users',
             component: AdminUsersComponent,

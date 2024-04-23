@@ -1,0 +1,98 @@
+<section class="section dashboard">
+  <div class="container" *ngIf="statistics != null">
+    <div class="row">
+      <!-- Reports section -->
+      <div class="col-12">
+        <div class="card info-card sales-card">
+          <div class="card-body">
+            <h5 class="card-title">Reports <span>| Total</span></h5>
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-bar-chart"></i>
+              </div>
+              <div class="ps-3">
+                <h6>{{statistics.totalReports}}</h6>
+                <div class="d-flex flex-wrap justify-content-center align-items-center">
+                  <div class="text-success small px-1 fw-bold">{{statistics.totalReportProcesseds}}</div>
+                  <div class="text-muted small px-1">Processeds</div>
+                  <div class="text-danger small px-1 fw-bold">{{statistics.totalReportUnprocesseds}}</div>
+                  <div class="text-muted small px-1">Unprocesseds</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xxl-3">
+        <!-- Phần 1 -->
+        <div class="card info-card sales-card">
+          <div class="card-body">
+            <h5 class="card-title" routerLink="/admin/roles">
+              Users <span>| Total Users</span>
+            </h5>
+
+            <div class="d-flex align-items-center">
+              <div
+                class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+              >
+                <i class="bi bi-person"></i>
+              </div>
+              <div class="ps-3">
+                <h6>{{ statistics.totalUsers }}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xxl-3">
+        <div class="card info-card revenue-card">
+          <div class="card-body">
+            <h5 class="card-title" routerLink="/admin/movies">Movies <span>| Total</span></h5>
+            <div class="d-flex align-items-center">
+              <div
+                class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+              >
+                <i class="bi bi-film"></i>
+              </div>
+              <div class="ps-3">
+                <h6>{{ statistics.totalMovies }}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xxl-3">
+        <div class="card info-card customers-card">
+          <div class="card-body">
+            <h5 class="card-title" routerLink="/admin/genres">Genres <span>| Total</span></h5>
+
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-camera-video"></i>
+              </div>
+              <div class="ps-3">
+                <h6>{{statistics.totalGenres}}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xxl-3">
+        <div class="card info-card revenue-card">
+          <div class="card-body">
+            <h5 class="card-title" routerLink="/admin/certifications">Certifications <span>| Total</span></h5>
+
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <div class="ps-3">
+                <h6>{{statistics.totalCertifications}}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -2,6 +2,13 @@
   <form>
     <div *ngIf="rating != null">
       <div class="col-sm-12">
+        <span>Movie ID: {{ movie.id }}</span>
+      </div>
+      <div class="col-sm-12">
+        <span>Movie Title: {{ movie.title }}</span>
+      </div>
+      <hr>
+      <div class="col-sm-12">
         <span>Username: {{ rating.username }}</span>
       </div>
       <div class="col-sm-12">
