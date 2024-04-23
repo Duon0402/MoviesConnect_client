@@ -54,6 +54,8 @@ import { AdminReportHandleComponent } from './admin/admin-reports/admin-report-h
 import { ConfirmDialogComponent } from './_forms/confirm-dialog/confirm-dialog.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { MovieRecommendComponent } from './movies/movie-recommend/movie-recommend.component';
+import { AdminCertificationsCreateOrEditComponent } from './admin/admin-certifications/admin-certifications-create-or-edit/admin-certifications-create-or-edit.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,9 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     ConfirmDialogComponent,
     FooterComponent,
     AdminDashboardComponent,
+    MovieRecommendComponent,
+    AdminGenresCreateOrEditComponent,
+    AdminCertificationsCreateOrEditComponent
     ],
   imports: [
     BrowserModule,

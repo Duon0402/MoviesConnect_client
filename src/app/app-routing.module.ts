@@ -23,6 +23,7 @@ import { AdminGenresComponent } from './admin/admin-genres/admin-genres.componen
 import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
 import { AdminCertificationsComponent } from './admin/admin-certifications/admin-certifications.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { MovieRecommendComponent } from './movies/movie-recommend/movie-recommend.component';
 const routes: Routes = [
   {
     path: '',
@@ -42,9 +43,10 @@ const routes: Routes = [
       {
         path: 'member',
         children: [
-          {path: 'profile', component: MemberEditComponent},
-          {path: 'watchlist', component: WatchlistComponent}
-        ]
+          { path: 'profile', component: MemberEditComponent },
+          { path: 'watchlist', component: WatchlistComponent },
+          { path: 'recommend', component: MovieRecommendComponent },
+        ],
       },
       {
         path: '',
@@ -71,20 +73,20 @@ const routes: Routes = [
           },
           {
             path: 'movies',
-            component: AdminMoviesComponent
+            component: AdminMoviesComponent,
           },
           {
             path: 'genres',
-            component: AdminGenresComponent
+            component: AdminGenresComponent,
           },
           {
             path: 'certifications',
-            component: AdminCertificationsComponent
+            component: AdminCertificationsComponent,
           },
           {
             path: 'reports',
-            component: AdminReportsComponent
-          }
+            component: AdminReportsComponent,
+          },
         ],
       },
     ],

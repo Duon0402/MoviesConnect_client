@@ -59,19 +59,4 @@ export class HomeComponent implements OnInit{
       this.certifs = result;
     })
   }
-
-  // loadListRecommendMovies() {
-  //   this._service.getListRecommendMovies().subscribe(result => {
-  //     this.recommendMovies = result;
-  //     this.chunkMovies(this.recommendMovies);
-  //   })
-  // }
-
-  // movieChunks: MovieOutputDto[][] = [];
-  // chunkMovies(listMovies: any[]) {
-  //   const chunkSize = 5;
-  //   for (let i = 0; i < listMovies.length; i += chunkSize) {
-  //     this.movieChunks.push(listMovies.slice(i, i + chunkSize));
-  //   }
-  // }
 }

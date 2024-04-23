@@ -27,7 +27,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     register(body?: RegisterDto | undefined): Observable<AccountOutputDto> {
@@ -82,7 +82,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     login(body?: LoginDto | undefined): Observable<AccountOutputDto> {
@@ -137,7 +137,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     changePassword(body?: ChangePasswordDto | undefined): Observable<void> {
@@ -189,7 +189,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     changeSettingAccount(body?: boolean | undefined): Observable<void> {
@@ -291,7 +291,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param roles (optional) 
+     * @param roles (optional)
      * @return Success
      */
     editRoles(username: string, roles?: string | undefined): Observable<void> {
@@ -449,8 +449,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param userId (optional) 
-     * @param movieId (optional) 
+     * @param userId (optional)
+     * @param movieId (optional)
      * @return Success
      */
     deleteRating(userId?: number | undefined, movieId?: number | undefined): Observable<void> {
@@ -506,8 +506,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param userId (optional) 
-     * @param movieId (optional) 
+     * @param userId (optional)
+     * @param movieId (optional)
      * @return Success
      */
     updateRatingStatus(userId?: number | undefined, movieId?: number | undefined): Observable<void> {
@@ -563,8 +563,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param movieId (optional) 
-     * @param userId (optional) 
+     * @param movieId (optional)
+     * @param userId (optional)
      * @return Success
      */
     getRatingForHandle(movieId?: number | undefined, userId?: number | undefined): Observable<RatingOutputDto> {
@@ -675,7 +675,7 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getCertificationById(certiId: number): Observable<void> {
+    getCertificationById(certiId: number): Observable<CertificationOutputDto> {
         let url_ = this.baseUrl + "/api/Certification/GetCertificationById/{certiId}";
         if (certiId === undefined || certiId === null)
             throw new Error("The parameter 'certiId' must be defined.");
@@ -686,6 +686,7 @@ export class ProxiesService {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "text/plain"
             })
         };
 
@@ -696,14 +697,14 @@ export class ProxiesService {
                 try {
                     return this.processGetCertificationById(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<CertificationOutputDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<CertificationOutputDto>;
         }));
     }
 
-    protected processGetCertificationById(response: HttpResponseBase): Observable<void> {
+    protected processGetCertificationById(response: HttpResponseBase): Observable<CertificationOutputDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -712,7 +713,9 @@ export class ProxiesService {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as CertificationOutputDto;
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -773,7 +776,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     createOrEditCertifi(certiId: number, body?: CertificationCreateOrEditDto | undefined): Observable<void> {
@@ -878,7 +881,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     createGenre(body?: GenreCreateDto | undefined): Observable<void> {
@@ -930,7 +933,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     updateGenre(genreId: number, body?: GenreUpdateDto | undefined): Observable<void> {
@@ -1137,7 +1140,7 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getListMoviesByGenreId(genreId: number): Observable<void> {
+    getListMoviesByGenreId(genreId: number): Observable<MovieOutputDto[]> {
         let url_ = this.baseUrl + "/api/Genre/GetListMoviesByGenreId/{genreId}";
         if (genreId === undefined || genreId === null)
             throw new Error("The parameter 'genreId' must be defined.");
@@ -1148,6 +1151,7 @@ export class ProxiesService {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Accept": "text/plain"
             })
         };
 
@@ -1158,14 +1162,14 @@ export class ProxiesService {
                 try {
                     return this.processGetListMoviesByGenreId(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<void>;
+                    return _observableThrow(e) as any as Observable<MovieOutputDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<void>;
+                return _observableThrow(response_) as any as Observable<MovieOutputDto[]>;
         }));
     }
 
-    protected processGetListMoviesByGenreId(response: HttpResponseBase): Observable<void> {
+    protected processGetListMoviesByGenreId(response: HttpResponseBase): Observable<MovieOutputDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1174,7 +1178,9 @@ export class ProxiesService {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return _observableOf(null as any);
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as MovieOutputDto[];
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -1185,7 +1191,60 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @return Success
+     */
+    getGenre(genreId: number): Observable<GenreOutputDto> {
+        let url_ = this.baseUrl + "/api/Genre/GetGenre/{genreId}";
+        if (genreId === undefined || genreId === null)
+            throw new Error("The parameter 'genreId' must be defined.");
+        url_ = url_.replace("{genreId}", encodeURIComponent("" + genreId));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetGenre(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetGenre(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GenreOutputDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GenreOutputDto>;
+        }));
+    }
+
+    protected processGetGenre(response: HttpResponseBase): Observable<GenreOutputDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as GenreOutputDto;
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional)
      * @return Success
      */
     createMovie(body?: MovieCreateDto | undefined): Observable<void> {
@@ -1237,7 +1296,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     updateMovie(movieId: number, body?: MovieUpdateDto | undefined): Observable<void> {
@@ -1342,8 +1401,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param score (optional) 
-     * @param ratingViolation (optional) 
+     * @param score (optional)
+     * @param ratingViolation (optional)
      * @return Success
      */
     getMovieById(movieId: number, score?: number | undefined, ratingViolation?: boolean | undefined): Observable<MovieOutputDto> {
@@ -1458,16 +1517,16 @@ export class ProxiesService {
     }
 
     /**
-     * @param keyword (optional) 
-     * @param orderBy (optional) 
-     * @param sortOrder (optional) 
-     * @param status (optional) 
-     * @param pageSize (optional) 
-     * @param certificationId (optional) 
-     * @param genreId (optional) 
-     * @param purpose (optional) 
-     * @param minRating (optional) 
-     * @param maxRating (optional) 
+     * @param keyword (optional)
+     * @param orderBy (optional)
+     * @param sortOrder (optional)
+     * @param status (optional)
+     * @param pageSize (optional)
+     * @param certificationId (optional)
+     * @param genreId (optional)
+     * @param purpose (optional)
+     * @param minRating (optional)
+     * @param maxRating (optional)
      * @return Success
      */
     getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined, minRating?: number | undefined, maxRating?: number | undefined): Observable<ListMoviesOutputDto[]> {
@@ -1608,7 +1667,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param file (optional) 
+     * @param file (optional)
      * @return Success
      */
     setBanner(movieId: number, file?: FileParameter | undefined): Observable<AvatarDto> {
@@ -1669,7 +1728,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     addOrEditRating(movieId: number, body?: RatingAddOrEditDto | undefined): Observable<void> {
@@ -1777,8 +1836,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param score (optional) 
-     * @param ratingViolation (optional) 
+     * @param score (optional)
+     * @param ratingViolation (optional)
      * @return Success
      */
     getListRatings(movieId: number, score?: number | undefined, ratingViolation?: boolean | undefined): Observable<RatingOutputDto[]> {
@@ -1840,7 +1899,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     createReport(body?: ReportCreateDto | undefined): Observable<void> {
@@ -1945,8 +2004,8 @@ export class ProxiesService {
     }
 
     /**
-     * @param status (optional) 
-     * @param objectType (optional) 
+     * @param status (optional)
+     * @param objectType (optional)
      * @return Success
      */
     getListReports(status?: string | undefined, objectType?: string | undefined): Observable<ReportDto[]> {
@@ -2005,7 +2064,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     updateStatusReport(reportId: number, body?: ReportUpdateDto | undefined): Observable<void> {
@@ -2168,7 +2227,7 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getListUsers(): Observable<MemberDto> {
+    getListUsers(): Observable<MemberDto[]> {
         let url_ = this.baseUrl + "/api/User/GetListUsers";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2187,14 +2246,14 @@ export class ProxiesService {
                 try {
                     return this.processGetListUsers(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<MemberDto>;
+                    return _observableThrow(e) as any as Observable<MemberDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<MemberDto>;
+                return _observableThrow(response_) as any as Observable<MemberDto[]>;
         }));
     }
 
-    protected processGetListUsers(response: HttpResponseBase): Observable<MemberDto> {
+    protected processGetListUsers(response: HttpResponseBase): Observable<MemberDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2204,7 +2263,7 @@ export class ProxiesService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as MemberDto;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as MemberDto[];
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -2216,7 +2275,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param body (optional) 
+     * @param body (optional)
      * @return Success
      */
     updateUser(body?: MemberUpdateDto | undefined): Observable<void> {
@@ -2268,7 +2327,7 @@ export class ProxiesService {
     }
 
     /**
-     * @param file (optional) 
+     * @param file (optional)
      * @return Success
      */
     setAvatar(file?: FileParameter | undefined): Observable<AvatarDto> {

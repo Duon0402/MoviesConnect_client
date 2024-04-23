@@ -58,7 +58,6 @@ export class AdminMoviesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
         if(result.fileBanner) {
           this.createOrEditMovie(result.movieData, result.movieId, result.fileBanner);
         }
@@ -91,7 +90,7 @@ export class AdminMoviesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (true) {
+      if (result === true) {
         this.deleteMovie(this.rowSelected.id);
       }
     });
@@ -103,7 +102,6 @@ export class AdminMoviesComponent implements OnInit {
       .subscribe(() => {
         this.loadMovies();
         this.toastr.success('Delete Succesfully');
-
       });
   }
 }

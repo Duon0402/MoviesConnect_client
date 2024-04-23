@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { auto } from '@popperjs/core';
 import { AdminGenresCreateOrEditComponent } from './admin-genres-create-or-edit/admin-genres-create-or-edit.component';
+import { DeleteDialogComponent } from '../../_forms/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-admin-genres',
@@ -44,8 +45,8 @@ export class AdminGenresComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.loadGenres();
+      if (result) {
+        this.createOrEditGenre( result.genreData, result.genreId);
       }
     });
   }
@@ -54,5 +55,34 @@ export class AdminGenresComponent implements OnInit {
     this.movieService.getListGenres().subscribe((result) => {
       this.tableData = result;
     });
+  }
+
+  createOrEditGenre(genreData: any, genreId?: number,) {
+    this.adminService.createOrEditGenre(genreData, genreId).subscribe(() => {
+      const message = genreId ? 'Edit' : 'Create';
+      this.toastr.success(`${message} genre successful`);
+      this.loadGenres();
+    })
+  }
+
+  openDeleteDialog(genreId: any): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '300px',
+      height: auto,
+      data: { genreId: genreId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.deleteGenre(this.rowSelected.id);
+      }
+    });
+  }
+
+  deleteGenre(genreId: number) {
+    this.adminService.deleteGenre(genreId).subscribe(() => {
+      this.toastr.success("Delete successful");
+      this.loadGenres();
+    })
   }
 }

@@ -18,17 +18,20 @@
         {{ column.header }}
       </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <ng-container *ngIf="column.dateColumn; else ifImageColumn; else defaultFormat">
-          {{ element[column.displayedColumn] | dateFormat }}
+        <ng-container *ngIf="column.imageColumn; else dateColumn">
+          <img *ngIf="element[column.displayedColumn]" [src]="element[column.displayedColumn].url" alt="Image" width="30" height="30">
         </ng-container>
-        <ng-template #ifImageColumn>
-          <img *ngIf="column.imageColumn" [src]="element[column.displayedColumn]" alt="Image" width="50" height="50">
+        <ng-template #dateColumn>
+          <ng-container *ngIf="column.dateColumn; else defaultFormat">
+            {{ element[column.displayedColumn] | dateFormat }}
+          </ng-container>
         </ng-template>
         <ng-template #defaultFormat>
           {{ element[column.displayedColumn] }}
         </ng-template>
       </mat-cell>
     </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)"
       [class.selected-row]="isRowSelected(row)">

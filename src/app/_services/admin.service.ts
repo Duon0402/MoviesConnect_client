@@ -1,6 +1,9 @@
 import { environment } from './../../environments/environment.development';
 import { Injectable } from '@angular/core';
 import {
+  GenreCreateDto,
+  GenreOutputDto,
+  GenreUpdateDto,
   Movie,
   MovieCreateDto,
   MovieUpdateDto,
@@ -101,4 +104,30 @@ export class AdminService {
   loadRating(userId: number, movieId: number) {
     return this.http.get(this.baseUrl + 'Admin/GetRatingForHandle?userId=' + userId + '&movieId=' + movieId,);
   }
+
+  createOrEditGenre(
+    model: GenreCreateDto | GenreUpdateDto,
+    genreId?: number
+  ) {
+    if (genreId == null || genreId == 0) {
+      return this.http.post(this.baseUrl + 'Genre/CreateGenre', model);
+    }
+    else {
+      return this.http.put(this.baseUrl + 'Genre/UpdateGenre/' + genreId , model);
+    }
+  }
+
+  deleteGenre(genreId: number) {
+    return this.http.delete(this.baseUrl + 'Genre/DeleteGenre/' + genreId);
+  }
+
+  // certifications
+  createOrEditCerti(model: any ,certiId: number) {
+    return this.http.post(this.baseUrl + 'Certification/CreateOrEditCertifi/' + certiId, model);
+  }
+
+  deleteCerti(certiId: number) {
+    return this.http.delete(this.baseUrl + 'Certification/DeleteCertification/' + certiId);
+  }
 }
+

@@ -5,6 +5,9 @@ import { AdminService } from '../../_services/admin.service';
 import { MovieService } from '../../_services/movie.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { AdminCertificationsCreateOrEditComponent } from './admin-certifications-create-or-edit/admin-certifications-create-or-edit.component';
+import { auto } from '@popperjs/core';
+import { DeleteDialogComponent } from '../../_forms/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-admin-certifications',
@@ -36,23 +39,52 @@ export class AdminCertificationsComponent {
     this.rowSelected = selectedRow;
   }
 
-  openCreateOrEditDialog(genreId?: any): void {
-    // const dialogRef = this.dialog.open(AdminGenresCreateOrEditComponent, {
-    //   width: '400px',
-    //   height: auto,
-    //   data: { genreId },
-    // });
+  openCreateOrEditDialog(certiId?: any): void {
+    const dialogRef = this.dialog.open(AdminCertificationsCreateOrEditComponent, {
+      width: '400px',
+      height: auto,
+      data: { certiId },
+    });
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result === true) {
-    //     this.loadGenres();
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.createOrEditCerti(result.certiId, result.certiData);
+      }
+    });
   }
 
   loadCertifications() {
     this.movieService.getListCertifications().subscribe((result) => {
       this.tableData = result;
     });
+  }
+
+  createOrEditCerti(certiId: number, certiData: any) {
+    this.adminService.createOrEditCerti(certiData, certiId).subscribe(() => {
+      const message = certiId ? 'Edit' : 'Create';
+      this.toastr.success(`${message} certification successful`);
+      this.loadCertifications();
+    })
+  }
+
+  openDeleteDialog(certiId: any): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '600px',
+      height: auto,
+      data: { certiId: certiId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.deleteCerti(this.rowSelected.id);
+      }
+    });
+  }
+
+  deleteCerti(certiId: number) {
+    this.adminService.deleteCerti(certiId).subscribe(() => {
+      this.toastr.success("Delete certification successfull");
+      this.loadCertifications();
+    })
   }
 }
