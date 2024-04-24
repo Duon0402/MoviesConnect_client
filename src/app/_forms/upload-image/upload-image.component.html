@@ -1,11 +1,13 @@
 <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-2"
+    >
       <img
       id="profileImage"
       class="image"
       [src]="imgUrl"
       alt="Image"
-      [ngStyle]="{ 'max-width.px': imgWidth, 'max-height.px': imgHeight }"
+      [ngStyle]="{ 'max-width.px': imgWidth, 'max-height.px': imgHeight,
+        'min-width.px': imgWidth, 'min-height.px': imgHeight }"
     />
     </div>
     <div class="col-sm-1 p-5">
