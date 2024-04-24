@@ -70,9 +70,10 @@ export class AdminMoviesComponent implements OnInit {
 
   // create or edit movie
   createOrEditMovie(movieData: any, movieId?: number, fileBanner?: any) {
-    this.adminService.createOrEditMovie(movieData, movieId).subscribe(() => {
-      if (fileBanner != null) {
-        this.adminService.changeBanner(fileBanner, movieId).subscribe(() => {
+    this.adminService.createOrEditMovie(movieData, movieId).subscribe((result) => {
+      console.log(result);
+      if (fileBanner != null && result != null ) {
+        this.adminService.changeBanner(fileBanner, result).subscribe(() => {
           this.loadMovies();
         });
       }
