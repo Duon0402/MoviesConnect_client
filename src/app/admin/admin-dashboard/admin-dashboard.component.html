@@ -1,4 +1,4 @@
-<section class="section dashboard">
+<section class="section dashboard" *ngIf="accountService.currentUser$ | async as user">
   <div class="container" *ngIf="statistics != null">
     <div class="row">
       <!-- Reports section -->
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-lg-6 col-xxl-3">
+      <div class="col-md-6 col-lg-6 col-xxl-3" *ngIf="user.roles?.includes('Admin')">
         <!-- Phần 1 -->
         <div class="card info-card sales-card">
           <div class="card-body">

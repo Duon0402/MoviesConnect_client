@@ -1,3 +1,4 @@
+import { AccountService } from './../../_services/account.service';
 import { Component, OnInit } from '@angular/core';
 import {
   ProxiesService,
@@ -12,7 +13,7 @@ import {
 export class AdminDashboardComponent implements OnInit {
   statistics!: StatisticsDto;
 
-  constructor(private _service: ProxiesService) {}
+  constructor(private _service: ProxiesService, public accountService: AccountService) {}
 
   ngOnInit(): void {
     this.loadStatistics();
