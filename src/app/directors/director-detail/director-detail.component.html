@@ -1,0 +1,40 @@
+
+
+<div class="card">
+  <div *ngIf="director" class="card-body mt-3">
+    <div class="row">
+      <div class="col-md-3">
+        <img
+          class="img img-fluid m-2"
+          src="{{ director.directorImage?.url }}"
+          alt="{{ director.name }}"
+        />
+      </div>
+      <div class="col-md-7">
+        <div class="d-flex justify-content-between">
+          <h1>{{ director.name }}</h1>
+        </div>
+        <p class="text-muted">
+          <strong>Date Of Birth:</strong>
+          {{ director.dateOfBirth | date : "dd/MM/yyyy" }}
+        </p>
+        <div class="description-scroll">
+          <p class="text-muted">
+            <strong>Summary:</strong> {{ director.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Top Movie Of Director</h5>
+    <div class="row">
+      <div class="col">
+        <app-movie-carousel [movieParams]="topMovies" [id]="'topMovies'"></app-movie-carousel>
+      </div>
+    </div>
+  </div>
+</div>

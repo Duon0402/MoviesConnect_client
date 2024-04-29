@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">Your Watchlist</h4>
-    <div class="text-center" *ngIf="!movies || movies.length === 0">
+    <div class="alert alert-warning text-center mt-" *ngIf="!movies || movies.length === 0" role="alert">
       <span>Nothing in your watchlist.</span>
       <a class="btn btn-link" routerLink="/movies">Explore Movies</a>
     </div>

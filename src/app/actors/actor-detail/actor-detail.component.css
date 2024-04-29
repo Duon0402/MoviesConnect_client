@@ -1,0 +1,4 @@
+.description-scroll {
+  max-height: 200px; /* Đặt chiều cao tối đa của phần mô tả */
+  overflow-y: auto; /* Kích hoạt thanh cuộn dọc khi phần mô tả vượt quá chiều cao tối đa */
+}

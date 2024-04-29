@@ -3,6 +3,8 @@ import { MemberService } from './../../_services/member.service';
 import { RatingListComponent } from './../ratings/rating-list/rating-list.component';
 import {
   AccountOutputDto,
+  ActorOutputDto,
+  DirectorOutputDto,
   MovieOutputDto,
   RatingOutputDto,
 } from './../../../shared/service-proxies/proxies.service';
@@ -32,6 +34,10 @@ export class MovieDetailComponent implements OnInit {
   ratings!: RatingOutputDto[];
   ratingParams?: RatingParams;
   currentUser!: AccountOutputDto | null;
+  actors!: ActorOutputDto[];
+  movieId!: any
+  director!: DirectorOutputDto
+  directorId!: any;
 
   constructor(
     private _service: ProxiesService,
@@ -45,16 +51,22 @@ export class MovieDetailComponent implements OnInit {
   ) {
     this.accountService.currentUser$
     .pipe(take(1))
-    .subscribe((currentUser) => (this.currentUser = currentUser));
+    .subscribe((currentUser) => (this.currentUser = currentUser)
+  );
+
+    this.movieId = Number(this.route.snapshot.paramMap.get('id'));
   }
   ngOnInit(): void {
     this.loadMovie();
+    // this.loadActors();
   }
 
   loadMovie() {
     const movieId = Number(this.route.snapshot.paramMap.get('id'));
     this._service.getMovieById(movieId).subscribe((response) => {
       this.movie = response;
+      this.director = this.movie.director as any
+      this.actors = this.movie.actors as any
     });
   }
 
@@ -156,4 +168,11 @@ export class MovieDetailComponent implements OnInit {
       }
     });
   }
+
+  // loadActors() {
+  //   const movieId = Number(this.route.snapshot.paramMap.get('id'));
+  //   this._service.getListActorsByMovieId(movieId).subscribe(result => {
+  //     this.actors = result;
+  //   })
+  // }
 }

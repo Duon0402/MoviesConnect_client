@@ -63,6 +63,14 @@ import { AdminDirectorCreateOrEditComponent } from './admin/admin-directors/admi
 import { MemberPointComponent } from './members/member-edit/member-point/member-point.component';
 import { MemberVoucherComponent } from './members/member-edit/member-voucher/member-voucher.component';
 import { MemberRedeemPointsComponent } from './members/member-edit/member-redeem-points/member-redeem-points.component';
+import { ActorDetailComponent } from './actors/actor-detail/actor-detail.component';
+import { ActorCardComponent } from './actors/actor-card/actor-card.component';
+import { ActorCarouselComponent } from './actors/actor-carousel/actor-carousel.component';
+import { DirectorCardComponent } from './directors/director-card/director-card.component';
+import { DirectorCarouselComponent } from './directors/director-carousel/director-carousel.component';
+import { DirectorDetailComponent } from './directors/director-detail/director-detail.component';
+import { DirectorListComponent } from './directors/director-list/director-list.component';
+import { ActorListComponent } from './actors/actor-list/actor-list.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +127,15 @@ import { MemberRedeemPointsComponent } from './members/member-edit/member-redeem
     AdminDirectorCreateOrEditComponent,
     MemberPointComponent,
     MemberVoucherComponent,
-    MemberRedeemPointsComponent
+    MemberRedeemPointsComponent,
+    ActorDetailComponent,
+    ActorCardComponent,
+    ActorCarouselComponent,
+    DirectorCardComponent,
+    DirectorCarouselComponent,
+    DirectorDetailComponent,
+    DirectorListComponent,
+    ActorListComponent,
     ],
   imports: [
     BrowserModule,

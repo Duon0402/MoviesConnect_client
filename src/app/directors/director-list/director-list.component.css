@@ -1,0 +1,5 @@
+.director-container{
+  max-height: 500px;
+  min-height: 300px;
+  overflow-y: auto;
+}

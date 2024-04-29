@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Actors</h4>
+
+    <!-- Tìm kiếm -->
+    <div class="col-md-12 mb-3">
+      <input
+        matInput
+        type="text"
+        class="form-control"
+        id="filter"
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Search Actors"
+      />
+    </div>
+    <div class="row actors-container">
+      <div class="col-lg-2" *ngFor="let actor of filteredActors">
+        <app-actor-card [actor]="actor"></app-actor-card>
+      </div>
+    </div>
+  </div>
+</div>

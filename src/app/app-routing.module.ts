@@ -27,6 +27,10 @@ import { MovieRecommendComponent } from './movies/movie-recommend/movie-recommen
 import { AdminActorsComponent } from './admin/admin-actors/admin-actors.component';
 import { AdminDirectorsComponent } from './admin/admin-directors/admin-directors.component';
 import { MemberRedeemPointsComponent } from './members/member-edit/member-redeem-points/member-redeem-points.component';
+import { ActorDetailComponent } from './actors/actor-detail/actor-detail.component';
+import { DirectorDetailComponent } from './directors/director-detail/director-detail.component';
+import { DirectorListComponent } from './directors/director-list/director-list.component';
+import { ActorListComponent } from './actors/actor-list/actor-list.component';
 const routes: Routes = [
   {
     path: '',
@@ -106,10 +110,6 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'redeem',
-        component: MemberRedeemPointsComponent,
-      },
-      {
         path: 'login',
         component: LoginComponent,
       },
@@ -120,6 +120,14 @@ const routes: Routes = [
       // movies
       { path: 'movies', component: MovieListComponent },
       { path: 'movies/:id', component: MovieDetailComponent },
+
+      // actors
+      { path: 'actors', component: ActorListComponent },
+      { path: 'actors/:id', component: ActorDetailComponent },
+
+      // directors
+      { path: 'directors', component: DirectorListComponent},
+      { path: 'directors/:id', component: DirectorDetailComponent}
     ],
   },
 
