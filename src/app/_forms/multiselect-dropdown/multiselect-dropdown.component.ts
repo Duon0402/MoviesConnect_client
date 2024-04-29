@@ -12,6 +12,7 @@ export class MultiselectDropdownComponent implements OnInit {
   @Input() resetFilter: boolean = false;
   @Input() selectedItems: DropdownItem[] = [];
   @Input() singleSelection: boolean = false;
+  @Input() itemsShowLimit: number = 3;
   @Output() selectedItemsChange = new EventEmitter<DropdownItem[]>()
 
   dropdownSettings: IDropdownSettings = {};
@@ -51,7 +52,7 @@ export class MultiselectDropdownComponent implements OnInit {
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: this.itemsShowLimit,
       allowSearchFilter: true,
     };
   }

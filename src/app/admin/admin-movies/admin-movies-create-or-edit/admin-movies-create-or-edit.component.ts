@@ -1,10 +1,12 @@
 import { DropdownItem } from './../../../_models/dropdownItem';
 import { MovieService } from './../../../_services/movie.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
+  ActorInputDto,
   ActorOutputDto,
   CertificationOutputDto,
+  DirectorInputDto,
   DirectorOutputDto,
   GenreOutputDto,
   MovieCreateDto,
@@ -12,6 +14,15 @@ import {
   MovieUpdateDto,
   ProxiesService,
 } from '../../../../shared/service-proxies/proxies.service';
+import { AdminService } from '../../../_services/admin.service';
+import { ToastrService } from 'ngx-toastr';
+import { AdminGenresCreateOrEditComponent } from '../../admin-genres/admin-genres-create-or-edit/admin-genres-create-or-edit.component';
+import { auto } from '@popperjs/core';
+import { ActorService } from '../../../_services/actor.service';
+import { AdminActorCreateOrEditComponent } from '../../admin-actors/admin-actor-create-or-edit/admin-actor-create-or-edit.component';
+import { AdminCertificationsCreateOrEditComponent } from '../../admin-certifications/admin-certifications-create-or-edit/admin-certifications-create-or-edit.component';
+import { DirectorService } from '../../../_services/director.service';
+import { AdminDirectorCreateOrEditComponent } from '../../admin-directors/admin-director-create-or-edit/admin-director-create-or-edit.component';
 
 @Component({
   selector: 'app-admin-movies-create-or-edit',
@@ -36,7 +47,12 @@ export class AdminMoviesCreateOrEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AdminMoviesCreateOrEditComponent>,
     private movieService: MovieService,
-    private _service: ProxiesService
+    private _service: ProxiesService,
+    private adminService: AdminService,
+    private toastr: ToastrService,
+    private dialog: MatDialog,
+    private actorService: ActorService,
+    private directorService: DirectorService
   ) {}
 
   ngOnInit(): void {
@@ -149,9 +165,121 @@ export class AdminMoviesCreateOrEditComponent implements OnInit {
 
   onDirectorSelected(selectedItems: DropdownItem[]) {
     this.movieData.directorId = (selectedItems && selectedItems.length > 0) ? selectedItems[0].item_id : 0;
-}
+  }
 
   onCertifiSelected(selectedItems: DropdownItem[]) {
     this.movieData.certificationId = (selectedItems && selectedItems.length > 0) ? selectedItems[0].item_id : 0;
   }
+
+  openCreateGenre(genreId?: any) {
+    const dialogRef = this.dialog.open(AdminGenresCreateOrEditComponent, {
+      width: '400px',
+      height: auto,
+      data: { genreId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.createGenre( result.genreData);
+      }
+    });
+  }
+
+  createGenre(genreData: any) {
+    this.adminService.createGenre(genreData).subscribe(() => {
+      this.toastr.success('Create genre successful');
+      this.loadGenres();
+    })
+  }
+
+  createOrEditActor(actorData: ActorInputDto, actorId?: number, file?: File) {
+    this.actorService.createOrEditActor(actorData, actorId).subscribe((result) => {
+      if(file != null && result != null) {
+        this.actorService.changeActorImage(file, result).subscribe(() => {
+          this.loadActors();
+        })
+      }
+      const message = actorData ? 'Edit' : 'Create';
+      this.toastr.success(`${message} actor successful`);
+      this.loadActors();
+    })
+  }
+
+  openCreateOrEditActorDialog(actorId?: any) {
+    const dialogRef = this.dialog.open(AdminActorCreateOrEditComponent, {
+      width: '800px',
+      height: auto,
+      data: { actorId: actorId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        if(result.file) {
+          this.createOrEditActor(result.actorData, result.actorId, result.file);
+        }
+        else {
+          this.createOrEditActor(result.actorData, result.actorId);
+        }
+      }
+    });
+  }
+
+  openCreateOrEditCertiDialog(certiId?: any): void {
+    const dialogRef = this.dialog.open(AdminCertificationsCreateOrEditComponent, {
+      width: '400px',
+      height: auto,
+      data: { certiId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.createOrEditCerti(result.certiId, result.certiData);
+      }
+    });
+  }
+
+  createOrEditCerti(certiId: number, certiData: any) {
+    this.adminService.createOrEditCerti(certiData, certiId).subscribe(() => {
+      const message = certiId ? 'Edit' : 'Create';
+      this.toastr.success(`${message} certification successful`);
+      this.loadCertifis();
+    })
+  }
+
+  createOrEditDirector(directorData: DirectorInputDto, directorId?: number, file?: File) {
+    this.directorService.createOrEditDirector(directorData, directorId).subscribe((result) => {
+      if(file != null && result != null) {
+        this.directorService.changeDirectorImage(file, result).subscribe(() => {
+          this.loadDirectors();
+        })
+      }
+      const message = directorData ? 'Edit' : 'Create';
+      this.toastr.success(`${message} director successful`);
+      this.loadDirectors();
+    })
+  }
+
+  openCreateOrEditDialog(directorId?: any) {
+    const dialogRef = this.dialog.open(AdminDirectorCreateOrEditComponent, {
+      width: '800px',
+      height: auto,
+      data: { directorId: directorId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        if(result.file) {
+          this.createOrEditDirector(result.directorData, result.directorId, result.file);
+        }
+        else {
+          this.createOrEditDirector(result.directorData, result.directorId);
+        }
+      }
+    });
+  }
 }
+
+
+
+
+

@@ -93,11 +93,12 @@
         [dropdownList]="actors"
         [selectedItems]="selectedActors"
         (selectedItemsChange)="onActorsSelected($event)"
+        [itemsShowLimit] = "4"
       >
       </app-multiselect-dropdown>
     </div>
     <div class="col-sm-1 d-flex justify-content-end">
-      <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+      <button type="button" class="btn btn-outline-primary" (click)="openCreateOrEditActorDialog(null)"><i class="bi bi-plus"></i></button>
     </div>
   </div>
 
@@ -109,11 +110,12 @@
           [selectedItems]="selectedDirector"
           (selectedItemsChange)="onDirectorSelected($event)"
           [singleSelection]="true"
+          [itemsShowLimit] = "4"
         >
         </app-multiselect-dropdown>
       </div>
       <div class="col-sm-1 d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+        <button type="button" class="btn btn-outline-primary" (click)="openCreateOrEditDialog(null)"><i class="bi bi-plus"></i></button>
       </div>
     </div>
 
@@ -123,12 +125,13 @@
         <app-multiselect-dropdown
           [dropdownList]="genres"
           [selectedItems]="selectedGenres"
+          [itemsShowLimit] = "4"
           (selectedItemsChange)="onGenresSelected($event)"
         >
         </app-multiselect-dropdown>
       </div>
       <div class="col-sm-1 d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+        <button type="button" class="btn btn-outline-primary" (click)="openCreateGenre(null)"><i class="bi bi-plus"></i></button>
       </div>
     </div>
 
@@ -142,11 +145,12 @@
           [selectedItems]="selectedCertifi"
           (selectedItemsChange)="onCertifiSelected($event)"
           [singleSelection]="true"
+          [itemsShowLimit] = "4"
         >
         </app-multiselect-dropdown>
       </div>
       <div class="col-sm-1 d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+        <button type="button" class="btn btn-outline-primary" (click)="openCreateOrEditCertiDialog(null)"><i class="bi bi-plus"></i></button>
       </div>
     </div>
 

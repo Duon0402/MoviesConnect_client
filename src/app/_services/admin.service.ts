@@ -100,7 +100,6 @@ export class AdminService {
     return this.http.put(this.baseUrl + 'Admin/UpdateRatingStatus?userId=' + userId + '&movieId=' + movieId, {});
   }
 
-
   loadRating(userId: number, movieId: number) {
     return this.http.get(this.baseUrl + 'Admin/GetRatingForHandle?userId=' + userId + '&movieId=' + movieId,);
   }
@@ -115,6 +114,10 @@ export class AdminService {
     else {
       return this.http.put(this.baseUrl + 'Genre/UpdateGenre/' + genreId , model);
     }
+  }
+
+  createGenre(model: any) {
+    return this.http.post(this.baseUrl + 'Genre/CreateGenre', model);
   }
 
   deleteGenre(genreId: number) {
