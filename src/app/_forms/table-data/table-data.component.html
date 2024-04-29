@@ -23,7 +23,7 @@
         </ng-container>
         <ng-template #dateColumn>
           <ng-container *ngIf="column.dateColumn; else defaultFormat">
-            {{ element[column.displayedColumn] | dateFormat }}
+            {{ element[column.displayedColumn] | date:'dd/MM/yyyy HH:mm:ss' }}
           </ng-container>
         </ng-template>
         <ng-template #defaultFormat>

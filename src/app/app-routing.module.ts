@@ -24,6 +24,9 @@ import { AdminReportsComponent } from './admin/admin-reports/admin-reports.compo
 import { AdminCertificationsComponent } from './admin/admin-certifications/admin-certifications.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { MovieRecommendComponent } from './movies/movie-recommend/movie-recommend.component';
+import { AdminActorsComponent } from './admin/admin-actors/admin-actors.component';
+import { AdminDirectorsComponent } from './admin/admin-directors/admin-directors.component';
+import { MemberRedeemPointsComponent } from './members/member-edit/member-redeem-points/member-redeem-points.component';
 const routes: Routes = [
   {
     path: '',
@@ -87,6 +90,14 @@ const routes: Routes = [
             path: 'reports',
             component: AdminReportsComponent,
           },
+          {
+            path: 'actors',
+            component: AdminActorsComponent,
+          },
+          {
+            path: 'directors',
+            component: AdminDirectorsComponent,
+          },
         ],
       },
     ],
@@ -94,6 +105,10 @@ const routes: Routes = [
   {
     path: '',
     children: [
+      {
+        path: 'redeem',
+        component: MemberRedeemPointsComponent,
+      },
       {
         path: 'login',
         component: LoginComponent,

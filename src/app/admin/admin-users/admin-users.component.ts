@@ -16,6 +16,7 @@ export class AdminUsersComponent implements OnInit{
     { displayedColumn: 'avatar', header: 'Avatar', imageColumn: true, dateColumn: false},
     { displayedColumn: 'gender', header: 'Gender' },
     { displayedColumn: 'dateOfBirth', header: 'Date Of Birth', dateColumn: true },
+    { displayedColumn: 'contributionPoints', header: 'Points' },
     { displayedColumn: 'isPrivate', header: 'Is Private' },
   ];
 

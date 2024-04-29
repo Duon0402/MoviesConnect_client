@@ -1,0 +1,14 @@
+<div class="card-body">
+  <div>
+    <h5 class="mt-3">Point Transaction History</h5>
+    <span class="btn btn-close" (click)="closeDialog()"></span>
+  </div>
+  <div class="point-container mt-3">
+    <app-table-data
+      [tableColumns]="tableColumns"
+      [tableData]="tableData"
+    >
+    </app-table-data>
+  </div>
+
+</div>

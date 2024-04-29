@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-between">
+  <span>Your Points: {{memberPoints}}</span>
+  <div class="btn btn-outline-success" (click)="openConvertPointsToVoucherDialog()">
+    <i class="bi bi-currency-exchange me-1"></i> <Span>Redeem Points</Span>
+  </div>
+</div>
+<hr>
+<div class="d-flex justify-content-between">
+  <span>Your Vouchers</span>
+  <div class="btn btn-outline-secondary" (click)="openPointTransactionHistoryDialog()">
+    <i class="bi bi-clock-history me-1"></i> <Span>Points History</Span>
+  </div>
+</div>
+<div class="voucher-container mt-3">
+  <app-table-data
+    [tableColumns]="tableColumns"
+    [tableData]="tableData"
+    (rowSelected)="onRowSelected($event)"
+  >
+  </app-table-data>
+</div>
+

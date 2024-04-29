@@ -33,4 +33,8 @@ export class MemberService {
   createReport(model: any) {
     return this.http.post(this.baseUrl + 'Report/CreateReport', model);
   }
+
+  convertPointToVoucher(model: any) {
+    return this.http.post(this.baseUrl + 'User/ConvertPointToVoucher', model);
+  }
 }

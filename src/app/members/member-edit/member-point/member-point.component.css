@@ -1,0 +1,11 @@
+.point-container{
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+.btn-close {
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

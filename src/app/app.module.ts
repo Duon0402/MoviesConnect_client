@@ -56,6 +56,13 @@ import { FooterComponent } from './footer/footer.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { MovieRecommendComponent } from './movies/movie-recommend/movie-recommend.component';
 import { AdminCertificationsCreateOrEditComponent } from './admin/admin-certifications/admin-certifications-create-or-edit/admin-certifications-create-or-edit.component';
+import { AdminActorsComponent } from './admin/admin-actors/admin-actors.component';
+import { AdminActorCreateOrEditComponent } from './admin/admin-actors/admin-actor-create-or-edit/admin-actor-create-or-edit.component';
+import { AdminDirectorsComponent } from './admin/admin-directors/admin-directors.component';
+import { AdminDirectorCreateOrEditComponent } from './admin/admin-directors/admin-director-create-or-edit/admin-director-create-or-edit.component';
+import { MemberPointComponent } from './members/member-edit/member-point/member-point.component';
+import { MemberVoucherComponent } from './members/member-edit/member-voucher/member-voucher.component';
+import { MemberRedeemPointsComponent } from './members/member-edit/member-redeem-points/member-redeem-points.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +112,14 @@ import { AdminCertificationsCreateOrEditComponent } from './admin/admin-certific
     AdminDashboardComponent,
     MovieRecommendComponent,
     AdminGenresCreateOrEditComponent,
-    AdminCertificationsCreateOrEditComponent
+    AdminCertificationsCreateOrEditComponent,
+    AdminActorsComponent,
+    AdminActorCreateOrEditComponent,
+    AdminDirectorsComponent,
+    AdminDirectorCreateOrEditComponent,
+    MemberPointComponent,
+    MemberVoucherComponent,
+    MemberRedeemPointsComponent
     ],
   imports: [
     BrowserModule,

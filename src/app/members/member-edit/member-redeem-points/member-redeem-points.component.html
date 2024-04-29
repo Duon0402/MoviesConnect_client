@@ -1,0 +1,31 @@
+<div class="card-body">
+  <div>
+    <h5 class="mt-3">Redeem Points</h5>
+    <span class="btn btn-close" (click)="closeDialog()"></span>
+  </div>
+  <div class="dashboard">
+    <div class="row justify-content-center">
+      <div class="col-md-4 col-lg-4 col-xxl-3" *ngFor="let voucher of vouchers; let i = index"
+           [class.selected-card]="isSelected === i" (click)="onCardClick(i)">
+        <div class="card info-card revenue-card mt-4">
+          <div class="card-body">
+            <h5 class="card-title">Voucher <span>| {{ voucher.points }} points</span></h5>
+            <div class="d-flex align-items-center">
+              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-currency-dollar"></i>
+              </div>
+              <div class="ps-3">
+                <h6>${{ voucher.value }}</h6>
+                <span class="text-success small pt-1 fw-bold">7</span>
+                <span class="text-muted small pt-2 ps-1">days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <button class="btn btn-primary" [disabled]="isSelected === null" (click)="openConfirmDialog()">Redeem</button>
+      </div>
+    </div>
+  </div>
+</div>

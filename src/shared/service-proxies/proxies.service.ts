@@ -1520,7 +1520,7 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getListDirectors(): Observable<DirectorOutputDto> {
+    getListDirectors(): Observable<DirectorOutputDto[]> {
         let url_ = this.baseUrl + "/api/Director/GetListDirectors";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1539,14 +1539,14 @@ export class ProxiesService {
                 try {
                     return this.processGetListDirectors(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<DirectorOutputDto>;
+                    return _observableThrow(e) as any as Observable<DirectorOutputDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<DirectorOutputDto>;
+                return _observableThrow(response_) as any as Observable<DirectorOutputDto[]>;
         }));
     }
 
-    protected processGetListDirectors(response: HttpResponseBase): Observable<DirectorOutputDto> {
+    protected processGetListDirectors(response: HttpResponseBase): Observable<DirectorOutputDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1556,7 +1556,7 @@ export class ProxiesService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as DirectorOutputDto;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as DirectorOutputDto[];
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1570,7 +1570,7 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getListMoviesByDirectorId(directorId: number): Observable<DirectorOutputDto> {
+    getListMoviesByDirectorId(directorId: number): Observable<MovieOutputDto[]> {
         let url_ = this.baseUrl + "/api/Director/GetListMoviesByDirectorId/{directorId}";
         if (directorId === undefined || directorId === null)
             throw new Error("The parameter 'directorId' must be defined.");
@@ -1592,14 +1592,14 @@ export class ProxiesService {
                 try {
                     return this.processGetListMoviesByDirectorId(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<DirectorOutputDto>;
+                    return _observableThrow(e) as any as Observable<MovieOutputDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<DirectorOutputDto>;
+                return _observableThrow(response_) as any as Observable<MovieOutputDto[]>;
         }));
     }
 
-    protected processGetListMoviesByDirectorId(response: HttpResponseBase): Observable<DirectorOutputDto> {
+    protected processGetListMoviesByDirectorId(response: HttpResponseBase): Observable<MovieOutputDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1609,7 +1609,7 @@ export class ProxiesService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as DirectorOutputDto;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as MovieOutputDto[];
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1621,19 +1621,14 @@ export class ProxiesService {
     }
 
     /**
-     * @param dirctorId (optional) 
      * @param file (optional) 
      * @return Success
      */
-    setDirectorImage(actorId: string, dirctorId?: number | undefined, file?: FileParameter | undefined): Observable<DirectorImage> {
-        let url_ = this.baseUrl + "/api/Director/SetDirectorImage/{actorId}?";
-        if (actorId === undefined || actorId === null)
-            throw new Error("The parameter 'actorId' must be defined.");
-        url_ = url_.replace("{actorId}", encodeURIComponent("" + actorId));
-        if (dirctorId === null)
-            throw new Error("The parameter 'dirctorId' cannot be null.");
-        else if (dirctorId !== undefined)
-            url_ += "dirctorId=" + encodeURIComponent("" + dirctorId) + "&";
+    setDirectorImage(directorId: number, file?: FileParameter | undefined): Observable<DirectorImage> {
+        let url_ = this.baseUrl + "/api/Director/SetDirectorImage/{directorId}";
+        if (directorId === undefined || directorId === null)
+            throw new Error("The parameter 'directorId' must be defined.");
+        url_ = url_.replace("{directorId}", encodeURIComponent("" + directorId));
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = new FormData();
@@ -3199,11 +3194,8 @@ export class ProxiesService {
     /**
      * @return Success
      */
-    getListPointTransactions(userId: string): Observable<PointTransactionOutputDto[]> {
-        let url_ = this.baseUrl + "/api/User/GetListPointTransactions/{userId}";
-        if (userId === undefined || userId === null)
-            throw new Error("The parameter 'userId' must be defined.");
-        url_ = url_.replace("{userId}", encodeURIComponent("" + userId));
+    getListPointTransactions(): Observable<PointTransactionOutputDto[]> {
+        let url_ = this.baseUrl + "/api/User/GetListPointTransactions";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -3250,22 +3242,21 @@ export class ProxiesService {
     }
 
     /**
-     * @param points (optional) 
+     * @param body (optional) 
      * @return Success
      */
-    convertPointToVoucher(points?: number | undefined): Observable<Voucher> {
-        let url_ = this.baseUrl + "/api/User/ConvertPointToVoucher?";
-        if (points === null)
-            throw new Error("The parameter 'points' cannot be null.");
-        else if (points !== undefined)
-            url_ += "points=" + encodeURIComponent("" + points) + "&";
+    convertPointToVoucher(body?: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/User/ConvertPointToVoucher";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(body);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "text/plain"
+                "Content-Type": "application/json",
             })
         };
 
@@ -3276,14 +3267,62 @@ export class ProxiesService {
                 try {
                     return this.processConvertPointToVoucher(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<Voucher>;
+                    return _observableThrow(e) as any as Observable<void>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<Voucher>;
+                return _observableThrow(response_) as any as Observable<void>;
         }));
     }
 
-    protected processConvertPointToVoucher(response: HttpResponseBase): Observable<Voucher> {
+    protected processConvertPointToVoucher(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return _observableOf(null as any);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @return Success
+     */
+    getListVoucherByUserId(): Observable<VoucherOutputDto[]> {
+        let url_ = this.baseUrl + "/api/User/GetListVoucherByUserId";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetListVoucherByUserId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetListVoucherByUserId(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<VoucherOutputDto[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<VoucherOutputDto[]>;
+        }));
+    }
+
+    protected processGetListVoucherByUserId(response: HttpResponseBase): Observable<VoucherOutputDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -3293,7 +3332,7 @@ export class ProxiesService {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
-            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as Voucher;
+            result200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver) as VoucherOutputDto[];
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -3743,6 +3782,8 @@ export interface MovieCreateDto {
     status?: string | undefined;
     certificationId?: number;
     genreIds?: number[] | undefined;
+    directorId?: number;
+    actorIds?: number[] | undefined;
 }
 
 export interface MovieGenre {
@@ -3777,6 +3818,8 @@ export interface MovieUpdateDto {
     status?: string | undefined;
     certificationId?: number;
     genreIds?: number[] | undefined;
+    directorId?: number;
+    actorIds?: number[] | undefined;
 }
 
 export interface PointTransaction {
@@ -3874,6 +3917,13 @@ export interface Voucher {
     expiryDate?: Date;
     userId?: number;
     user?: AppUser;
+}
+
+export interface VoucherOutputDto {
+    id?: number;
+    code?: string | undefined;
+    value?: number;
+    expiryDate?: Date;
 }
 
 export interface Watchlist {

@@ -127,6 +127,11 @@
                 </form>
               </div>
             </tab>
+            <tab heading="Vouchers" (selectTab)="onTabActivated($event)">
+              <div class="tab-content p-3">
+                <app-member-voucher></app-member-voucher>
+              </div>
+            </tab>
             <tab heading="Change Password" (selectTab)="onTabActivated($event)">
               <div class="tab-content p-3">
                 <app-change-password></app-change-password>

@@ -1,0 +1,13 @@
+.card:hover {
+  cursor: pointer;
+}
+.btn-close {
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.selected-card {
+  background-color: #cce5ff;
+}
