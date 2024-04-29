@@ -6,6 +6,8 @@ export class MoviesParams {
   status?: string;
   certificationId?: number[];
   genreId?: number[];
+  actorId?: number[];
+  directorId?: number[];
   purpose?: string;
   maxRating?: number;
   minRating?: number;

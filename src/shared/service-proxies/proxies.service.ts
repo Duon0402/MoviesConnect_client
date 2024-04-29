@@ -2331,12 +2331,14 @@ export class ProxiesService {
      * @param pageSize (optional) 
      * @param certificationId (optional) 
      * @param genreId (optional) 
+     * @param actorId (optional) 
+     * @param directorId (optional) 
      * @param purpose (optional) 
      * @param minRating (optional) 
      * @param maxRating (optional) 
      * @return Success
      */
-    getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, purpose?: string | undefined, minRating?: number | undefined, maxRating?: number | undefined): Observable<ListMoviesOutputDto[]> {
+    getListMovies(keyword?: string | undefined, orderBy?: string | undefined, sortOrder?: string | undefined, status?: string | undefined, pageSize?: number | undefined, certificationId?: number[] | undefined, genreId?: number[] | undefined, actorId?: number[] | undefined, directorId?: number[] | undefined, purpose?: string | undefined, minRating?: number | undefined, maxRating?: number | undefined): Observable<ListMoviesOutputDto[]> {
         let url_ = this.baseUrl + "/api/Movie/GetListMovies?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -2366,6 +2368,14 @@ export class ProxiesService {
             throw new Error("The parameter 'genreId' cannot be null.");
         else if (genreId !== undefined)
             genreId && genreId.forEach(item => { url_ += "GenreId=" + encodeURIComponent("" + item) + "&"; });
+        if (actorId === null)
+            throw new Error("The parameter 'actorId' cannot be null.");
+        else if (actorId !== undefined)
+            actorId && actorId.forEach(item => { url_ += "ActorId=" + encodeURIComponent("" + item) + "&"; });
+        if (directorId === null)
+            throw new Error("The parameter 'directorId' cannot be null.");
+        else if (directorId !== undefined)
+            directorId && directorId.forEach(item => { url_ += "DirectorId=" + encodeURIComponent("" + item) + "&"; });
         if (purpose === null)
             throw new Error("The parameter 'purpose' cannot be null.");
         else if (purpose !== undefined)
@@ -3717,7 +3727,7 @@ export interface ListMoviesOutputDto {
     averageRating?: number;
     totalRatings?: number;
     isInWatchList?: boolean;
-    bannerOutput?: BannerDto;
+    banner?: BannerDto;
 }
 
 export interface LoginDto {

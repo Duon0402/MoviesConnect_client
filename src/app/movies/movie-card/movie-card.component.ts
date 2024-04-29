@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
   styleUrl: './movie-card.component.css',
 })
 export class MovieCardComponent {
-  @Input() movie!: ListMoviesOutputDto;
+  @Input() movie!: any;
   @Input() isShow: boolean = true;
   currentUser!: AccountOutputDto | null;
   watchlistMovies: ListMoviesOutputDto[] = [];
@@ -28,7 +28,8 @@ export class MovieCardComponent {
     private accountService: AccountService,
     private dialog: MatDialog,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private _service: ProxiesService
   ) {
     this.accountService.currentUser$.pipe(take(1)).subscribe((currentUser) => {
       this.currentUser = currentUser;
@@ -69,7 +70,14 @@ export class MovieCardComponent {
     this.movieService
       .addOrEditRating(this.movie.id, ratingData)
       .subscribe(() => {
+        this.loadMovie(this.movie.id)
         this.toastr.success('Rating Successfuly');
       });
+  }
+
+  loadMovie(movieId: any) {
+    this._service.getMovieById(movieId).subscribe(result => {
+      this.movie = result;
+    })
   }
 }

@@ -73,12 +73,34 @@
               </div>
             </div>
             <div class="form-group row mt-3">
-              <label for="genres" class="col-sm-4 col-form-label">Certifications</label>
+              <label for="certifications" class="col-sm-4 col-form-label">Certifications</label>
               <div class="col-sm-8">
                 <app-multiselect-dropdown
                   [dropdownList]="certifs"
                   [selectedItems]="selectedItems"
                   (selectedItemsChange)="onCertifisSelected($event)">
+                </app-multiselect-dropdown>
+              </div>
+            </div>
+
+            <div class="form-group row mt-3">
+              <label for="certifications" class="col-sm-4 col-form-label">Actors</label>
+              <div class="col-sm-8">
+                <app-multiselect-dropdown
+                  [dropdownList]="actors"
+                  [selectedItems]="selectedItems"
+                  (selectedItemsChange)="onActorsSelected($event)">
+                </app-multiselect-dropdown>
+              </div>
+            </div>
+
+            <div class="form-group row mt-3">
+              <label for="certifications" class="col-sm-4 col-form-label">Directors</label>
+              <div class="col-sm-8">
+                <app-multiselect-dropdown
+                  [dropdownList]="directors"
+                  [selectedItems]="selectedItems"
+                  (selectedItemsChange)="onDirectorsSelected($event)">
                 </app-multiselect-dropdown>
               </div>
             </div>

@@ -28,6 +28,8 @@ export class MovieService {
       params.pageSize,
       params.certificationId,
       params.genreId,
+      params.actorId,
+      params.directorId,
       params.purpose,
       params.minRating,
       params.maxRating,
