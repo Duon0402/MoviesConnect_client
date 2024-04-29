@@ -1,6 +1,6 @@
 <div class="card-body">
   <h5 class="card-title">{{ data.movieId ? "Edit Movie" : "Create Movie" }}</h5>
-  <form #movieForm="ngForm">
+  <form #movieForm="ngForm" class="form-container">
     <div class="row mb-3">
       <label for="inputText" class="col-sm-2 col-form-label">Title</label>
       <div class="col-sm-10">
@@ -86,33 +86,67 @@
       </div>
     </div>
 
-    <div class="row mb-3">
-      <label for="certifications" class="col-sm-2 col-form-label"
-        >Certifications</label
+  <div class="row mb-3 align-items-center">
+    <label for="actors" class="col-sm-2 col-form-label">Actors</label>
+    <div class="col-sm-9">
+      <app-multiselect-dropdown
+        [dropdownList]="actors"
+        [selectedItems]="selectedActors"
+        (selectedItemsChange)="onActorsSelected($event)"
       >
-      <div class="col-sm-10">
-        <select
-          class="form-select"
-          [(ngModel)]="movieData.certificationId"
-          name="certifications"
-          required="true"
+      </app-multiselect-dropdown>
+    </div>
+    <div class="col-sm-1 d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+    </div>
+  </div>
+
+    <div class="row mb-3 align-items-center">
+      <label for="director" class="col-sm-2 col-form-label">Director</label>
+      <div class="col-sm-9">
+        <app-multiselect-dropdown
+          [dropdownList]="directors"
+          [selectedItems]="selectedDirector"
+          (selectedItemsChange)="onDirectorSelected($event)"
+          [singleSelection]="true"
         >
-          <option *ngFor="let certifi of certifis" [value]="certifi.id">
-            {{ certifi.name }}
-          </option>
-        </select>
+        </app-multiselect-dropdown>
+      </div>
+      <div class="col-sm-1 d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+      </div>
+    </div>
+
+    <div class="row mb-3 align-items-center">
+      <label for="genres" class="col-sm-2 col-form-label">Genres</label>
+      <div class="col-sm-9">
+        <app-multiselect-dropdown
+          [dropdownList]="genres"
+          [selectedItems]="selectedGenres"
+          (selectedItemsChange)="onGenresSelected($event)"
+        >
+        </app-multiselect-dropdown>
+      </div>
+      <div class="col-sm-1 d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
       </div>
     </div>
 
     <div class="row mb-3">
-      <label for="genres" class="col-sm-2 col-form-label">Genres</label>
-      <div class="col-sm-10">
+      <label for="certifications" class="col-sm-2 col-form-label"
+        >Certifications</label
+      >
+      <div class="col-sm-9">
         <app-multiselect-dropdown
-          [dropdownList]="genres"
-          [selectedItems]="selectedItems"
-          (selectedItemsChange)="onGenresSelected($event)"
+          [dropdownList]="certifis"
+          [selectedItems]="selectedCertifi"
+          (selectedItemsChange)="onCertifiSelected($event)"
+          [singleSelection]="true"
         >
         </app-multiselect-dropdown>
+      </div>
+      <div class="col-sm-1 d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary"><i class="bi bi-plus"></i></button>
       </div>
     </div>
 

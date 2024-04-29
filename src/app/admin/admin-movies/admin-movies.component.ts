@@ -51,8 +51,8 @@ export class AdminMoviesComponent implements OnInit {
 
   openCreateOrEditDialog(movieId?: any): void {
     const dialogRef = this.dialog.open(AdminMoviesCreateOrEditComponent, {
-      width: '800px',
-      height: auto,
+      width: '80%',
+      maxHeight: '100vh',
       data: { movieId: movieId },
     });
 

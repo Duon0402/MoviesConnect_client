@@ -36,6 +36,7 @@
               "src/assets/img"
             ],
             "styles": [
+              "node_modules/ng-multiselect-dropdown/themes/ng-multiselect-dropdown.theme.scss",
               "src/custom-theme.scss",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",

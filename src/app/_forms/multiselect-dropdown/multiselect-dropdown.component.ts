@@ -11,10 +11,10 @@ export class MultiselectDropdownComponent implements OnInit {
   @Input() dropdownList: DropdownItem[] = [];
   @Input() resetFilter: boolean = false;
   @Input() selectedItems: DropdownItem[] = [];
-  @Output() selectedItemsChange = new EventEmitter<DropdownItem[]>();
+  @Input() singleSelection: boolean = false;
+  @Output() selectedItemsChange = new EventEmitter<DropdownItem[]>()
 
   dropdownSettings: IDropdownSettings = {};
-
 
   ngOnInit() {
     this.initializeDropdownSettings();
@@ -46,12 +46,12 @@ export class MultiselectDropdownComponent implements OnInit {
 
   initializeDropdownSettings() {
     this.dropdownSettings = {
-      singleSelection: false,
+      singleSelection: this.singleSelection,
       idField: 'item_id',
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
-      itemsShowLimit: 2,
+      itemsShowLimit: 3,
       allowSearchFilter: true,
     };
   }
