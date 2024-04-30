@@ -20,7 +20,7 @@
         <div class="certifications" style="min-height: 165px; max-height: 165px; overflow-y: auto;">
           <ul class="list-unstyled text-center">
             <li *ngFor="let certif of certifs">
-              <span class="badge bg-primary mt-3 w-50 h-auto">{{
+              <span class="badge bg-primary mt-3 w-50 h-auto" routerLink="/certis/{{certif.id}}">{{
                 certif.name
               }}</span>
             </li>
@@ -37,7 +37,7 @@
         <div class="genres" style="min-height: 165px; max-height: 165px; overflow-y: auto;">
           <ul class="list-unstyled text-center">
             <li *ngFor="let genre of genres">
-              <span class="badge bg-primary mt-3 w-50 h-auto">{{
+              <span class="badge bg-primary mt-3 w-50 h-auto" routerLink="/genres/{{genre.id}}">{{
                 genre.name
               }}</span>
             </li>

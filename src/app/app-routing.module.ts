@@ -31,6 +31,9 @@ import { ActorDetailComponent } from './actors/actor-detail/actor-detail.compone
 import { DirectorDetailComponent } from './directors/director-detail/director-detail.component';
 import { DirectorListComponent } from './directors/director-list/director-list.component';
 import { ActorListComponent } from './actors/actor-list/actor-list.component';
+import { TernOfUseComponent } from './tern-of-use/tern-of-use.component';
+import { GenreComponent } from './genre/genre.component';
+import { CertiComponent } from './certi/certi.component';
 const routes: Routes = [
   {
     path: '',
@@ -127,7 +130,16 @@ const routes: Routes = [
 
       // directors
       { path: 'directors', component: DirectorListComponent},
-      { path: 'directors/:id', component: DirectorDetailComponent}
+      { path: 'directors/:id', component: DirectorDetailComponent},
+
+      // terms of use
+      { path: 'termsofuse', component: TernOfUseComponent},
+
+      // genres
+      { path: 'genres/:id', component: GenreComponent},
+
+      //certifis
+      { path: 'certis/:id', component: CertiComponent}
     ],
   },
 

@@ -71,6 +71,9 @@ import { DirectorCarouselComponent } from './directors/director-carousel/directo
 import { DirectorDetailComponent } from './directors/director-detail/director-detail.component';
 import { DirectorListComponent } from './directors/director-list/director-list.component';
 import { ActorListComponent } from './actors/actor-list/actor-list.component';
+import { TernOfUseComponent } from './tern-of-use/tern-of-use.component';
+import { GenreComponent } from './genre/genre.component';
+import { CertiComponent } from './certi/certi.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +139,9 @@ import { ActorListComponent } from './actors/actor-list/actor-list.component';
     DirectorDetailComponent,
     DirectorListComponent,
     ActorListComponent,
+    TernOfUseComponent,
+    GenreComponent,
+    CertiComponent,
     ],
   imports: [
     BrowserModule,

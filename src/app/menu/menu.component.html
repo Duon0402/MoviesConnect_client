@@ -2,11 +2,13 @@
   <div class="card-header">
     <h3 class="card-title">Menu</h3>
   </div>
-  <span class="btn btn-close" (click)="closeDialog()"></span>
-  <ul>
-    <li><a routerLink="/actors" (click)="closeDialog()">Actors</a></li>
-    <li><a routerLink="/directors" (click)="closeDialog()">Directors</a></li>
-    <li><a routerLink="/movies" (click)="closeDialog()">Movies</a></li>
-    <li><a routerLink="/member/recommend" (click)="closeDialog()">Recommend Movies</a></li>
+  <button type="button" class="btn-close" aria-label="Close" (click)="closeDialog()"></button>
+  <ul class="list-group list-group-flush mt-3">
+    <li class="list-group-item"><a routerLink="/actors" (click)="closeDialog()">Actors</a></li>
+    <li class="list-group-item"><a routerLink="/directors" (click)="closeDialog()">Directors</a></li>
+    <li class="list-group-item"><a routerLink="/movies" (click)="closeDialog()">Movies</a></li>
+    <li class="list-group-item"><a routerLink="/member/recommend" (click)="closeDialog()">Recommend Movies</a></li>
+    <li class="list-group-item"><a routerLink="/member/watchlist" (click)="closeDialog()">Watchlist</a></li>
+    <li class="list-group-item"><a routerLink="termsofuse" (click)="closeDialog()">Terms Of Use</a></li>
   </ul>
 </div>

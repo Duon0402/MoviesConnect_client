@@ -55,7 +55,7 @@ export class AdminReportHandleComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (true) {
+      if (result === true) {
         this.isViolationRating();
       }
     });
@@ -66,6 +66,28 @@ export class AdminReportHandleComponent {
       movieId: this.report.objectId,
       userId: this.report.objectId2,
       purpose: 'violation'
+    }
+    this.dialogRef.close(rating);
+  }
+
+  openDeleteDialog(): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '300px',
+      height: auto,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.deleteRating();
+      }
+    });
+  }
+
+  deleteRating() {
+    const rating = {
+      movieId: this.report.objectId,
+      userId: this.report.objectId2,
+      purpose: 'delete'
     }
     this.dialogRef.close(rating);
   }

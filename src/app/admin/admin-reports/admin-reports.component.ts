@@ -87,7 +87,12 @@ export class AdminReportsComponent {
 
       dialogRef.afterClosed().subscribe((result: any) => {
         if (result) {
-          this.violationRating(result.movieId, result.userId);
+          if (result.purpose == 'violation') {
+            this.violationRating(result.movieId, result.userId);
+          }
+          if(result.purpose == 'delete') {
+            this.deleteRating(result.movieId, result.userId);
+          }
         }
       });
     }
