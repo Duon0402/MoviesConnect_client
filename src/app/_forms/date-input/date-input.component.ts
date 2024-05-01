@@ -18,7 +18,7 @@ export class DateInputComponent {
   bsConfig: Partial<BsDatepickerConfig> = {
     containerClass: 'theme-red',
     dateInputFormat: 'DD/MM/YYYY',
-    useUtc: true,
+    // useUtc: true,
   }
   maxDate: Date = new Date();;
 }

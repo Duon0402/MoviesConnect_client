@@ -8,7 +8,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './fillter-rating.component.css',
 })
 export class FillterRatingComponent {
-  ratingParams: RatingParams = {};
+  ratingParams: RatingParams = {
+    ratingViolation: false
+  };
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

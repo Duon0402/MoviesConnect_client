@@ -199,7 +199,7 @@ export class AdminMoviesCreateOrEditComponent implements OnInit {
           this.loadActors();
         })
       }
-      const message = actorData ? 'Edit' : 'Create';
+      const message = (actorId != null) ? 'Edit' : 'Create';
       this.toastr.success(`${message} actor successful`);
       this.loadActors();
     })
@@ -209,7 +209,7 @@ export class AdminMoviesCreateOrEditComponent implements OnInit {
     const dialogRef = this.dialog.open(AdminActorCreateOrEditComponent, {
       width: '800px',
       height: auto,
-      data: { actorId: actorId },
+      data: { actorId: actorId, isShow: false },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -253,17 +253,17 @@ export class AdminMoviesCreateOrEditComponent implements OnInit {
           this.loadDirectors();
         })
       }
-      const message = directorData ? 'Edit' : 'Create';
+      const message = (directorId != null) ? 'Edit' : 'Create';
       this.toastr.success(`${message} director successful`);
       this.loadDirectors();
     })
   }
 
-  openCreateOrEditDialog(directorId?: any) {
+  openCreateOrEditDirectorDialog(directorId?: any) {
     const dialogRef = this.dialog.open(AdminDirectorCreateOrEditComponent, {
       width: '800px',
       height: auto,
-      data: { directorId: directorId },
+      data: { directorId: directorId, isShow: false },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

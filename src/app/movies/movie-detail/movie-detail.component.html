@@ -17,7 +17,7 @@
         <div class="summary-scroll">
           <p class="text-muted">
             <strong>Summary:</strong><br />
-            {{ movie.summary }} minutes
+            {{ movie.summary }}
           </p>
         </div>
         <p class="text-muted">
@@ -34,7 +34,7 @@
             <ul class="list-unstyled d-flex flex-wrap">
               <li
                 *ngFor="let genre of movie.genres"
-                class="me-2 badge bg-primary"
+                class="me-2 badge bg-primary" routerLink="/genres/{{genre.id}}"
               >
                 {{ genre.name }}
               </li>
@@ -48,7 +48,7 @@
             (mouseleave)="showCertificationInfo = false"
           >
             <strong>Certification: </strong>
-            <span class="certi me-2 badge bg-primary">{{
+            <span class="certi me-2 badge bg-primary" routerLink="/certis/{{movie.certification.id}}">{{
               movie.certification.name
             }}</span>
             <span *ngIf="showCertificationInfo">

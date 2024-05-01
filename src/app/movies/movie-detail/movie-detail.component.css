@@ -1,7 +1,8 @@
 .banner {
-  width: 450px;
-  height: 450px;
+  width: 500px;
+  height: 500px;
   border: 1px grey solid;
+  padding: 5px;
 }
 .ratings-container {
   max-height: 500px;
@@ -11,4 +12,8 @@
   max-height: 200px;
   overflow-y: auto;
   margin-top: 10px;
+}
+
+.badge {
+  cursor: pointer;
 }

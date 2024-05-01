@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Top Movies of {{ genre.name }} Genre</h5>
+    <h5 class="card-title" *ngIf="genre != null">Top Movies of {{ genre.name }} Genre</h5>
     <div class="row">
       <div class="col">
         <app-movie-carousel [movieParams]="moviesParams" [id]="'genres'"></app-movie-carousel>

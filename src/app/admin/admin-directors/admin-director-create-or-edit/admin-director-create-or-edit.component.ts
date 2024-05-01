@@ -14,6 +14,7 @@ export class AdminDirectorCreateOrEditComponent implements OnInit{
   director: DirectorOutputDto = {};
   selectedItems!: any;
   selectedFile!: File | null;
+  isShow: boolean = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,6 +24,9 @@ export class AdminDirectorCreateOrEditComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    if (this.data.isShow != null ) {
+      this.isShow = this.data.isShow
+    }
     if (this.data.directorId != null) {
       this.loadDirector(this.data.directorId);
     }

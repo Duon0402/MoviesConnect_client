@@ -7,7 +7,7 @@
         </ng-container>
         <ng-template #otherProfile>
           <a [routerLink]="['/members', rating.username]">{{ rating.username | titlecase }}</a>
-          <i class="btn bi bi-three-dots" (click)="openReportFormRating()"></i>
+          <i class="btn bi bi-three-dots" (click)="openReportFormRating(rating.appUserId)"></i>
         </ng-template>
       </div>
       <div class="rating-section">

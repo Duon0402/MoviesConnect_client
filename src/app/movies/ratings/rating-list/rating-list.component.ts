@@ -46,11 +46,11 @@ export class RatingListComponent implements OnInit {
     });
   }
 
-  openReportFormRating(): void {
+  openReportFormRating(userRatingId: any): void {
     const dialogRef = this.dialog.open(ReportFormComponent, {
       width: '800px',
       height: 'auto',
-      data: { objectId: this.movieId, objectId2: this.currentUser?.id, objectType: "Rating" },
+      data: { objectId: this.movieId, objectId2: userRatingId, objectType: "Rating" },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

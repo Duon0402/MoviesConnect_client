@@ -56,4 +56,14 @@ export class MultiselectDropdownComponent implements OnInit {
       allowSearchFilter: true,
     };
   }
+
+  onItemsSelectAll() {
+    this.selectedItems = [...this.dropdownList];
+    this.emitSelectedItems();
+  }
+
+  onItemsDeSelectAll() {
+    this.selectedItems = [];
+    this.emitSelectedItems();
+  }
 }

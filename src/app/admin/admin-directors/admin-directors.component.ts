@@ -18,7 +18,7 @@ export class AdminDirectorsComponent implements OnInit{
     { displayedColumn: 'id', header: 'ID' },
     { displayedColumn: 'name', header: 'Name' },
     { displayedColumn: 'directorImage', header: 'Image', imageColumn: true },
-    { displayedColumn: 'description', header: 'Description' },
+    // { displayedColumn: 'description', header: 'Description' },
     { displayedColumn: 'dateOfBirth', header: 'Date Of Birth', dateColumn: true },
   ];
 
@@ -49,7 +49,7 @@ export class AdminDirectorsComponent implements OnInit{
           this.loadDirectors();
         })
       }
-      const message = directorData ? 'Edit' : 'Create';
+      const message = (directorId != null) ? 'Edit' : 'Create';
       this.toastr.success(`${message} director successful`);
       this.loadDirectors();
     })

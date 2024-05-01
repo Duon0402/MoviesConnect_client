@@ -1,0 +1,5 @@
+.description-textarea {
+  max-height: 400px; /* Đặt chiều cao tối đa ở đây */
+  min-height: 200px;
+  overflow-y: auto; /* Kích hoạt thanh cuộn dọc */
+}

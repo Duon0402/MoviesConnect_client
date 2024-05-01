@@ -18,7 +18,7 @@ export class AdminActorsComponent implements OnInit {
     { displayedColumn: 'id', header: 'ID' },
     { displayedColumn: 'name', header: 'Name' },
     { displayedColumn: 'actorImage', header: 'Image', imageColumn: true },
-    { displayedColumn: 'description', header: 'Description' },
+    // { displayedColumn: 'description', header: 'Description' },
     { displayedColumn: 'dateOfBirth', header: 'Date Of Birth', dateColumn: true },
   ];
 
@@ -49,7 +49,7 @@ export class AdminActorsComponent implements OnInit {
           this.loadActors();
         })
       }
-      const message = actorData ? 'Edit' : 'Create';
+      const message = (actorId != null) ? 'Edit' : 'Create';
       this.toastr.success(`${message} actor successful`);
       this.loadActors();
     })

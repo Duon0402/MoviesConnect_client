@@ -87,7 +87,7 @@ export class MovieListComponent implements OnInit {
           item_text: certif.name || '',
         }));
 
-        this.actors = dropdownItems;
+        this.certifs = dropdownItems;
       });
   }
 
@@ -107,7 +107,7 @@ export class MovieListComponent implements OnInit {
       keyword: '',
       genreId: [],
       maxRating: 5,
-      minRating: 1,
+      minRating: 0,
       status: ''
     };
     this.loadMovies();

@@ -3,6 +3,8 @@
   [data]="dropdownList"
   (onSelect)="onItemSelect($event)"
   (onDeSelect)="onItemDeSelect($event)"
+  (onSelectAll)="onItemsSelectAll()"
+  (onDeSelectAll)="onItemsDeSelectAll()"
   [(ngModel)]="selectedItems"
 >
 </ng-multiselect-dropdown>

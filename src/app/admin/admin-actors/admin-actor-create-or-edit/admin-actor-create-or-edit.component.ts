@@ -14,6 +14,7 @@ export class AdminActorCreateOrEditComponent implements OnInit{
   actor: ActorOutputDto = {};
   selectedItems!: any;
   selectedFile!: File | null;
+  isShow: boolean = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,6 +24,9 @@ export class AdminActorCreateOrEditComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    if (this.data.isShow != null ) {
+      this.isShow = this.data.isShow
+    }
     if (this.data.actorId != null) {
       this.loadActor(this.data.actorId);
     }

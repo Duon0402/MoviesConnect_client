@@ -1,10 +1,10 @@
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Top 10 New Movies</h5>
+    <h5 class="card-title">Top 10 Movies</h5>
     <div class="row">
       <div class="col">
         <app-movie-carousel
-          [movieParams]="newMovies"
+          [movieParams]="topMovies"
           [id]="'newMovies'"
         ></app-movie-carousel>
       </div>
@@ -50,7 +50,7 @@
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Top 10 Old Movie</h5>
+    <h5 class="card-title">Top 10 Movies Comming Soon</h5>
     <div class="row">
       <div class="col">
         <app-movie-carousel

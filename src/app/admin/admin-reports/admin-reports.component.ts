@@ -99,7 +99,7 @@ export class AdminReportsComponent {
     if(this.rowSelected && this.rowSelected.objectType === 'Movie') {
       const dialogRef = this.dialog.open(AdminMoviesCreateOrEditComponent, {
         width: '800px',
-        height: auto,
+        height: '100vh',
         data: { movieId: this.rowSelected.objectId},
       });
 

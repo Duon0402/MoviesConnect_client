@@ -51,6 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               break;
               case 403:
                 this.toastr.error("You do not have permission to access this resource");
+                this.router.navigateByUrl('');
                 break;
             case 404:
               this.router.navigateByUrl('/not-found');

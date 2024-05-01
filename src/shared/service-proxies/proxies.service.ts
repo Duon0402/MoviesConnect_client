@@ -3906,6 +3906,8 @@ export interface ReportUpdateDto {
 
 export interface StatisticsDto {
     totalMovies?: number;
+    totalActors?: number;
+    totalDirectors?: number;
     totalUsers?: number;
     totalReports?: number;
     totalReportUnprocesseds?: number;

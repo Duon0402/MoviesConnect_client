@@ -11,8 +11,8 @@ import { take } from 'rxjs';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit{
-  newMovies: MoviesParams = {
-    orderBy: 'release-date',
+  topMovies: MoviesParams = {
+    orderBy: 'score',
     sortOrder: 'desc',
     status: 'Released',
     pageSize: 10,
@@ -20,10 +20,11 @@ export class HomeComponent implements OnInit{
 
   moviesComimgSoon: MoviesParams = {
     orderBy: 'release-date',
-    sortOrder: 'asc',
-    status: 'Released',
+    sortOrder: 'desc',
+    status: 'Unreleased',
     pageSize: 10,
   };
+
 
   currentUser?: AccountOutputDto | null;
 
