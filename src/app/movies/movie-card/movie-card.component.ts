@@ -43,7 +43,9 @@ export class MovieCardComponent {
   }
 
   removeMovieFromWatchlist(movieId: any) {
-    this.openRatingDialog()
+    if( this.movie != null && this.movie.status == "Released") {
+      this.openRatingDialog();
+    }
     this.movieService.removeMovieFromWatchlist(movieId).subscribe(() => {
       this.movie.isInWatchList = false;
     });

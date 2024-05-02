@@ -77,7 +77,9 @@ export class MovieDetailComponent implements OnInit {
   }
 
   removeFromWatchlist(movieId: any) {
-    this.openRatingDialog();
+    if( this.movie != null && this.movie.status == "Released") {
+      this.openRatingDialog();
+    }
     this.movieService.removeMovieFromWatchlist(movieId).subscribe(() => {
       this.movie.isInWatchlist = false;
     });
