@@ -23,6 +23,7 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     this.setTableDataSource(data);
   }
 
+  @Input() isShow: boolean = true;
   public dataSource = new MatTableDataSource<any>([]);
   public displayedColumns: string[] = [];
 
